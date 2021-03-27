@@ -9,6 +9,7 @@ import actors.Enemy;
 import points.BigPoint;
 import points.Point;
 import graphic.*;
+import graphics.Tile;
 import actors.*;
 import points.*;
 import system.*;

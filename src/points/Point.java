@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Point extends Rectangle{
+public class Point extends IsPoint{
 	
 	public Point(int x, int y){
 		
@@ -15,6 +15,12 @@ public class Point extends Rectangle{
 		
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, 8, 8);
+		
+	}
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
 		
 	}
 	

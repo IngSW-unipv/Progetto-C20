@@ -26,5 +26,8 @@ public class Tile extends Rectangle{
 		g2d.drawLine(x, y + 32 - 1, x + 32 - 1, y + 32 - 1);
 
 	}
+	public void tick(){
+		
+	}
 	
 }

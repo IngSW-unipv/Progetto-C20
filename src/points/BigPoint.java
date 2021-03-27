@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class BigPoint extends Rectangle{
+public class BigPoint extends IsPoint{
 	
 	public BigPoint(int x, int y){
 		
@@ -17,6 +17,12 @@ public class BigPoint extends Rectangle{
 		
 		g.setColor(Color.YELLOW);
 		g.drawImage(new ImageIcon("res/players/apple.png").getImage(), this.x-8, this.y-8, null);
+		
+	}
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
 		
 	}
 	

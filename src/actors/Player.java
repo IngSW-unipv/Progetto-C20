@@ -15,10 +15,13 @@ public class Player extends Actor {
 	private int score=0, lvl = 1;
 	private Level level;
 	private boolean turno;
+	private int posizione;
 	
 	public Player(int x, int y, Level level , boolean b, int i){
 		
-		super(x, y, i, level);
+		super(x, y, level);
+		this.setBounds(x, y, 32, 32);
+		this.posizione = i;
 		direction = new boolean[4]; // right 0, left 1, up 2, down 3
 		this.reset();
 		this.turno = b;
