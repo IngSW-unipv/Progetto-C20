@@ -13,11 +13,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import javax.swing.JFrame;
-import graphic.*;
-import actors.*;
-import points.*;
-import system.*;
+
+import graphics.Menu;
 
 public class Game extends Canvas implements Runnable/*, KeyListener*/{
 

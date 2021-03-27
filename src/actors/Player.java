@@ -2,14 +2,11 @@ package actors;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Timer;
 import javax.swing.ImageIcon;
-import graphic.*;
-import actors.*;
-import points.*;
-import system.*;
 
-public class Player extends Rectangle {
+import system.Level;
+
+public class Player extends Actor {
 		
 	private boolean direction[];
 	private int speed = 4;
@@ -18,14 +15,12 @@ public class Player extends Rectangle {
 	private int score=0, lvl = 1;
 	private Level level;
 	private boolean turno;
-	private Color c;
-	public Player(int x, int y, Level level , boolean b,Color c){
+	
+	public Player(int x, int y, Level level , boolean b, int i){
 		
-		this.c = c;
-		this.setBounds(x, y, 32, 32);
+		super(x, y, i, level);
 		direction = new boolean[4]; // right 0, left 1, up 2, down 3
 		this.reset();
-		this.level = level;
 		this.turno = b;
 		
 	}
@@ -192,13 +187,13 @@ public class Player extends Rectangle {
 			if(this.level.getTurno().isKill()){
 			
 				g.setColor(Color.WHITE);
-				g.drawImage(new ImageIcon("res/players/fantasma1.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/fantasma" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 				String time = Integer.toString(3 - ((int)((System.currentTimeMillis() - this.level.getStart())/1000)));
 				int h2 = g.getFontMetrics().getHeight();
 				int w2 = g.getFontMetrics().stringWidth(time);
 				g.drawString(time, x + 16, y+16);
 			}else{
-				g.drawImage(new ImageIcon("res/players/fantasma.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/fantasm" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}
 			
 		}else{

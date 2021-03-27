@@ -2,10 +2,6 @@ package points;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import graphic.*;
-import actors.*;
-import points.*;
-import system.*;
 
 import javax.swing.ImageIcon;
 

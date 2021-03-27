@@ -3,22 +3,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
-import javax.imageio.ImageIO;
-import graphic.*;
-import actors.*;
-import points.*;
-import system.*;
+
+import actors.Player;
+import graphics.Map;
+import graphics.Tile;
+import points.BigPoint;
+import points.Point;
 
 public class Level implements KeyListener {
 	
 	private int width, height;
-	//public Turno turno;
+	
 	private Tile[][] tiles;
 	private List <Point> points; //lista dei punti piccoli nel gioco
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
@@ -28,8 +27,6 @@ public class Level implements KeyListener {
 
 	private Game game;
 	private boolean paused = false;
-	private int n;
-	private Timer timer;
 	private long start = 0;
 	private String path;
 	
@@ -43,36 +40,37 @@ public class Level implements KeyListener {
 		setEnemies(new ArrayList<>());;
 		setPlayers(new ArrayList<>());
 		this.game.addKeyListener(this);
-		timer = new Timer();
 		this.path = this.getPath();
 		
 		this.getPlayers().clear();
 		
+		// creo i giocatori richiesti dal menu
+		
 		if(n >= 1){
 			
-			getPlayers().add(0, new Player(0, 0, this, true, Color.red));
+			getPlayers().add(0, new Player(0, 0, this, true, 0));
 		}
 		
 		if(n >= 2){
 			
-			getPlayers().add(1, new Player(0, 0, this, false, Color.green));
+			getPlayers().add(1, new Player(0, 0, this, false, 1));
 			
 		}
 		
 		if(n >= 3){
 			
-			getPlayers().add(2, new Player(0, 0, this, false, Color.blue));
+			getPlayers().add(2, new Player(0, 0, this, false, 2));
 			
 		}
 		
 		if(n >= 4){
 			
-			getPlayers().add(3, new Player(0, 0, this, false, Color.white));
+			getPlayers().add(3, new Player(0, 0, this, false, 3));
 			
 		}
 		
 		map = new Map(this, this.path);
-		//this.turno = new Turno(this, this.players);
+		
 	}
 	
 	//prendo il giocatore con il turno attuale
@@ -115,7 +113,6 @@ public class Level implements KeyListener {
 		
 		if(!paused){
 			
-			//this.turno.tick();
 			
 			this.getTurno().tick();
 			
@@ -208,8 +205,6 @@ public class Level implements KeyListener {
 	
 	public void Render(Graphics g){
 		
-		//this.turno.Render();
-		
 		for(int x = 0 ; x < getWidth() ; x++){
 			
 			for(int y = 0 ; y < getHeight() ; y++){
@@ -239,6 +234,8 @@ public class Level implements KeyListener {
 		}
 		
 		this.getTurno().render(g);
+		
+		// mostro a schermo punteggio giovatore attuale e fps
 		
 		g.setColor(Color.WHITE);
 		g.drawString("Score: " + this.getTurno().getScore(), 0, 25);
@@ -331,6 +328,8 @@ public class Level implements KeyListener {
 		
 	}
 
+	//gestisco la tastiera
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
