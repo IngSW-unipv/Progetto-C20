@@ -20,9 +20,7 @@ public class BigPoint extends IsPoint{
 		
 	}
 
-	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		
 	}
 	

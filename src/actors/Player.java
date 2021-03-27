@@ -16,14 +16,13 @@ public class Player extends Actor {
 	private Level level;
 	private boolean turno;
 	private int posizione;
-	
 	public Player(int x, int y, Level level , boolean b, int i){
-		
 		super(x, y, level);
-		this.setBounds(x, y, 32, 32);
 		this.posizione = i;
+		this.setBounds(x, y, 32, 32);
 		direction = new boolean[4]; // right 0, left 1, up 2, down 3
 		this.reset();
+		this.level = level;
 		this.turno = b;
 		
 	}
@@ -204,15 +203,15 @@ public class Player extends Actor {
 			//g.setColor(c);
 			//g.drawRect(x, y, width, height);
 			if(direction[0] && canMove(x + speed,y)){
-				g.drawImage(new ImageIcon("res/players/playerR.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerR" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else if(direction[1] && canMove(x - speed,y)){
-				g.drawImage(new ImageIcon("res/players/playerL.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerL" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else if(direction[2] && canMove(x,y - speed)){
-				g.drawImage(new ImageIcon("res/players/playerU.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerU" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else if(direction[3] && canMove(x,y + speed)){
-				g.drawImage(new ImageIcon("res/players/playerD.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerD" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else{
-				g.drawImage(new ImageIcon("res/players/playerR.png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerR" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}
 			
 			

@@ -23,4 +23,8 @@ public class Tile extends Rectangle{
 
 	}
 	
+	public void tick(){
+		
+	}
+	
 }
