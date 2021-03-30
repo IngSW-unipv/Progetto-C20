@@ -68,6 +68,11 @@ public class Level implements KeyListener {
 			getPlayers().add(3, new Player(0, 0, this, false, 3));
 			
 		}
+		if(n >= 5){
+			
+			getPlayers().add(4, new Player(0, 0, this, false, 4));
+			
+		}
 		
 		map = new Map(this, this.path);
 		
@@ -445,6 +450,35 @@ public class Level implements KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_NUMPAD6){
 				
 				this.getPlayers().get(3).moveRight();
+				
+			}
+			
+		}
+		
+		//Player 4
+		if(this.getPlayers().size() >= 5){
+			
+			if(e.getKeyCode() == KeyEvent.VK_T){
+				
+				this.getPlayers().get(4).moveUp();
+				
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_G){
+				
+				this.getPlayers().get(4).moveDown();
+				
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_F){
+				
+				this.getPlayers().get(4).moveLeft();
+				
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_H){
+				
+				this.getPlayers().get(4).moveRight();
 				
 			}
 			

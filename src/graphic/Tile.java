@@ -1,12 +1,8 @@
-package graphic;
+package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import graphic.*;
-import actors.*;
-import points.*;
-import system.*;
 
 public class Tile extends Rectangle{
 	
@@ -26,6 +22,7 @@ public class Tile extends Rectangle{
 		g2d.drawLine(x, y + 32 - 1, x + 32 - 1, y + 32 - 1);
 
 	}
+	
 	public void tick(){
 		
 	}

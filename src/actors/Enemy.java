@@ -127,17 +127,15 @@ public class Enemy extends Player{
 		if(this.level.getTurno().isKill()){
 			
 			g.setColor(Color.WHITE);
-			g.drawImage(new ImageIcon("res/players/fantasma4.png").getImage(), this.x, this.y, null);
+			g.drawImage(new ImageIcon("res/players/fantasma5.png").getImage(), this.x, this.y, null);
 			String time = Integer.toString(3 - ((int)((System.currentTimeMillis() - this.level.getStart())/1000)));
-			//int h2 = g.getFontMetrics().getHeight();
-			//int w2 = g.getFontMetrics().stringWidth(time);
 			g.drawString(time, x + 16, y+16);
 			
 		}else{
 			
 			g.setColor(Color.ORANGE);
 			
-			g.drawImage(new ImageIcon("res/players/fantasm4.png").getImage(), this.x, this.y, null);
+			g.drawImage(new ImageIcon("res/players/fantasm5.png").getImage(), this.x, this.y, null);
 			
 		}
 		

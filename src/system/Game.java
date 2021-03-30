@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 
 import graphics.Menu;
 
-public class Game extends Canvas implements Runnable/*, KeyListener*/{
+public class Game extends Canvas implements Runnable{
 
 
 
@@ -143,11 +143,7 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 			
 			level.tick();
 			
-		}else if(state == State.End){
-			
-			menu.tick();
-			
-		}else if(state == State.Menu){
+		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
 			
 			menu.tick();
 			
@@ -183,11 +179,7 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 			
 			level.Render(g);
 			
-		}else if(state == State.End){
-			
-			menu.render(g);
-			
-		}else if(state == State.Menu){
+		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
 			
 			menu.render(g);
 			

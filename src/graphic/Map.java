@@ -1,4 +1,4 @@
-package graphic;
+package graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
@@ -8,11 +8,7 @@ import javax.imageio.ImageIO;
 import actors.Enemy;
 import points.BigPoint;
 import points.Point;
-import graphic.*;
-import graphics.Tile;
-import actors.*;
-import points.*;
-import system.*;
+import system.Level;
 
 public class Map {
 	
@@ -22,12 +18,17 @@ public class Map {
 		
 		this.level = l;
 		Random r = new Random(); 
-		int max = 10;
+		int max = 10; //max punti grossi
+		
+		//pulisco le liste dalla precedente mappa
+		
 		this.level.getBigPoints().clear();
 		this.level.getPoints().clear();
 		this.level.getEnemies().clear();
 		
 		try { 
+			
+			//ottengo l'immagine e la divido incaselle da ricreare
 			
 			BufferedImage map = ImageIO.read(getClass().getResource(path));
 			this.level.setWidth(map.getWidth());
@@ -121,7 +122,7 @@ public class Map {
 			return 16;
 		}else if(n<=32){
 			return 32;
-		}else if(n>=32){
+		}else if(n>32){
 			return 32;
 		}else {
 			return 2;
