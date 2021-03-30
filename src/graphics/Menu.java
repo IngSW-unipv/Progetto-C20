@@ -18,6 +18,22 @@ public class Menu extends MouseAdapter{
 		
 	}
 	
+	public String getColore(int n){
+		if(n == 0){
+			return "Orange";
+		}else if(n == 1){
+			return "Blue";
+		}else if(n == 2){
+			return "Red";
+		}else if(n == 3){
+			return "Green";
+		}else if(n == 4){
+			return "Yellow";
+		}else{
+			return "Error";
+		}
+	}
+	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int height){
 		
 		if(mx >x && mx< x+width){
@@ -131,10 +147,10 @@ public class Menu extends MouseAdapter{
 			int h2 = g.getFontMetrics().getHeight();
 			
 			for(int i = 0; i < this.game.getLevel().getPlayers().size(); i++ ){
-				
-				int w2 = g.getFontMetrics().stringWidth("Score " + (i+1)+ ": " + this.game.getLevel().getPlayers().get(i).getScore()) / 2;
+	
+				int w2 = g.getFontMetrics().stringWidth(this.getColore(i) + ":" + this.game.getLevel().getPlayers().get(i).getScore()) / 2;
 				g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(i*y), x, y);
-				g.drawString("Score " + (i+1)+ ": " + this.game.getLevel().getPlayers().get(i).getScore() , (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size()+1)* y))/2) );
+				g.drawString(this.getColore(i) + ": " + this.game.getLevel().getPlayers().get(i).getScore() , (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size()+1)* y))/2) );
 			
 			}
 			
@@ -183,20 +199,20 @@ public class Menu extends MouseAdapter{
 			g.setColor(Color.WHITE);
 			int h2 = g.getFontMetrics().getHeight();
 			
-			int w2 = g.getFontMetrics().stringWidth("Player 1: WASD") / 2;
-			g.drawString("Player 1: WASD", (game.getWIDTH() / 2) - w2, h2+(0*y)+((game.getHEIGHT() - (6* y))/2));
+			int w2 = g.getFontMetrics().stringWidth("Orange: WASD") / 2;
+			g.drawString("Orange: WASD", (game.getWIDTH() / 2) - w2, h2+(0*y)+((game.getHEIGHT() - (6* y))/2));
 			
-			w2 = g.getFontMetrics().stringWidth("Player 2: IJKL") / 2;
-			g.drawString("Player 2: IJKL", (game.getWIDTH() / 2) - w2, h2+(1*y)+((game.getHEIGHT() - (6* y))/2));
+			w2 = g.getFontMetrics().stringWidth("Blue: TFGH") / 2;
+			g.drawString("Blue: TFGH", (game.getWIDTH() / 2) - w2, h2+(1*y)+((game.getHEIGHT() - (6* y))/2));
 			
-			w2 = g.getFontMetrics().stringWidth("Player 3: Freccette") / 2;
-			g.drawString("Player 3: Freccette", (game.getWIDTH() / 2) - w2, h2+(2*y)+((game.getHEIGHT() - (6* y))/2));
+			w2 = g.getFontMetrics().stringWidth("Red: IJKL") / 2;
+			g.drawString("Red: IJKL", (game.getWIDTH() / 2) - w2, h2+(2*y)+((game.getHEIGHT() - (6* y))/2));
 			
-			w2 = g.getFontMetrics().stringWidth("Player 4: 8456") / 2;
-			g.drawString("Player 4: 8456", (game.getWIDTH() / 2) - w2, h2+(3*y)+((game.getHEIGHT() - (6* y))/2));
+			w2 = g.getFontMetrics().stringWidth("Green: Freccette") / 2;
+			g.drawString("Green: Freccette", (game.getWIDTH() / 2) - w2, h2+(3*y)+((game.getHEIGHT() - (6* y))/2));
 			
-			w2 = g.getFontMetrics().stringWidth("Player 5: TFGH") / 2;
-			g.drawString("Player 5: TFGH", (game.getWIDTH() / 2) - w2, h2+(4*y)+((game.getHEIGHT() - (6* y))/2));
+			w2 = g.getFontMetrics().stringWidth("Yellow: 8456") / 2;
+			g.drawString("Yellow: 8456", (game.getWIDTH() / 2) - w2, h2+(4*y)+((game.getHEIGHT() - (6* y))/2));
 			
 			w2 = g.getFontMetrics().stringWidth("Menu") / 2;
 			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), x, y);

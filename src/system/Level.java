@@ -370,25 +370,25 @@ public class Level implements KeyListener {
 		//Player 2
 		if(this.getPlayers().size() >= 2){
 			
-			if(e.getKeyCode() == KeyEvent.VK_UP){
+			if(e.getKeyCode() == KeyEvent.VK_T){
 				
 				this.getPlayers().get(1).moveUp();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_DOWN){
+			if(e.getKeyCode() == KeyEvent.VK_G){
 				
 				this.getPlayers().get(1).moveDown();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_LEFT){
+			if(e.getKeyCode() == KeyEvent.VK_F){
 				
 				this.getPlayers().get(1).moveLeft();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			if(e.getKeyCode() == KeyEvent.VK_H){
 				
 				this.getPlayers().get(1).moveRight();
 				
@@ -429,25 +429,25 @@ public class Level implements KeyListener {
 		//Player 4
 		if(this.getPlayers().size() >= 4){
 			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD8){
+			if(e.getKeyCode() == KeyEvent.VK_UP){
 				
 				this.getPlayers().get(3).moveUp();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD5){
+			if(e.getKeyCode() == KeyEvent.VK_DOWN){
 				
 				this.getPlayers().get(3).moveDown();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD4){
+			if(e.getKeyCode() == KeyEvent.VK_LEFT){
 				
 				this.getPlayers().get(3).moveLeft();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD6){
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 				
 				this.getPlayers().get(3).moveRight();
 				
@@ -455,32 +455,34 @@ public class Level implements KeyListener {
 			
 		}
 		
-		//Player 4
+		//Player 5
 		if(this.getPlayers().size() >= 5){
 			
-			if(e.getKeyCode() == KeyEvent.VK_T){
+
+			if(e.getKeyCode() == KeyEvent.VK_NUMPAD8){
 				
 				this.getPlayers().get(4).moveUp();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_G){
+			if(e.getKeyCode() == KeyEvent.VK_NUMPAD5){
 				
 				this.getPlayers().get(4).moveDown();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_F){
+			if(e.getKeyCode() == KeyEvent.VK_NUMPAD4){
 				
 				this.getPlayers().get(4).moveLeft();
 				
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_H){
+			if(e.getKeyCode() == KeyEvent.VK_NUMPAD6){
 				
 				this.getPlayers().get(4).moveRight();
 				
 			}
+			
 			
 		}
 		
