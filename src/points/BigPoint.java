@@ -1,9 +1,7 @@
 package points;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
+import java.awt.*;
 
 public class BigPoint extends IsPoint{
 	

@@ -8,13 +8,10 @@ import javax.swing.ImageIcon;
 import system.Level;
 
 public class Enemy extends Player{
-	private int random = 0, smart = 1;
-	private int state = random;
-	private int left = 0, right = 1, up =2, down = 3;
+
+	private int dir;
 	
-	private int dir = -1;
-	
-	public int speed = 2;
+	public int speed;
 	
 	private Random r;
 	private Level level;
@@ -57,67 +54,65 @@ public class Enemy extends Player{
 	}
 	
 	public void tick(){
-		
-		if(state == random){
-			
-			if (dir == left){
-				
-				if(canMove(x - speed,y)){
-					
-					x -= speed;
-					
-				}else{
-					
-					dir = r.nextInt(4);
-					
-				}
-				
+
+		int left = 0;
+		if (dir == left){
+
+			if(canMove(x - speed,y)){
+
+				x -= speed;
+
+			}else{
+
+				dir = r.nextInt(4);
+
 			}
-			
-			if(dir == right){
-				
-				if(canMove(x + speed,y)){
-					
-					x += speed;
-					
-				}else{
-					
-					dir = r.nextInt(4);
-					
-				}
-				
+
+		}
+
+		int right = 1;
+		if(dir == right){
+
+			if(canMove(x + speed,y)){
+
+				x += speed;
+
+			}else{
+
+				dir = r.nextInt(4);
+
 			}
-			
-			if(dir == up){
-				
-				if(canMove(x,y - speed)){
-					
-					y -= speed;
-					
-				}else{
-					
-					dir = r.nextInt(4);
-					
-				}
-				
+
+		}
+
+		int up = 2;
+		if(dir == up){
+
+			if(canMove(x,y - speed)){
+
+				y -= speed;
+
+			}else{
+
+				dir = r.nextInt(4);
+
 			}
-			
-			if(dir == down){
-				
-				if(canMove(x,y + speed)){
-					
-					y += speed;
-					
-				}else{
-					
-					dir = r.nextInt(4);
-					
-				}
-				
+
+		}
+
+		int down = 3;
+		if(dir == down) {
+
+			if (canMove(x, y + speed)) {
+
+				y += speed;
+
+			} else {
+
+				dir = r.nextInt(4);
+
 			}
-			
-		}else if (state == smart){
-			
+
 		}
 		
 	}

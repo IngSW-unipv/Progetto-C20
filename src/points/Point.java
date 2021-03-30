@@ -1,7 +1,6 @@
 package points;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+
+import java.awt.*;
 
 public class Point extends IsPoint{
 	

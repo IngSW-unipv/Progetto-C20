@@ -2,13 +2,14 @@ package actors;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 
 import system.Level;
 
 public class Player extends Actor {
 		
-	private boolean direction[];
+	private boolean[] direction;
 	private int speed = 4;
 	private int temp;
 	private boolean kill = false;
@@ -28,12 +29,8 @@ public class Player extends Actor {
 	}
 	
 	public void reset(){
-		
-		for(int i = 0 ; i < this.direction.length ; i++){
-			
-			this.direction[i] = false;
-			
-		}
+
+		Arrays.fill(this.direction, false);
 		
 	}
 	
@@ -189,29 +186,25 @@ public class Player extends Actor {
 			if(this.level.getTurno().isKill()){
 			
 				g.setColor(Color.WHITE);
-				g.drawImage(new ImageIcon("res/players/fantasma" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/fantasma" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 				String time = Integer.toString(3 - ((int)((System.currentTimeMillis() - this.level.getStart())/1000)));
-				int h2 = g.getFontMetrics().getHeight();
-				int w2 = g.getFontMetrics().stringWidth(time);
 				g.drawString(time, x + 16, y+16);
 			}else{
-				g.drawImage(new ImageIcon("res/players/fantasm" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/fantasm" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}
 			
 		}else{
-			
-			//g.setColor(c);
-			//g.drawRect(x, y, width, height);
+
 			if(direction[0] && canMove(x + speed,y)){
-				g.drawImage(new ImageIcon("res/players/playerR" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerR" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else if(direction[1] && canMove(x - speed,y)){
-				g.drawImage(new ImageIcon("res/players/playerL" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerL" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else if(direction[2] && canMove(x,y - speed)){
-				g.drawImage(new ImageIcon("res/players/playerU" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerU" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else if(direction[3] && canMove(x,y + speed)){
-				g.drawImage(new ImageIcon("res/players/playerD" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerD" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}else{
-				g.drawImage(new ImageIcon("res/players/playerR" + Integer.toString(this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
+				g.drawImage(new ImageIcon("res/players/playerR" + (this.posizione + 1) + ".png").getImage(), this.x, this.y, null);
 			}
 			
 			
@@ -278,12 +271,6 @@ public class Player extends Actor {
 	public void setLvl(int lvl) {
 		
 		this.lvl = lvl;
-		
-	}
-
-	public int getTemp() {
-		
-		return temp;
 		
 	}
 

@@ -1,22 +1,10 @@
 package system;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.swing.JFrame;
 
 import graphics.Menu;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable/*, KeyListener*/{
 
@@ -29,16 +17,14 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 
 	private boolean isRunning = false;
 	private int frames=0;
-	
-	private final int WIDTH =640, HEIGHT = 480; // widht larghezza x -> height lunghezza y 
-	
+
 	private  final String TITLE= "Pac-Man";
 	
 	private Thread thread;
 	
 	private Level level;  // Level si occupa di gestire il mondo di gioco
 
-	private Menu menu; // si occupa di gestire la parte scritta 
+	private final Menu menu; // si occupa di gestire la parte scritta
 	
 	private State state; // Stati del gioco
 	
@@ -58,9 +44,7 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 	private synchronized void start(){
 		
 		if(isRunning){
-			
-			return;
-			
+
 		}else{
 			
 			isRunning = true;
@@ -173,7 +157,7 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.setColor(Color.white);
 		int h2 = g.getFontMetrics().getHeight();
-		g.drawString("FPS: " + Integer.toString(this.frames), 0, h2);
+		g.drawString("FPS: " + this.frames, 0, h2);
 		
 		if(state == State.Game){
 			
@@ -194,11 +178,7 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 		return level;
 	}
 
-	public void setLevel(Level level) {
-		this.level = level;
-	}
 
-	
 	public State getState() {
 		return state;
 	}
@@ -212,11 +192,12 @@ public class Game extends Canvas implements Runnable/*, KeyListener*/{
 	}
 	
 	public int getHEIGHT() {
-		return HEIGHT;
+		// widht larghezza x -> height lunghezza y
+		return 480;
 	}
 
 	public int getWIDTH() {
-		return WIDTH;
+		return 640;
 	}
 	
 	public static void main(String[] args){

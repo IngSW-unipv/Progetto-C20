@@ -1,18 +1,17 @@
 package system;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
 
 import actors.Player;
 import graphics.Map;
 import graphics.Tile;
 import points.BigPoint;
 import points.Point;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Level implements KeyListener {
 	
@@ -28,19 +27,17 @@ public class Level implements KeyListener {
 	private Game game;
 	private boolean paused = false;
 	private long start = 0;
-	private String path;
-	
-	
+
+
 	public Level(Game game, int n){
 		
 		this.game = game;
 		
 		setPoints(new ArrayList<>());
 		setBigPoints(new ArrayList<>());
-		setEnemies(new ArrayList<>());;
+		setEnemies(new ArrayList<>());
 		setPlayers(new ArrayList<>());
 		this.game.addKeyListener(this);
-		this.path = this.getPath();
 		
 		this.getPlayers().clear();
 		
@@ -74,7 +71,7 @@ public class Level implements KeyListener {
 			
 		}
 		
-		map = new Map(this, this.path);
+		map = new Map(this, this.getPath());
 		
 	}
 	
@@ -261,12 +258,6 @@ public class Level implements KeyListener {
 		
 	}
 
-	public void setStart(long start) {
-		
-		this.start = start;
-		
-	}
-
 	public Tile[][] getTiles() {
 		return tiles;
 	}
@@ -306,10 +297,6 @@ public class Level implements KeyListener {
 	public void setPlayers(List <Player> players) {
 		this.players = players;
 	}
-	
-	public int getSize(){
-		return this.players.size();
-	}
 
 	public int getHeight() {
 		return height;
@@ -329,7 +316,7 @@ public class Level implements KeyListener {
 	
 	public String getPath(){
 		Random ram = new Random();
-		return "/map/map" +  Integer.toString(ram.nextInt(3-1) + 1)  +  ".png";
+		return "res/map/map" + (ram.nextInt(2 - 1) + 1) +  ".png";
 		
 	}
 
@@ -343,7 +330,7 @@ public class Level implements KeyListener {
 			
 			if(e.getKeyCode() == KeyEvent.VK_W){
 				
-				this.getPlayers().get(0).moveUp();;
+				this.getPlayers().get(0).moveUp();
 				
 			}
 			

@@ -10,7 +10,7 @@ import system.State;
 
 public class Menu extends MouseAdapter{
 	
-	private Game game;
+	private final Game game;
 	
 	public Menu(Game game){
 		
@@ -37,16 +37,8 @@ public class Menu extends MouseAdapter{
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int height){
 		
 		if(mx >x && mx< x+width){
-			
-			if(my >y && my< y+height){
-				
-				return true;
-				
-			}else{
-				
-				return false;
-				
-			}
+
+			return my > y && my < y + height;
 			
 		}else{
 			
@@ -140,8 +132,8 @@ public class Menu extends MouseAdapter{
 		int y = 64;
 		
 		if(game.getState()  == State.End){
-			
-			Font fnt = new Font("arial",1,25);
+
+			Font fnt = new Font("arial", Font.BOLD, 25);
 			g.setFont(fnt);
 			g.setColor(Color.WHITE);
 			int h2 = g.getFontMetrics().getHeight();
@@ -164,7 +156,7 @@ public class Menu extends MouseAdapter{
 		
 		}else if(game.getState()  == State.Menu){
 			
-			Font fnt = new Font("arial",1,25);
+			Font fnt = new Font("arial", Font.BOLD,25);
 			g.setFont(fnt);
 			g.setColor(Color.WHITE);
 			int h2 = g.getFontMetrics().getHeight();
@@ -194,7 +186,7 @@ public class Menu extends MouseAdapter{
 			g.drawString("How to play", (game.getWIDTH() / 2) - w2, h2+(5*y)+((game.getHEIGHT() - (6* y))/2));
 			
 		}else if(game.getState()  == State.Tutorial){
-			Font fnt = new Font("arial",1,25);
+			Font fnt = new Font("arial", Font.BOLD,25);
 			g.setFont(fnt);
 			g.setColor(Color.WHITE);
 			int h2 = g.getFontMetrics().getHeight();
