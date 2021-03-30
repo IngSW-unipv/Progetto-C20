@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 
 import graphics.Menu;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable/*, KeyListener*/{
 
 
 
