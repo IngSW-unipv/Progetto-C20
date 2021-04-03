@@ -11,13 +11,24 @@ import system.State;
 public class Menu extends MouseAdapter{
 	
 	private final Game game;
-	
+
+	/**
+	 * Class costructor
+	 * @param game to change the enum and start of the level
+	 */
+
 	public Menu(Game game){
 		
 		this.game = game;
 		
 	}
-	
+
+	/**
+	 * this get the colour based on the n of the list
+	 * @param n of List
+	 * @return colour
+	 */
+
 	public String getColore(int n){
 		if(n == 0){
 			return "Orange";
@@ -33,7 +44,18 @@ public class Menu extends MouseAdapter{
 			return "Error";
 		}
 	}
-	
+
+	/**
+	 * Control if the mouse is over the baloon
+	 * @param mx x mouse
+	 * @param my y mouse
+	 * @param x start of the rectangle
+	 * @param y start of the rectangle
+	 * @param width of the rectangle
+	 * @param height of the the rectangle
+	 * @return the boolean value to confirm the mouseover
+	 */
+
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int height){
 		
 		if(mx >x && mx< x+width){
@@ -47,7 +69,13 @@ public class Menu extends MouseAdapter{
 		}
 		
 	}
-	
+
+	/**
+	 * This method is the logic parte of the Menu,
+	 * if you click on something in the if the method will do something
+	 * @param e mouseEvent
+	 */
+
 	public void mousePressed(MouseEvent e){
 		
 		int mx = e.getX();
@@ -120,12 +148,19 @@ public class Menu extends MouseAdapter{
 		}
 		
 	}
-	
 
+	/**
+	 * tick method present in all the class
+	 */
 	public void tick() {
 		
 	}
 
+	/**
+	 * Control the graphics part of the Menu,
+	 * The ending menu is dynamic in base of the number of player
+	 * @param g Graphics
+	 */
 	public void render(Graphics g) {
 		
 		int x = 200;

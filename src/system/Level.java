@@ -47,32 +47,10 @@ public class Level implements KeyListener {
 			
 			getPlayers().add(0, new Player(0, 0, this, true, 0));
 		}
-		
-		if(n >= 2){
-			
-			getPlayers().add(1, new Player(0, 0, this, false, 1));
-			
+		for(int i = 1; i<n; i++){
+			getPlayers().add(i, new Player(0, 0, this, false, i));
 		}
-		
-		if(n >= 3){
-			
-			getPlayers().add(2, new Player(0, 0, this, false, 2));
-			
-		}
-		
-		if(n >= 4){
-			
-			getPlayers().add(3, new Player(0, 0, this, false, 3));
-			
-		}
-		if(n >= 5){
-			
-			getPlayers().add(4, new Player(0, 0, this, false, 4));
-			
-		}
-		
 		map = new Map(this, this.getPath());
-		
 	}
 	
 	//prendo il giocatore con il turno attuale
@@ -316,7 +294,7 @@ public class Level implements KeyListener {
 	
 	public String getPath(){
 		Random ram = new Random();
-		return "res/map/map" + (ram.nextInt(2 - 1) + 1) +  ".png";
+		return "res/map/map" + (ram.nextInt(3 - 1) + 1) +  ".png";
 		
 	}
 
