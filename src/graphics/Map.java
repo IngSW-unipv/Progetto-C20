@@ -21,6 +21,7 @@ public class Map {
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
 	private List <Player> enemies; // lita dei giocatori non attivi e bot
 	/**
+	 * @author Filippo Tagliaferri
 	 * Class constructor
 	 *@param level to set all the List to play
 	 *@param path to get the path to follow for the image

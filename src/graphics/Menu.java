@@ -13,6 +13,7 @@ public class Menu extends MouseAdapter{
 	private final Game game;
 
 	/**
+	 * @author Filippo Tagliaferri
 	 * Class costructor
 	 * @param game to change the enum and start of the level
 	 */
@@ -40,9 +41,28 @@ public class Menu extends MouseAdapter{
 			return "Green";
 		}else if(n == 4){
 			return "Yellow";
-		}else{
-			return "Error";
 		}
+		return "Error";
+	}
+
+	/**
+	 * this get the key based on the n of the list
+	 * @param n of List
+	 * @return key
+	 */
+	public String getTasti(int n){
+		if(n == 0){
+			return "WASD";
+		}else if(n == 1){
+			return "TFGH";
+		}else if(n == 2){
+			return "IJKL";
+		}else if(n == 3){
+			return "Freccette";
+		}else if(n == 4){
+			return "8456";
+		}
+		return "Error";
 	}
 
 	/**
@@ -103,38 +123,16 @@ public class Menu extends MouseAdapter{
 			}
 			
 		}else if(game.getState()  == State.Menu){
-			
-			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (0*y), 200, 64)){
-				
-				//create level con 1 player
-				this.game.setLevel(1);
-				this.game.setState(State.Game);
-				
-			}else if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (1*y), 200, 64)){
-				
-				// 2
-				this.game.setLevel(2);
-				this.game.setState(State.Game);
-				
-			}else if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (2*y), 200, 64)){
-				
-				//3
-				this.game.setLevel(3);
-				this.game.setState(State.Game);
-				
-			}else if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (3*y), 200, 64)){
-				
-				//4
-				this.game.setLevel(4);
-				this.game.setState(State.Game);
-				
-			}else if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (4*y), 200, 64)){
-				
-				//5
-				this.game.setLevel(5);
-				this.game.setState(State.Game);
-				
-			}else if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
+			for(int i=0; i < 5; i++){
+				if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (i*y), 200, 64)){
+
+					//create level con 1 player
+					this.game.setLevel(i+1);
+					this.game.setState(State.Game);
+
+				}
+			}
+			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
 				
 				//how to play
 				this.game.setState(State.Tutorial);
@@ -195,27 +193,13 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt);
 			g.setColor(Color.WHITE);
 			int h2 = g.getFontMetrics().getHeight();
-			
-			int w2 = g.getFontMetrics().stringWidth("1") / 2;
-			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (0*y), x, y);
-			g.drawString("1", (game.getWIDTH() / 2) - w2, h2+(0*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("2") / 2;
-			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2)+(1*y), x, y);
-			g.drawString("2", (game.getWIDTH() / 2) - w2, h2+(1*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("3") / 2;
-			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2)+(2*y), x, y);
-			g.drawString("3", (game.getWIDTH() / 2) - w2, h2+(2*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("4") / 2;
-			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (3*y), x, y);
-			g.drawString("4", (game.getWIDTH() / 2) - w2, h2+(3*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("5") / 2;
-			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (4*y), x, y);
-			g.drawString("5", (game.getWIDTH() / 2) - w2, h2+(4*y)+((game.getHEIGHT() - (6* y))/2));
-			
+			int w2;
+			for(int i = 0; i < 5 ; i++){
+				w2 = g.getFontMetrics().stringWidth(Integer.toString(i+1)) / 2;
+				g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (i*y), x, y);
+				g.drawString(Integer.toString(i+1), (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - (6* y))/2));
+			}
+
 			w2 = g.getFontMetrics().stringWidth("How to play") / 2;
 			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), x, y);
 			g.drawString("How to play", (game.getWIDTH() / 2) - w2, h2+(5*y)+((game.getHEIGHT() - (6* y))/2));
@@ -225,22 +209,12 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt);
 			g.setColor(Color.WHITE);
 			int h2 = g.getFontMetrics().getHeight();
-			
-			int w2 = g.getFontMetrics().stringWidth("Orange: WASD") / 2;
-			g.drawString("Orange: WASD", (game.getWIDTH() / 2) - w2, h2+(0*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("Blue: TFGH") / 2;
-			g.drawString("Blue: TFGH", (game.getWIDTH() / 2) - w2, h2+(1*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("Red: IJKL") / 2;
-			g.drawString("Red: IJKL", (game.getWIDTH() / 2) - w2, h2+(2*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("Green: Freccette") / 2;
-			g.drawString("Green: Freccette", (game.getWIDTH() / 2) - w2, h2+(3*y)+((game.getHEIGHT() - (6* y))/2));
-			
-			w2 = g.getFontMetrics().stringWidth("Yellow: 8456") / 2;
-			g.drawString("Yellow: 8456", (game.getWIDTH() / 2) - w2, h2+(4*y)+((game.getHEIGHT() - (6* y))/2));
-			
+			int w2;
+			for(int i = 0; i < 5; i++){
+				w2 = g.getFontMetrics().stringWidth(this.getColore(i) + ":" + this.getTasti(i)) / 2;
+				g.drawString(this.getColore(i) + ":" + this.getTasti(i), (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - (6* y))/2));
+			}
+
 			w2 = g.getFontMetrics().stringWidth("Menu") / 2;
 			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), x, y);
 			g.drawString("Menu", (game.getWIDTH() / 2) - w2, h2+(5*y)+((game.getHEIGHT() - (6* y))/2));
