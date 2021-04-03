@@ -2,9 +2,6 @@ package system;
 
 import actors.Player;
 import graphics.Map;
-import graphics.Tile;
-import points.BigPoint;
-import points.Point;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,11 +13,6 @@ import java.util.Random;
 public class Level implements KeyListener {
 	
 	private int width, height;
-	
-	private Tile[][] tiles;
-	private List <Point> points; //lista dei punti piccoli nel gioco
-	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
-	private List <Player> enemies; // lita dei giocatori non attivi e bot
 	private List <Player> players;  //Lista di giocatori attivi
 	private Map map; // mappa dove si gioca
 
@@ -32,10 +24,6 @@ public class Level implements KeyListener {
 	public Level(Game game, int n){
 		
 		this.game = game;
-		
-		setPoints(new ArrayList<>());
-		setBigPoints(new ArrayList<>());
-		setEnemies(new ArrayList<>());
 		setPlayers(new ArrayList<>());
 		this.game.addKeyListener(this);
 		
@@ -96,15 +84,15 @@ public class Level implements KeyListener {
 			
 			this.getTurno().tick();
 			
-			for(int i = 0 ; i < getEnemies().size() ; i++){
-				
-				getEnemies().get(i).tick();
+			for(int i = 0 ; i < map.getEnemies().size() ; i++){
+
+				map.getEnemies().get(i).tick();
 					
 			}
 			
 			// se vengono mangiati tutti gli oggetti statici in gioco si passa al livello successivo
 			
-			if(this.getPoints().size() == 0 && this.getBigPoints().size() == 0){
+			if(this.map.getPoints().size() == 0 && this.map.getBigPoints().size() == 0){
 				//win
 				this.getTurno().setLvl(this.getTurno().getLvl() + 1);
 				
@@ -114,11 +102,11 @@ public class Level implements KeyListener {
 			
 			//controllo interazione con punti 
 			
-			for(int i = 0; i < this.getPoints().size(); i++ ){
+			for(int i = 0; i < this.map.getPoints().size(); i++ ){
 				
-				if(this.getTurno().intersects(this.getPoints().get(i))){
+				if(this.getTurno().intersects(this.map.getPoints().get(i))){
 					
-					this.getPoints().remove(i);
+					this.map.getPoints().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 50);
 					
 				}
@@ -127,13 +115,13 @@ public class Level implements KeyListener {
 			
 			//controllo le interazioni con la frutta
 			
-			for(int i = 0; i < this.getBigPoints().size(); i++ ){
+			for(int i = 0; i < this.map.getBigPoints().size(); i++ ){
 				
-				if(this.getTurno().intersects(this.getBigPoints().get(i))){
+				if(this.getTurno().intersects(this.map.getBigPoints().get(i))){
 					
 					this.start = System.currentTimeMillis();
 					this.getTurno().setKill(true);
-					this.getBigPoints().remove(i);
+					this.map.getBigPoints().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 100);
 					
 				}
@@ -142,9 +130,9 @@ public class Level implements KeyListener {
 
 			//controllo interazione con nemici e in base allo stato di kill decido il risultato
 			
-			for(int i = 0; i < this.getEnemies().size(); i++ ){
+			for(int i = 0; i < this.map.getEnemies().size(); i++ ){
 				
-				if(this.getTurno().intersects(this.getEnemies().get(i))){
+				if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 					
 					if(!this.getTurno().isKill()){
 						
@@ -162,7 +150,7 @@ public class Level implements KeyListener {
 						
 					}else{
 						
-						this.getEnemies().remove(i);
+						this.map.getEnemies().remove(i);
 						this.getTurno().setScore(this.getTurno().getScore() + 200);
 						
 					}
@@ -189,27 +177,27 @@ public class Level implements KeyListener {
 			
 			for(int y = 0 ; y < getHeight() ; y++){
 				
-				if(getTiles()[x][y] != null) getTiles()[x][y].Render(g);
+				if(this.map.getTiles()[x][y] != null) this.map.getTiles()[x][y].Render(g);
 				
 			}
 			
 		}
 		
-		for(int i = 0 ; i < getPoints().size() ; i++){
+		for(int i = 0 ; i < this.map.getPoints().size() ; i++){
 		
-		getPoints().get(i).render(g);
+		this.map.getPoints().get(i).render(g);
 			
 		}
 		
-		for(int i = 0 ; i < getBigPoints().size() ; i++){
+		for(int i = 0 ; i < this.map.getBigPoints().size() ; i++){
 			
-		getBigPoints().get(i).render(g);
+		this.map.getBigPoints().get(i).render(g);
 			
 		}
 		
-		for(int i = 0 ; i < getEnemies().size() ; i++){
+		for(int i = 0 ; i < this.map.getEnemies().size() ; i++){
 			
-			getEnemies().get(i).render(g);
+			this.map.getEnemies().get(i).render(g);
 				
 		}
 		
@@ -236,61 +224,19 @@ public class Level implements KeyListener {
 		
 	}
 
-	public Tile[][] getTiles() {
-		return tiles;
-	}
+	public List <Player> getPlayers() { return players; }
 
-	public void setTiles(Tile[][] tiles) {
-		this.tiles = tiles;
-	}
+	public void setPlayers(List <Player> players) { this.players = players; }
 
-	public List <BigPoint> getBigPoints() {
-		return bigPoints;
-	}
+	public int getHeight() { return height; }
 
-	public void setBigPoints(List <BigPoint> bigPoints) {
-		this.bigPoints = bigPoints;
-	}
-
-	public List <Point> getPoints() {
-		return points;
-	}
-
-	public void setPoints(List <Point> points) {
-		this.points = points;
-	}
-
-	public List <Player> getEnemies() {
-		return enemies;
-	}
-
-	public void setEnemies(List <Player> enemies) {
-		this.enemies = enemies;
-	}
-
-	public List <Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List <Player> players) {
-		this.players = players;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
+	public void setHeight(int height) { this.height = height; }
 	
-	public int getWidth() {
-		return width;
-	}
+	public int getWidth() { return width; }
 
-	public void setWidth(int width) {
-		this.width = width;
-	}
+	public void setWidth(int width) { this.width = width; }
+
+	public Map getMap() { return map; }
 	
 	public String getPath(){
 		Random ram = new Random();

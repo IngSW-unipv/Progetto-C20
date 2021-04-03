@@ -31,13 +31,13 @@ public class Enemy extends Player{
 		
 		Rectangle bounds = new Rectangle(nextX, nextY, this.width,this.height);
 		
-		for(int xx = 0; xx < level.getTiles().length; xx++){
+		for(int xx = 0; xx < level.getMap().getTiles().length; xx++){
 			
-			for(int yy = 0; yy < level.getTiles()[0].length; yy++){
+			for(int yy = 0; yy < level.getMap().getTiles()[0].length; yy++){
 				
-				if(level.getTiles()[xx][yy] != null){
+				if(level.getMap().getTiles()[xx][yy] != null){
 					
-					if(bounds.intersects(level.getTiles()[xx][yy])){
+					if(bounds.intersects(level.getMap().getTiles()[xx][yy])){
 						
 						return false;
 						
