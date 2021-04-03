@@ -30,9 +30,9 @@ public class Map {
 
 		this.level = level;
 
-		setPoints(new ArrayList<>());
-		setBigPoints(new ArrayList<>());
-		setEnemies(new ArrayList<>());
+		this.setPoints(new ArrayList<>());
+		this.setBigPoints(new ArrayList<>());
+		this.setEnemies(new ArrayList<>());
 
 		this.createMap(path);
 
@@ -51,9 +51,9 @@ public class Map {
 		Random r = new Random();
 		int max = 10; //max punti grossi
 		//pulisco le liste dalla precedente mappa
-		getBigPoints().clear();
-		getPoints().clear();
-		getEnemies().clear();
+		this.getBigPoints().clear();
+		this.getPoints().clear();
+		this.getEnemies().clear();
 
 		try {
 
@@ -63,7 +63,7 @@ public class Map {
 			level.setWidth(map.getWidth());
 			level.setHeight(map.getHeight());
 			int[] pixels = new int[level.getWidth() * level.getHeight()];
-			setTiles(new Tile[level.getWidth()][level.getHeight()]);
+			this.setTiles(new Tile[level.getWidth()][level.getHeight()]);
 			map.getRGB(0, 0, level.getWidth(), level.getHeight(), pixels, 0, level. getWidth());
 			int pos = 0;
 
@@ -84,7 +84,7 @@ public class Map {
 					}else if(val == 0xFF000000){
 
 						//tile
-						getTiles()[xx][yy] = new Tile(xx*32, yy*32);
+						this.getTiles()[xx][yy] = new Tile(xx*32, yy*32);
 
 					}else{
 
@@ -93,11 +93,11 @@ public class Map {
 
 						if(temp<93 || max == 0){
 
-							getPoints().add(new Point(xx*32, yy*32));
+							this.getPoints().add(new Point(xx*32, yy*32));
 
 						}else{
 
-							getBigPoints().add(new BigPoint(xx*32, yy*32));
+							this.getBigPoints().add(new BigPoint(xx*32, yy*32));
 							max--;
 
 						}
@@ -116,12 +116,12 @@ public class Map {
 								level.getPlayers().get(pos).y = yy*32;
 								level.getPlayers().get(pos).setSpeed(this.getSpeed(level.getTurno().getLvl()));
 								level.getPlayers().get(pos).reset();
-								getEnemies().add(level.getPlayers().get(pos));
+								this.getEnemies().add(level.getPlayers().get(pos));
 								pos++;
 
 							}else{
 
-								getEnemies().add(new Enemy(xx*32, yy*32, this.getSpeed(level.getTurno().getLvl()), level));
+								this.getEnemies().add(new Enemy(xx*32, yy*32, this.getSpeed(level.getTurno().getLvl()), level));
 
 							}
 
