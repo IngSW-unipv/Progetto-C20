@@ -1,11 +1,11 @@
 package actors;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.Random;
 
-import javax.swing.ImageIcon;
 import system.Level;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Enemy extends Player{
 
@@ -15,6 +15,7 @@ public class Enemy extends Player{
 	
 	private Random r;
 	private Level level;
+	private int tmp = 4;
 	
 	public Enemy(int x, int y, int l, Level level){
 		
@@ -24,6 +25,7 @@ public class Enemy extends Player{
 		this.setBounds(x, y, 32, 32);
 		dir = r.nextInt(4);
 		this.speed = l;
+		this.setFantasmi();
 		
 	}
 	
@@ -54,29 +56,33 @@ public class Enemy extends Player{
 	}
 	
 	public void tick(){
+		List<Integer> t = new ArrayList<>();
+		t.clear();
 
-		int left = 0;
-		if (dir == left){
-
-			if(canMove(x - speed,y)){
-
-				x -= speed;
-
-			}else{
-
-				dir = r.nextInt(4);
-
-			}
-
+		if(canMove(x + speed,y)){
+			t.add(0);
+		}
+		if(canMove(x - speed,y)){
+			t.add(1);
+		}
+		if(canMove(x,y - speed)){
+			t.add(2);
+		}
+		if (canMove(x, y + speed)) {
+			t.add(3);
 		}
 
-		int right = 1;
-		if(dir == right){
+		if(t.size() > tmp){
+			dir = r.nextInt(4);
+		}
+
+		//right 0
+		if (dir == 0){
 
 			if(canMove(x + speed,y)){
 
 				x += speed;
-
+				tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -85,13 +91,28 @@ public class Enemy extends Player{
 
 		}
 
-		int up = 2;
-		if(dir == up){
+		//left 1
+		if(dir == 1){
+
+			if(canMove(x - speed,y)){
+
+				x -= speed;
+				int tmp = t.size();
+			}else{
+
+				dir = r.nextInt(4);
+
+			}
+
+		}
+
+		//up 2
+		if(dir == 2){
 
 			if(canMove(x,y - speed)){
 
 				y -= speed;
-
+				int tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -100,13 +121,13 @@ public class Enemy extends Player{
 
 		}
 
-		int down = 3;
-		if(dir == down) {
+		//down 3
+		if(dir == 3) {
 
 			if (canMove(x, y + speed)) {
 
 				y += speed;
-
+				int tmp = t.size();
 			} else {
 
 				dir = r.nextInt(4);
@@ -114,7 +135,7 @@ public class Enemy extends Player{
 			}
 
 		}
-		
+
 	}
 	
 	public void render(Graphics g){
@@ -122,7 +143,7 @@ public class Enemy extends Player{
 		if(this.level.getTurno().isKill()){
 			
 			g.setColor(Color.WHITE);
-			g.drawImage(new ImageIcon("res/players/fantasma5.png").getImage(), this.x, this.y, null);
+			g.drawImage(this.getFantasma(0), this.x, this.y, null);
 			String time = Integer.toString(3 - ((int)((System.currentTimeMillis() - this.level.getStart())/1000)));
 			g.drawString(time, x + 16, y+16);
 			
@@ -130,7 +151,7 @@ public class Enemy extends Player{
 			
 			g.setColor(Color.ORANGE);
 			
-			g.drawImage(new ImageIcon("res/players/fantasm5.png").getImage(), this.x, this.y, null);
+			g.drawImage(this.getFantasma(1), this.x, this.y, null);
 			
 		}
 		
