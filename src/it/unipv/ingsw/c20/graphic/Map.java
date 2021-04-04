@@ -1,4 +1,4 @@
-package graphics;
+package graphic;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,10 +8,10 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import actors.Enemy;
-import actors.Player;
-import points.BigPoint;
-import points.Point;
+import actor.Enemy;
+import actor.Player;
+import point.BigPoint;
+import point.Point;
 import system.Level;
 
 public class Map {

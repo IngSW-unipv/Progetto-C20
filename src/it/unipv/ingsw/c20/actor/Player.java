@@ -1,4 +1,4 @@
-package actors;
+package actor;
 import java.awt.*;
 import java.util.Arrays;
 import javax.swing.ImageIcon;

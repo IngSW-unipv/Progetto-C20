@@ -1,4 +1,4 @@
-package points;
+package point;
 
 import javax.swing.*;
 import java.awt.*;

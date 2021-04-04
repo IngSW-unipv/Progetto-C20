@@ -1,6 +1,6 @@
 package system;
 
-import graphics.Menu;
+import graphic.Menu;
 
 import javax.swing.*;
 import java.awt.*;

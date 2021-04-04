@@ -1,7 +1,7 @@
 package system;
 
-import actors.Player;
-import graphics.Map;
+import actor.Player;
+import graphic.Map;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
