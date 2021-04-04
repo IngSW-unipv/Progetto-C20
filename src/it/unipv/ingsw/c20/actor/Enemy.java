@@ -15,6 +15,7 @@ public class Enemy extends Player{
 	private Random r;
 	private Level level;
 	private int tmp = 4;
+	private List<Integer> t;
 	
 	public Enemy(int x, int y, int l, Level level){
 		
@@ -25,6 +26,8 @@ public class Enemy extends Player{
 		dir = r.nextInt(4);
 		this.speed = l;
 		this.setFantasmi();
+		t = new ArrayList<>();
+
 		
 	}
 	
@@ -55,7 +58,7 @@ public class Enemy extends Player{
 	}
 	
 	public void tick(){
-		List<Integer> t = new ArrayList<>();
+
 		t.clear();
 
 		if(canMove(x + speed,y)){
