@@ -1,6 +1,6 @@
-package actor;
+package it.unipv.ingsw.c20.actor;
 
-import system.Level;
+import it.unipv.ingsw.c20.system.Level;
 
 import java.awt.*;
 

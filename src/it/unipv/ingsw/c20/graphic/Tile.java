@@ -1,4 +1,4 @@
-package graphic;
+package it.unipv.ingsw.c20.graphic;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

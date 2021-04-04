@@ -1,9 +1,10 @@
-package actor;
+package it.unipv.ingsw.c20.actor;
+
 import java.awt.*;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 
-import system.Level;
+import it.unipv.ingsw.c20.system.Level;
 
 public class Player extends Actor {
 		

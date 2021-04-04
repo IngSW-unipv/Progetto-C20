@@ -1,7 +1,7 @@
-package system;
+package it.unipv.ingsw.c20.system;
 
-import actor.Player;
-import graphic.Map;
+import it.unipv.ingsw.c20.actor.Player;
+import it.unipv.ingsw.c20.graphic.Map;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

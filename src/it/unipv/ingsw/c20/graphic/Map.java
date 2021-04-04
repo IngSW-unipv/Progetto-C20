@@ -1,4 +1,4 @@
-package graphic;
+package it.unipv.ingsw.c20.graphic;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import actor.Enemy;
-import actor.Player;
-import point.BigPoint;
-import point.Point;
-import system.Level;
+import it.unipv.ingsw.c20.actor.Enemy;
+import it.unipv.ingsw.c20.actor.Player;
+import it.unipv.ingsw.c20.point.BigPoint;
+import it.unipv.ingsw.c20.point.Point;
+import it.unipv.ingsw.c20.system.Level;
 
 public class Map {
 	Level level;

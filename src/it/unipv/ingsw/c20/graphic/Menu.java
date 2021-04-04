@@ -1,12 +1,12 @@
-package graphic;
+package it.unipv.ingsw.c20.graphic;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import system.Game;
-import system.State;
+import it.unipv.ingsw.c20.system.Game;
+import it.unipv.ingsw.c20.system.State;
 
 public class Menu extends MouseAdapter{
 	

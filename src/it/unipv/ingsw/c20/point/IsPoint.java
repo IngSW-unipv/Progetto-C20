@@ -1,4 +1,4 @@
-package point;
+package it.unipv.ingsw.c20.point;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

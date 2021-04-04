@@ -1,6 +1,6 @@
-package system;
+package it.unipv.ingsw.c20.system;
 
-import graphic.Menu;
+import it.unipv.ingsw.c20.graphic.Menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public class Game extends Canvas implements Runnable{
 		
 		//Partirò sempre prima dal menù, quindi imposto menù come primo state.
 		this.state = State.Menu;
-		
+
 		//Creo il menu.
 		this.menu = new Menu(this);
 		//Aggiungo il listener così che menù possa reagire al mouse.
