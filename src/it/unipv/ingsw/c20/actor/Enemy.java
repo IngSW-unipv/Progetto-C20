@@ -21,7 +21,6 @@ public class Enemy extends Player {
 	public int speed;
 
 	private Random r;
-	private Level level;
 	private int tmp = 4;
 	private List<Integer> t;
 
@@ -36,7 +35,6 @@ public class Enemy extends Player {
 	public Enemy(int x, int y, int l, Level level) {
 
 		super(x, y, level, false, 4);
-		this.level = level;
 		r = new Random();
 		this.setBounds(x, y, 32, 32);
 		dir = r.nextInt(4);
@@ -58,13 +56,13 @@ public class Enemy extends Player {
 
 		Rectangle bounds = new Rectangle(nextX, nextY, this.width, this.height);
 
-		for (int xx = 0; xx < level.getMap().getTiles().length; xx++) {
+		for (int xx = 0; xx < this.getLevel().getMap().getTiles().length; xx++) {
 
-			for (int yy = 0; yy < level.getMap().getTiles()[0].length; yy++) {
+			for (int yy = 0; yy < this.getLevel().getMap().getTiles()[0].length; yy++) {
 
-				if (level.getMap().getTiles()[xx][yy] != null) {
+				if (this.getLevel().getMap().getTiles()[xx][yy] != null) {
 
-					if (bounds.intersects(level.getMap().getTiles()[xx][yy])) {
+					if (bounds.intersects(this.getLevel().getMap().getTiles()[xx][yy])) {
 
 						return false;
 
@@ -172,11 +170,11 @@ public class Enemy extends Player {
 	 */
 	public void render(Graphics g) {
 
-		if (this.level.getTurno().isKill()) {
+		if (this.getLevel().getTurno().isKill()) {
 
 			g.setColor(Color.WHITE);
 			g.drawImage(this.getFantasma(0), this.x, this.y, null);
-			String time = Integer.toString(3 - ((int) ((System.currentTimeMillis() - this.level.getStart()) / 1000)));
+			String time = Integer.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
 			g.drawString(time, x + 16, y + 16);
 
 		} else {

@@ -28,6 +28,10 @@ public abstract class Actor extends Rectangle {
 		this.level = level;
 
 	}
+	
+	public Level getLevel(){
+		return this.level;
+	}
 
 	public abstract boolean canMove(int x, int y);
 

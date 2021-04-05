@@ -22,7 +22,6 @@ public class Player extends Actor {
 	private int imgtemp;
 	private boolean kill = false;
 	private int score = 0, lvl = 1;
-	private Level level;
 	private boolean turno;
 	private int posizione;
 	private Image[] pacman;
@@ -43,7 +42,6 @@ public class Player extends Actor {
 		this.setBounds(x, y, 32, 32);
 		direction = new boolean[4]; // right 0, left 1, up 2, down 3
 		this.reset();
-		this.level = level;
 		this.turno = b;
 		this.setPacman();
 		this.setFantasmi();
@@ -105,13 +103,13 @@ public class Player extends Actor {
 
 		Rectangle bounds = new Rectangle(nextX, nextY, this.width, this.height); // Rectangle creation
 
-		for (int xx = 0; xx < level.getMap().getTiles().length; xx++) {
+		for (int xx = 0; xx < this.getLevel().getMap().getTiles().length; xx++) {
 
-			for (int yy = 0; yy < level.getMap().getTiles()[0].length; yy++) {
+			for (int yy = 0; yy < this.getLevel().getMap().getTiles()[0].length; yy++) {
 
-				if (level.getMap().getTiles()[xx][yy] != null) {
+				if (this.getLevel().getMap().getTiles()[xx][yy] != null) {
 
-					if (bounds.intersects(level.getMap().getTiles()[xx][yy])) {
+					if (bounds.intersects(this.getLevel().getMap().getTiles()[xx][yy])) {
 
 						return false;
 
@@ -210,12 +208,12 @@ public class Player extends Actor {
 	 */
 	public void render(Graphics g) {
 		if (!this.turno) {
-			if (this.level.getTurno().isKill()) {
+			if (this.getLevel().getTurno().isKill()) {
 
 				g.setColor(Color.WHITE);
 				g.drawImage(fantasmi[0], this.x, this.y, null);
 				String time = Integer
-						.toString(3 - ((int) ((System.currentTimeMillis() - this.level.getStart()) / 1000)));
+						.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
 				g.drawString(time, x + 16, y + 16);
 			} else {
 				g.drawImage(fantasmi[1], this.x, this.y, null);
