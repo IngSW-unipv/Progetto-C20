@@ -61,6 +61,7 @@ public class Level implements KeyListener {
 	
 	// prendo l'index del giocatore pacman
 	
+	@SuppressWarnings("null")
 	public int getIndex(){
 		
 		for(int i = 0; i < getPlayers().size(); i++){
@@ -74,6 +75,7 @@ public class Level implements KeyListener {
 		}
 		
 		return (Integer) null;
+		
 		
 	}
 	

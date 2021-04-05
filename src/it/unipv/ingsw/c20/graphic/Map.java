@@ -11,13 +11,13 @@ import javax.imageio.ImageIO;
 import it.unipv.ingsw.c20.actor.Enemy;
 import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.point.BigPoint;
-import it.unipv.ingsw.c20.point.Point;
+import it.unipv.ingsw.c20.point.LilPoint;
 import it.unipv.ingsw.c20.system.Level;
 
 public class Map {
 	Level level;
 	private Tile[][] tiles;
-	private List<Point> points; //lista dei punti piccoli nel gioco
+	private List<LilPoint> points; //lista dei punti piccoli nel gioco
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
 	private List <Player> enemies; // lita dei giocatori non attivi e bot
 	/**
@@ -94,7 +94,7 @@ public class Map {
 
 						if(temp<93 || max == 0){
 
-							this.getPoints().add(new Point(xx*32, yy*32));
+							this.getPoints().add(new LilPoint(xx*32, yy*32));
 
 						}else{
 
@@ -182,9 +182,9 @@ public class Map {
 
 	public void setBigPoints(List <BigPoint> bigPoints) { this.bigPoints = bigPoints; }
 
-	public List <Point> getPoints() { return points; }
+	public List <LilPoint> getPoints() { return points; }
 
-	public void setPoints(List <Point> points) { this.points = points; }
+	public void setPoints(List <LilPoint> points) { this.points = points; }
 
 	public List <Player> getEnemies() { return enemies; }
 
