@@ -39,17 +39,17 @@ public class Game extends Canvas implements Runnable{
 		this.setMinimumSize(dimension);
 		this.setMaximumSize(dimension);
 		
-		//Partirò sempre prima dal menù, quindi imposto menù come primo state.
+		//The game will starts every time from the menu, so menu will be the first state.
 		this.state = State.Menu;
 
-		//Creo il menu.
+		//Creates the menu.
 		this.menu = new Menu(this);
-		//Aggiungo il listener così che menù possa reagire al mouse.
+		//Adds the listener so that menu can react to mouse's movement.
 		this.addMouseListener(menu); 
 	}
 	
 	private synchronized void start(){
-		//Inizia il gioco
+		//Starts the game
 		
 		if(!isRunning){
 			
@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private synchronized void stop(){
-		//Chiude il gioco
+		//Stops the game
 		
 		if(!isRunning){
 			return;
@@ -78,76 +78,77 @@ public class Game extends Canvas implements Runnable{
 	
   /** Game's core, manages the fps system, creating the illusion of a moving picture. */
 	public void run(){
-		//Il cuore del gioco, la funzione principale che permette al gioco di aggiornarsi in continuazione
+		//This the game's core, the master function that allow the game to be updated continuously.
 		
-		this.requestFocusInWindow(); //Quando viene premuto un tasto, il tasto verrà ascoltato dal rispettivo listener.
-		long lastTime = System.nanoTime(); //it's the timer of the system (nanoseconds), used for delta's calculation
-		long timer = System.currentTimeMillis(); //it's the time of the system (milliseconds), used for delta's calculation
-		double amountOfTicks = 60.0; //it's the amount of tick per second
-		double ns = 1e9/amountOfTicks; //indicates the amount of nanoseconds in every tick
-		double delta = 0; //delta when he is increased by one it will indicates that a tick is passed
-		int fps = 0; //fps frames per second
+		this.requestFocusInWindow(); //When a key is pressed, it will be listened from the proper listener.
+		long lastTime = System.nanoTime(); //it's the timer of the system (nanoseconds), used for delta's calculation.
+		long timer = System.currentTimeMillis(); //it's the time of the system (milliseconds), used for delta's calculation.
+		double amountOfTicks = 60.0; //it's the amount of tick per second.
+		double ns = 1e9/amountOfTicks; //indicates the amount of nanoseconds in every tick.
+		double delta = 0; //delta when he is increased by one it will indicates that a tick is passed.
+		int fps = 0; //fps frames per second.
 		
 		while(isRunning){
 	
 			long now = System.nanoTime();
-			delta += (now - lastTime)/ns; //Così facendo delta ora avrà l'unità di misura di un tick.
+			delta += (now - lastTime)/ns; //Delta now has a tick as measure unit.
 			lastTime = now;
-			//Ogni volta che delta viene aumentato di uno significa che è passato un tick.
+			//When delta is increased by one , it means that a tick has passed.
 			
 			while(delta >=1){
-				//dato che è passato un tick chiamo il metodo tick.
+				//One tick has passed so i call tick method.
 				this.tick();
-				//Ora riporto delta a 0.
+				//Brings back delta to 0.
 				delta--;
 			}
 			
-			//Aggiorno la finestra renderizzandola.
+			//Updates window renderizing it.
 			this.render();
-			//Aumento di 1 gli fps dato che ho aggiornato la finestra.
+			//I've updated the window so now i will increase fps by one.
 			fps++;
 			
 			if(System.currentTimeMillis() - timer >1000){
-				//Scrive gli fps una volta ogni secondo, controllando current time.
-				timer += 1000; //Aggiorno il timer per essere 1 secondo in ritardo.
-				//Aggiorno i frames e riporto fps a 0, ciò avviene una volta ogni secondo.
+				//It writes fps one per second controlling timer.
+				timer += 1000; //Updates the time to be one second late.
+				//Updates frames and bring back to 0 fps, this will happen once per second.
 				this.frames = fps;
-				//Frames indica quindi i frames al secondo.
+				
 				fps = 0;	
 			}
 		}
 
-		stop();	//Ferma il gioco.	
+		stop();	//stops the game.	
 	}
 
 	private void tick() {
-		// Tick aggiorna continuamente la parte logica di quello che sta succedendo a schermo
+		// Tick continuously update the logical side of what is happening on the screen. 
 		
 		if(state == State.Game){
-			//Se sto giocando aggiorna la finestra usando le immagini di level.
+			//If i'm playing it will update the window using level's images.
 			level.tick();
 		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
-			//Se ho finito di giocare, sono nel menu o nel tutorial, aggiorno la finestra usando le immagini del menu.
+			//If i'm not playing i'm in the menu or in the tutorial, so i will update the window using menu's images.
 			menu.tick();
 		}
 	}
 
 	
 	private void render() {
-		// Render aggiorna continuamente la parte grafica della finestra.
-		//BufferStrategy è utile per organizzare gli elementi in una finestra.
+		//Render continuously update the graphic side of what is happening on the screen. 
+		
+		//BufferStrategy is used to organize window's elements.
 		BufferStrategy bs = this.getBufferStrategy();
 		
 		if(bs == null){
-			//In caso bs fosse nullo vado a creare 3 Buffer.
+			//If bs is null then it creates 3 buffer.
 			this.createBufferStrategy(3);
 			return;
 		}
 		
-		//Creo un contesto grafico per il buffer.
+		//Creates a graphic context for the buffer. 
 		Graphics g = bs.getDrawGraphics();
 		
-		//Stampo a schermo gli fps dell'applicazione
+		//Prints on the screen game's fps.
 		do {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -156,18 +157,18 @@ public class Game extends Canvas implements Runnable{
 		g.drawString("FPS: " + this.frames, 0, h2);
 		
 		if(state == State.Game){
-			//Se sto giocando renderizzo da level.
+			
 			level.Render(g);
 		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
-			//Se non sto giocando renderizzo da menu.
+	
 			menu.render(g);
 		}
 		
 		g.dispose();
-		//Il buffer disegnato diventa il buffer per JFrame.
+		//The drawn down buffer will became JFrame's buffer.
 		bs.show(); 
 		
-		//Chiudo il ciclo do-while con una prevenzione di sicurezza sulla perdita dei frames del buffer.
+		//Close the loop do while with a security prevention, cause can happen to loose some frames in the buffer.
 		}while(bs.contentsLost()); 
 	}
 	
@@ -220,10 +221,10 @@ public class Game extends Canvas implements Runnable{
 	public static void main(String[] args){
 		
 		
-		//Creo un gioco.
+		//Creates the game.
 		Game game = new Game();
 		
-		//Impostazioni della finestra.
+		//Window settings.
 		JFrame frame = new JFrame();
 		frame.setTitle(game.TITLE);
 		frame.add(game);
