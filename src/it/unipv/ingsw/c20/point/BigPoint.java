@@ -3,12 +3,12 @@ package it.unipv.ingsw.c20.point;
 import javax.swing.*;
 import java.awt.*;
 
-public class BigPoint extends IsPoint{
+public class BigPoint extends Point{
 	
 	private static final long serialVersionUID = 1L;
 
 	public BigPoint(int x, int y){
-		
+		super(x, y);
 		this.setBounds(x+16-8, y+16-8, 16, 16);
 		
 	}

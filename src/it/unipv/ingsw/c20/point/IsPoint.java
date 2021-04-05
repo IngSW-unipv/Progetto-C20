@@ -1,12 +1,11 @@
 package it.unipv.ingsw.c20.point;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 
-public abstract class IsPoint extends Rectangle {
-
-	private static final long serialVersionUID = 1L;
+public interface IsPoint{
 	
-	public abstract void tick();
-	public abstract void render(Graphics g);
+	
+	public void tick();
+	public void render(Graphics g);
+
 }

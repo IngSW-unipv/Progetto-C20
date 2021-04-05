@@ -1,26 +1,15 @@
 package it.unipv.ingsw.c20.point;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
-public class Point extends IsPoint{
-	
+public abstract class Point extends Rectangle implements IsPoint {
+
 	private static final long serialVersionUID = 1L;
-
-	public Point(int x, int y){
-		
-		this.setBounds(x+16-4, y+16-4, 8, 8);
-		
+	
+	Point(int x, int y){
 	}
 	
-	public void render(Graphics g){
-		
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 8, 8);
-		
-	}
-
-	public void tick() {
-		
-	}
-	
+	public abstract void tick();
+	public abstract void render(Graphics g);
 }
