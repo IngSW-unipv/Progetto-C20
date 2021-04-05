@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable{
 	private State state; // describes the game's state
 	
 	
-	/** The constructor, sets the first game's state (menu), creates the menu and add menu's listener. */
+	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
 		
 		Dimension dimension = new Dimension(this.getWIDTH(), this.getHEIGHT());
@@ -80,36 +80,39 @@ public class Game extends Canvas implements Runnable{
 	public void run(){
 		//This the game's core, the master function that allow the game to be updated continuously.
 		
-		this.requestFocusInWindow(); //When a key is pressed, it will be listened from the proper listener.
-		long lastTime = System.nanoTime(); //it's the timer of the system (nanoseconds), used for delta's calculation.
-		long timer = System.currentTimeMillis(); //it's the time of the system (milliseconds), used for delta's calculation.
-		double amountOfTicks = 60.0; //it's the amount of tick per second.
-		double ns = 1e9/amountOfTicks; //indicates the amount of nanoseconds in every tick.
-		double delta = 0; //delta when he is increased by one it will indicates that a tick is passed.
-		int fps = 0; //fps frames per second.
+		this.requestFocusInWindow(); 				//When a key is pressed, it will be listened from the proper listener.
+		long lastTime = System.nanoTime(); 			//it's the timer of the system (nanoseconds), used for delta's calculation.
+		long timer = System.currentTimeMillis(); 	//it's the time of the system (milliseconds), used for delta's calculation.
+		double amountOfTicks = 60.0; 				//it's the amount of tick per second.
+		double ns = 1e9/amountOfTicks; 				//indicates the amount of nanoseconds in every tick.
+		double delta = 0; 							//delta when he is increased by one it will indicates that a tick is passed.
+		int fps = 0; 								//fps frames per second.
 		
 		while(isRunning){
 	
 			long now = System.nanoTime();
-			delta += (now - lastTime)/ns; //Delta now has a tick as measure unit.
-			lastTime = now;
-			//When delta is increased by one , it means that a tick has passed.
+			delta += (now - lastTime)/ns; 			//Delta now has a tick as measure unit.
+			lastTime = now;							//When delta is increased by one , it means that a tick has passed.
+			
 			
 			while(delta >=1){
 				//One tick has passed so i call tick method.
 				this.tick();
+				
 				//Brings back delta to 0.
 				delta--;
 			}
 			
 			//Updates window renderizing it.
 			this.render();
+			
 			//I've updated the window so now i will increase fps by one.
 			fps++;
 			
 			if(System.currentTimeMillis() - timer >1000){
 				//It writes fps one per second controlling timer.
-				timer += 1000; //Updates the time to be one second late.
+				timer += 1000; 						//Updates the time to be one second late.
+				
 				//Updates frames and bring back to 0 fps, this will happen once per second.
 				this.frames = fps;
 				

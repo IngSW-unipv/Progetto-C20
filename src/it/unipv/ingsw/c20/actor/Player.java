@@ -13,7 +13,9 @@ import it.unipv.ingsw.c20.system.Level;
 	 */
 
 public class Player extends Actor {
-		
+	
+	private static final long serialVersionUID = -4955740102332399999L;
+	
 	private boolean[] direction;
 	private int speed = 4;
 	private int temp;

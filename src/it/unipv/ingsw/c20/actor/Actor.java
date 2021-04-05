@@ -7,6 +7,8 @@ import java.awt.*;
 
 public abstract class Actor extends Rectangle {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Level level;
 	
 	public Actor(int x, int y, Level level) {

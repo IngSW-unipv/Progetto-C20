@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 
 public class Tile extends Rectangle{
 	
+	private static final long serialVersionUID = 1L;
+
 	public Tile(int x, int y){
 		
 		this.setBounds(x, y, 32, 32);
