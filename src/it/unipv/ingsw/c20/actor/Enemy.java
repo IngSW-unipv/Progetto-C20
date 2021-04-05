@@ -77,7 +77,7 @@ public class Enemy extends Player{
 		}
 
 		if(t.size() > tmp){
-			dir = r.nextInt(4);
+			dir = t.get(r.nextInt(t.size()));
 		}
 
 		//right 0
@@ -86,7 +86,7 @@ public class Enemy extends Player{
 			if(canMove(x + speed,y)){
 
 				x += speed;
-				//tmp = t.size();
+				tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -101,7 +101,7 @@ public class Enemy extends Player{
 			if(canMove(x - speed,y)){
 
 				x -= speed;
-				//int tmp = t.size();
+				tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -116,7 +116,7 @@ public class Enemy extends Player{
 			if(canMove(x,y - speed)){
 
 				y -= speed;
-				//int tmp = t.size();
+				tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -131,7 +131,7 @@ public class Enemy extends Player{
 			if (canMove(x, y + speed)) {
 
 				y += speed;
-				//int tmp = t.size();
+				tmp = t.size();
 			} else {
 
 				dir = r.nextInt(4);
