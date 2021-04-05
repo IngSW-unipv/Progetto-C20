@@ -30,6 +30,8 @@ public class Level implements KeyListener {
 	private long start = 0;
 
 	/**
+	 * Constructor sets the players creating a list that will contain them,
+	 * adds the listener at the game, creates the players and create the map
 	 * @param game 
 	 * @param n integer represents the number of the players
 	 */
@@ -99,6 +101,9 @@ public class Level implements KeyListener {
 		
 	}
 	
+	/**
+	 * Tick continuously update the logical side of what is happening on the screen
+	 */
 	public void tick(){
 		
 		if(!paused){
@@ -131,9 +136,10 @@ public class Level implements KeyListener {
 		
 	}
 	
-	// if the static objects are eaten (yellow points and apples),
-	// pass at the following level
-	
+	/**
+	 * if the static objects are eaten (yellow points and apples),
+	 * pass at the following level
+	 */
 	public void updateLvl() {
 		
 		if(this.map.getPoints().size() == 0 && this.map.getBigPoints().size() == 0){
@@ -145,7 +151,7 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	//manage the points's interaction
+	/** manage the points's interaction */
 	public void interactionPoints() {
 		
 		for(int i = 0; i < this.map.getPoints().size(); i++ ){
@@ -159,7 +165,7 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	//control of the apples's interaction
+	/** control of the apples's interaction */
 	public void interactionFruits() {
 		
 		for(int i = 0; i < this.map.getBigPoints().size(); i++ ){
@@ -175,8 +181,9 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	//control of the enemys's interaction and in accord with the state of the kill 
-	//we decide the result
+	/**control of the enemys's interaction and in accord with the state of the kill 
+	 * we decide the result
+	 */
 	public void interactionEnemies() {
 		
 		for(int i = 0; i < this.map.getEnemies().size(); i++ ){
@@ -210,6 +217,10 @@ public class Level implements KeyListener {
 		
 	}
 	
+	
+	/**
+	 * Render continuously update the graphic side of what is happening on the screen.
+	 */
 	public void Render(Graphics g){
 		
 		for(int x = 0 ; x < getWidth() ; x++){
@@ -266,28 +277,64 @@ public class Level implements KeyListener {
 	/**
 	 * Getters and Setters
 	 */
+	
+	/**
+	 * Getter's Player
+	 * @return list of the players 
+	 */
 	public List <Player> getPlayers() { return players; }
-
+	
+	/**
+	 * Setter
+	 * @param players
+	 */
 	public void setPlayers(List <Player> players) { this.players = players; }
-
+	
+	/**
+	 * Getter
+	 * @return height 
+	 */
+	
 	public int getHeight() { return height; }
-
+	
+	/**
+	 * Setter
+	 * @param height
+	 */
 	public void setHeight(int height) { this.height = height; }
 	
+	/**
+	 * Getter
+	 * @return width
+	 */
 	public int getWidth() { return width; }
-
+	
+	/**
+	 * Setter
+	 * @param width
+	 */
 	public void setWidth(int width) { this.width = width; }
-
+	
+	/**
+	 * Map's getter
+	 * @return map
+	 */
 	public Map getMap() { return map; }
 	
+	/**
+	 * Generate randomly a map
+	 * @return String that contain the location of a random map 
+	 * present among the resources
+	 */
 	public String getPath(){
 		Random ram = new Random();
 		return "res/map/map" + (ram.nextInt(3 - 1) + 1) +  ".png";
 		
 	}
 
-	//manage the keyboard
-	
+	/**
+	 * Manage the keyboard
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
