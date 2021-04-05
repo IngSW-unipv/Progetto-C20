@@ -81,6 +81,8 @@ public class Player extends Actor {
 					
 					if(bounds.intersects(level.getMap().getTiles()[xx][yy])){
 						
+						// se c'è un muro si puo muovere senno non si puo muovere verso quella direzione
+						
 						return false;
 						
 					}
@@ -105,7 +107,7 @@ public class Player extends Actor {
 
 			for(int i=0; i< direction.length; i++){
 				
-				if(i != 0 && i != temp){
+				if(i != 0 && i != temp){ // forma di memoria il temp
 					
 					direction[i] = false;
 					

@@ -13,8 +13,8 @@ import java.util.Random;
 public class Level implements KeyListener {
 	
 	private int width, height;
-	private List <Player> players;  //Lista di giocatori attivi
-	private Map map; // mappa dove si gioca
+	private List <Player> players;
+	private Map map;
 
 	private Game game;
 	private boolean paused = false;
@@ -33,7 +33,7 @@ public class Level implements KeyListener {
 		
 		if(n >= 1){
 			
-			getPlayers().add(0, new Player(0, 0, this, true, 0));
+			getPlayers().add(0, new Player(0, 0, this, true, 0));	// imposto il turno del primo giocatore
 		}
 		for(int i = 1; i<n; i++){
 			getPlayers().add(i, new Player(0, 0, this, false, i));
@@ -84,88 +84,103 @@ public class Level implements KeyListener {
 		if(!paused){
 			
 			
-			this.getTurno().tick();
+			this.getTurno().tick();		// movimento di pacman
 			
 			for(int i = 0 ; i < map.getEnemies().size() ; i++){
 
-				map.getEnemies().get(i).tick();
+				map.getEnemies().get(i).tick();		// movimento dei fantasmi
 					
 			}
 			
-			// se vengono mangiati tutti gli oggetti statici in gioco si passa al livello successivo
+			updateLvl();
 			
-			if(this.map.getPoints().size() == 0 && this.map.getBigPoints().size() == 0){
-				//win
-				this.getTurno().setLvl(this.getTurno().getLvl() + 1);
+			interactionPoints();
+			
+			interactionFruits();
+			
+			interactionEnemies();
+			
+			// quando il timer arriva a 3 secondi si torna allo stato normale
+			if(this.getTurno().isKill() && (System.currentTimeMillis() - start) >=3000){
 				
-				this.map = new Map(this, this.getPath());
+				this.getTurno().setKill(false);
 				
 			}
 			
-			//controllo interazione con punti 
+		}
+		
+	}
+	
+	// se vengono mangiati tutti gli oggetti statici (punti gialli e melle),
+	// si passa al livello successivo
+	public void updateLvl() {
+		
+		if(this.map.getPoints().size() == 0 && this.map.getBigPoints().size() == 0){
+			//win
+			this.getTurno().setLvl(this.getTurno().getLvl() + 1);
 			
-			for(int i = 0; i < this.map.getPoints().size(); i++ ){
+			this.map = new Map(this, this.getPath());
+			
+		}
+	}
+	
+	//gestisco l'interazione con i punti
+	public void interactionPoints() {
+		
+		for(int i = 0; i < this.map.getPoints().size(); i++ ){
+			
+			if(this.getTurno().intersects(this.map.getPoints().get(i))){
 				
-				if(this.getTurno().intersects(this.map.getPoints().get(i))){
-					
-					this.map.getPoints().remove(i);
-					this.getTurno().setScore(this.getTurno().getScore() + 50);
-					
-				}
+				this.map.getPoints().remove(i);
+				this.getTurno().setScore(this.getTurno().getScore() + 50);
 				
 			}
+		}
+	}
+	
+	//controllo le interazioni con le frutte
+	public void interactionFruits() {
+		
+		for(int i = 0; i < this.map.getBigPoints().size(); i++ ){
 			
-			//controllo le interazioni con la frutta
-			
-			for(int i = 0; i < this.map.getBigPoints().size(); i++ ){
+			if(this.getTurno().intersects(this.map.getBigPoints().get(i))){
 				
-				if(this.getTurno().intersects(this.map.getBigPoints().get(i))){
-					
-					this.start = System.currentTimeMillis();
-					this.getTurno().setKill(true);
-					this.map.getBigPoints().remove(i);
-					this.getTurno().setScore(this.getTurno().getScore() + 100);
-					
-				}
+				this.start = System.currentTimeMillis();	// tempo di inizio per poter mangiare i nemici
+				this.getTurno().setKill(true);	// possibilita di mangiare i nemici	
+				this.map.getBigPoints().remove(i);
+				this.getTurno().setScore(this.getTurno().getScore() + 100);
 				
 			}
-
-			//controllo interazione con nemici e in base allo stato di kill decido il risultato
+		}
+	}
+	
+	//controllo interazione con nemici e in base allo stato di kill decido il risultato
+	public void interactionEnemies() {
+		
+		for(int i = 0; i < this.map.getEnemies().size(); i++ ){
 			
-			for(int i = 0; i < this.map.getEnemies().size(); i++ ){
+			if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 				
-				if(this.getTurno().intersects(this.map.getEnemies().get(i))){
+				if(!this.getTurno().isKill()){	// può ammazzare nemici o no
 					
-					if(!this.getTurno().isKill()){
+					if(this.getIndex() < this.getPlayers().size() -1){
 						
-						if(this.getIndex() < this.getPlayers().size() -1){
-							
-							this.getPlayers().get(this.getIndex()+1).setTurno(true);
-							this.getTurno().setTurno(false);
-							this.map = new Map(this, this.getPath());
-							
-						}else{
-							
-							this.game.setState(State.End);
-							
-						}
+						this.getPlayers().get(this.getIndex()+1).setTurno(true); //turno del giocatore successivo
+						this.getTurno().setTurno(false);	// muore giocatore corrente
+						this.map = new Map(this, this.getPath());
 						
 					}else{
 						
-						this.map.getEnemies().remove(i);
-						this.getTurno().setScore(this.getTurno().getScore() + 200);
+						this.game.setState(State.End);
 						
 					}
 					
+				}else{
+					
+					this.map.getEnemies().remove(i);
+					this.getTurno().setScore(this.getTurno().getScore() + 200);
+					
 				}
-				
-			}
-			
-			if(this.getTurno().isKill() && (System.currentTimeMillis() - start) >=3000){
-				
-				// quando il timer arriva a 3 secondi si torna allo stato normale
-				
-				this.getTurno().setKill(false);
 				
 			}
 			
