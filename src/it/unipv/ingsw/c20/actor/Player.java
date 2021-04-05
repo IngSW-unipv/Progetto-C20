@@ -7,28 +7,37 @@ import javax.swing.ImageIcon;
 import it.unipv.ingsw.c20.system.Level;
 
 /**
-	 * Player's class
-	 * 
-	 * @author Daniel Rotaru
-	 */
+ * Creator and manager of human player movements
+ * 
+ * @author Daniel Rotaru
+ */
 
 public class Player extends Actor {
-	
+
 	private static final long serialVersionUID = -4955740102332399999L;
-	
+
 	private boolean[] direction;
 	private int speed = 4;
 	private int temp;
 	private int imgtemp;
 	private boolean kill = false;
-	private int score=0, lvl = 1;
+	private int score = 0, lvl = 1;
 	private Level level;
 	private boolean turno;
 	private int posizione;
 	private Image[] pacman;
 	private Image[] fantasmi;
 
-	public Player(int x, int y, Level level , boolean b, int i){
+	/**
+	 * Class constructor
+	 * 
+	 * @param x	starting position of the player that will be immediately updated
+	 * @param y	starting position of the player that will be immediately updated
+	 * @param level	in this moment
+	 * @param b	player's turn
+	 * @param i number of the player
+	 */
+	public Player(int x, int y, Level level, boolean b, int i) {
 		super(x, y, level);
 		this.posizione = i;
 		this.setBounds(x, y, 32, 32);
@@ -39,232 +48,326 @@ public class Player extends Actor {
 		this.setPacman();
 		this.setFantasmi();
 	}
-	
-	public void reset(){
+
+	/**
+	 * Resets the direction's vector
+	 */
+	public void reset() {
 
 		Arrays.fill(this.direction, false);
-		
+
 	}
-	
-	public void moveRight(){
+
+	/**
+	 * Class used to move the player right
+	 */
+	public void moveRight() {
 		this.direction[0] = true;
-		this.setTemp(0);
+		this.setTemp(0); // used to save directions
 
 	}
-	
-	public void moveLeft(){
+
+	/**
+	 * Class used to move the player left
+	 */
+	public void moveLeft() {
 		this.direction[1] = true;
-		this.setTemp(1);
+		this.setTemp(1); // used to save directions
 
 	}
-	
-	public void moveUp(){
+
+	/**
+	 * Class used to move the player up
+	 */
+	public void moveUp() {
 		this.direction[2] = true;
-		this.setTemp(2);
+		this.setTemp(2); // used to save directions
 
 	}
-	
-	public void moveDown(){
+
+	/**
+	 * Class used to move the player down
+	 */
+	public void moveDown() {
 		this.direction[3] = true;
-		this.setTemp(3);
+		this.setTemp(3); // used to save directions
 	}
-	
-	public boolean canMove(int nextX, int nextY){
-		
-		Rectangle bounds = new Rectangle(nextX, nextY, this.width,this.height);
-		
-		for(int xx = 0; xx < level.getMap().getTiles().length; xx++){
-			
-			for(int yy = 0; yy < level.getMap().getTiles()[0].length; yy++){
-				
-				if(level.getMap().getTiles()[xx][yy] != null){
-					
-					if(bounds.intersects(level.getMap().getTiles()[xx][yy])){
-						
+
+	/**
+	 * Class used to understand if the next rectangle (32x32) is a rectangle in
+	 * which you can move (true) or not (false)
+	 * 
+	 * @param nextX
+	 * @param nextY
+	 * @return boolean
+	 */
+	public boolean canMove(int nextX, int nextY) {
+
+		Rectangle bounds = new Rectangle(nextX, nextY, this.width, this.height); // Rectangle creation
+
+		for (int xx = 0; xx < level.getMap().getTiles().length; xx++) {
+
+			for (int yy = 0; yy < level.getMap().getTiles()[0].length; yy++) {
+
+				if (level.getMap().getTiles()[xx][yy] != null) {
+
+					if (bounds.intersects(level.getMap().getTiles()[xx][yy])) {
+
 						return false;
-						
+
 					}
-					
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		return true;
-		
-	}
-	
-	
-	public void tick(){
-		
-		if(direction[0] && canMove(x + speed,y)){
-			
-			x += speed;
-			this.imgtemp = 0;
 
-			for(int i=0; i< direction.length; i++){
-				
-				if(i != 0 && i != temp){
-					
-					direction[i] = false;
-					
-				}
-				
-			}
-			
-		}
-		
-		if(direction[1] && canMove(x - speed,y)){
-			
-			x -= speed;
-			this.imgtemp = 1;
-
-			for(int i=0; i< direction.length; i++){
-				
-				if(i != 1 && i != temp){
-					
-					direction[i] = false;
-					
-				}
-				
-			}
-			
-		}
-		
-		if(direction[2] && canMove(x,y - speed)){
-			
-			y -= speed;
-			this.imgtemp = 2;
-
-			for(int i=0; i< direction.length; i++){
-				
-				if(i != 2 && i != temp){
-					
-					direction[i] = false;
-					
-				}
-				
-			}
-			
-		}
-		
-		if(direction[3] && canMove(x,y + speed)){
-			
-			y += speed;
-			this.imgtemp = 3;
-
-			for(int i=0; i< direction.length; i++){
-				
-				if(i != 3 && i != temp){
-					
-					direction[i] = false;
-					
-				}
-				
-			}
-			
-		}
-		
 	}
 
-	public void render(Graphics g){
-		if(!this.turno){
-			if(this.level.getTurno().isKill()){
-			
+	/**
+	 * Tick continuously update the logical side of what is happening on the screen
+	 * in order to manage the movement
+	 */
+	public void tick() {
+
+		if (direction[0] && canMove(x + speed, y)) {
+			// Each time you press a key it sets the corresponding value to true to figure
+			// out where to go and if it can go right
+
+			x += speed; // increase the variable x for the movement right
+			this.imgtemp = 0; // variable for the position of the pacman direction
+
+			for (int i = 0; i < direction.length; i++) {
+
+				if (i != 0 && i != temp) {
+
+					direction[i] = false;
+
+				}
+
+			}
+
+		}
+
+		if (direction[1] && canMove(x - speed, y)) {
+
+			x -= speed; // decrease the variable x for the movement left
+			this.imgtemp = 1; // variable for the position of the pacman direction
+
+			for (int i = 0; i < direction.length; i++) {
+
+				if (i != 1 && i != temp) {
+
+					direction[i] = false;
+
+				}
+
+			}
+
+		}
+
+		if (direction[2] && canMove(x, y - speed)) {
+
+			y -= speed; // increase the variable y for the movement down
+			this.imgtemp = 2; // variable for the position of the pacman direction
+
+			for (int i = 0; i < direction.length; i++) {
+
+				if (i != 2 && i != temp) {
+
+					direction[i] = false;
+
+				}
+
+			}
+
+		}
+
+		if (direction[3] && canMove(x, y + speed)) {
+
+			y += speed; // increase the variable y for the movement up
+			this.imgtemp = 3; // variable for the position of the pacman direction
+
+			for (int i = 0; i < direction.length; i++) {
+
+				if (i != 3 && i != temp) {
+
+					direction[i] = false;
+
+				}
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * graphic rendering of the player with differentiation in case of ghost or pacman
+	 */
+	public void render(Graphics g) {
+		if (!this.turno) {
+			if (this.level.getTurno().isKill()) {
+
 				g.setColor(Color.WHITE);
 				g.drawImage(fantasmi[0], this.x, this.y, null);
-				String time = Integer.toString(3 - ((int)((System.currentTimeMillis() - this.level.getStart())/1000)));
-				g.drawString(time, x + 16, y+16);
-			}else{
+				String time = Integer
+						.toString(3 - ((int) ((System.currentTimeMillis() - this.level.getStart()) / 1000)));
+				g.drawString(time, x + 16, y + 16);
+			} else {
 				g.drawImage(fantasmi[1], this.x, this.y, null);
 			}
-			
-		}else{
+
+		} else {
 			g.drawImage(this.pacman[this.imgtemp], this.x, this.y, null);
 		}
-		
+
 	}
-	
-	
+
+	// Getter and Setters
+
+	/**
+	 * Turno's getter
+	 * 
+	 * @return player's turno.
+	 */
 	public boolean isTurno() {
-		
+
 		return turno;
-		
+
 	}
 
+	/**
+	 * Turno's setter
+	 * 
+	 * @param turno of the player.
+	 */
 	public void setTurno(boolean turno) {
-		
+
 		this.turno = turno;
-		
+
 	}
-	
+
+	/**
+	 * Kill's getter
+	 * 
+	 * @return player's kill.
+	 */
 	public boolean isKill() {
-		
+
 		return kill;
-		
+
 	}
 
+	/**
+	 * Kill's setter
+	 * 
+	 * @param kill if can eat.
+	 */
 	public void setKill(boolean kill) {
-		
+
 		this.kill = kill;
-		
+
 	}
 
+	/**
+	 * Speed's setter
+	 * 
+	 * @param speed is the value how far can i move.
+	 */
 	public void setSpeed(int speed) {
-		
+
 		this.speed = speed;
-		
+
 	}
 
+	/**
+	 * Score's getter
+	 * 
+	 * @return player's score.
+	 */
 	public int getScore() {
-		
+
 		return score;
-		
+
 	}
 
+	/**
+	 * Turno's setter
+	 * 
+	 * @param score is the points the player earned.
+	 */
 	public void setScore(int score) {
-		
+
 		this.score = score;
-		
+
 	}
 
+	/**
+	 * Lvl's getter
+	 * 
+	 * @return player's lvl.
+	 */
 	public int getLvl() {
-		
+
 		return lvl;
-		
+
 	}
 
+	/**
+	 * Turno's setter
+	 * 
+	 * @param lvl is the current level.
+	 */
 	public void setLvl(int lvl) {
-		
+
 		this.lvl = lvl;
-		
+
 	}
 
+	/**
+	 * Turno's setter
+	 * 
+	 * @param temp.
+	 */
 	public void setTemp(int temp) {
-		
+
 		this.temp = temp;
-		
+
 	}
 
+	/**
+	 * Pacman's setter set the vector to load images of the pacman into memory
+	 */
 	public void setPacman() {
 		pacman = new Image[this.direction.length];
-		pacman[0]= new ImageIcon("res/players/playerR" + (this.posizione + 1) + ".png").getImage();
-		pacman[1]=new ImageIcon("res/players/playerL" + (this.posizione + 1) + ".png").getImage();
-		pacman[2]=new ImageIcon("res/players/playerU" + (this.posizione + 1) + ".png").getImage();
-		pacman[3]=new ImageIcon("res/players/playerD" + (this.posizione + 1) + ".png").getImage();
+		pacman[0] = new ImageIcon("res/players/playerR" + (this.posizione + 1) + ".png").getImage();
+		pacman[1] = new ImageIcon("res/players/playerL" + (this.posizione + 1) + ".png").getImage();
+		pacman[2] = new ImageIcon("res/players/playerU" + (this.posizione + 1) + ".png").getImage();
+		pacman[3] = new ImageIcon("res/players/playerD" + (this.posizione + 1) + ".png").getImage();
 		this.imgtemp = 0;
 	}
 
-	public void setFantasmi(){
+	/**
+	 * Fantasma's setter sets the vector to load images of the ghost
+	 */
+	public void setFantasmi() {
 		fantasmi = new Image[2];
-		fantasmi [0] = new ImageIcon("res/players/fantasma" + (this.posizione + 1) + ".png").getImage();
-		fantasmi [1] = new ImageIcon("res/players/fantasm" + (this.posizione + 1) + ".png").getImage();
+		fantasmi[0] = new ImageIcon("res/players/fantasma" + (this.posizione + 1) + ".png").getImage();
+		fantasmi[1] = new ImageIcon("res/players/fantasm" + (this.posizione + 1) + ".png").getImage();
 	}
 
-	public Image getFantasma(int n){
+	/**
+	 * Fantasma's getter
+	 * 
+	 * @param n
+	 * @return the n-th ghost.
+	 */
+	public Image getFantasma(int n) {
 		return this.fantasmi[n];
 	}
-	
-}
 
+}
