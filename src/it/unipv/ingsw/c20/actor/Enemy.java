@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class Enemy extends Player{
 
+	private static final long serialVersionUID = 1L;
+
 	private int dir;
 	
 	public int speed;
@@ -84,7 +86,7 @@ public class Enemy extends Player{
 			if(canMove(x + speed,y)){
 
 				x += speed;
-				tmp = t.size();
+				//tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -99,7 +101,7 @@ public class Enemy extends Player{
 			if(canMove(x - speed,y)){
 
 				x -= speed;
-				int tmp = t.size();
+				//int tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -114,7 +116,7 @@ public class Enemy extends Player{
 			if(canMove(x,y - speed)){
 
 				y -= speed;
-				int tmp = t.size();
+				//int tmp = t.size();
 			}else{
 
 				dir = r.nextInt(4);
@@ -129,7 +131,7 @@ public class Enemy extends Player{
 			if (canMove(x, y + speed)) {
 
 				y += speed;
-				int tmp = t.size();
+				//int tmp = t.size();
 			} else {
 
 				dir = r.nextInt(4);

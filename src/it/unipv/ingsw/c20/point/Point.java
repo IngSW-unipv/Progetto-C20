@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Point extends IsPoint{
 	
+	private static final long serialVersionUID = 1L;
+
 	public Point(int x, int y){
 		
 		this.setBounds(x+16-4, y+16-4, 8, 8);
