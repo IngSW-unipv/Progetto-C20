@@ -6,6 +6,12 @@ import javax.swing.ImageIcon;
 
 import it.unipv.ingsw.c20.system.Level;
 
+/**
+	 * Player's class
+	 * 
+	 * @author Daniel Rotaru
+	 */
+
 public class Player extends Actor {
 		
 	private boolean[] direction;
