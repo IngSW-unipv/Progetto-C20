@@ -9,18 +9,30 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+/**
+ * 
+ * @author Enxhi Ismaili, Carlos Reynaga
+ *
+ */
 public class Level implements KeyListener {
 	
 	private int width, height;
 	private List <Player> players;
 	private Map map;
-
+	
+	/**
+	 * @param players list of the active players
+	 * @param map map where the game is played 
+	 */
+	
 	private Game game;
 	private boolean paused = false;
 	private long start = 0;
 
-
+	/**
+	 * @param game 
+	 * @param n integer represents the number of the players
+	 */
 	public Level(Game game, int n){
 		
 		this.game = game;
@@ -29,20 +41,28 @@ public class Level implements KeyListener {
 		
 		this.getPlayers().clear();
 		
-		// creo i giocatori richiesti dal menu
+		// create the players required by the menu
+		createplayer(n);
 		
+		map = new Map(this, this.getPath());
+	}
+	
+	private void createplayer(int n) {
 		if(n >= 1){
 			
-			getPlayers().add(0, new Player(0, 0, this, true, 0));	// imposto il turno del primo giocatore
+			getPlayers().add(0, new Player(0, 0, this, true, 0));
 		}
 		for(int i = 1; i<n; i++){
 			getPlayers().add(i, new Player(0, 0, this, false, i));
 		}
-		map = new Map(this, this.getPath());
 	}
 	
-	//prendo il giocatore con il turno attuale
+	// take the player with the current round
 	
+	/**
+	 * Getter
+	 * @return player
+	 */
 	public Player getTurno(){
 		
 		for(int i = 0; i < getPlayers().size(); i++){
@@ -59,8 +79,10 @@ public class Level implements KeyListener {
 		
 	}
 	
-	// prendo l'index del giocatore pacman
-	
+	/**
+	 * Getter
+	 * @return integer that is the index of the player pacman
+	 */
 	public int getIndex(){
 		
 		for(int i = 0; i < getPlayers().size(); i++){
@@ -82,11 +104,11 @@ public class Level implements KeyListener {
 		if(!paused){
 			
 			
-			this.getTurno().tick();		// movimento di pacman
+			this.getTurno().tick();		// pacman's movement
 			
 			for(int i = 0 ; i < map.getEnemies().size() ; i++){
 
-				map.getEnemies().get(i).tick();		// movimento dei fantasmi
+				map.getEnemies().get(i).tick();		// ghosts's movement
 					
 			}
 			
@@ -98,7 +120,7 @@ public class Level implements KeyListener {
 			
 			interactionEnemies();
 			
-			// quando il timer arriva a 3 secondi si torna allo stato normale
+			// when the timer is up to 3 seconds return to the normal state
 			if(this.getTurno().isKill() && (System.currentTimeMillis() - start) >=3000){
 				
 				this.getTurno().setKill(false);
@@ -109,8 +131,9 @@ public class Level implements KeyListener {
 		
 	}
 	
-	// se vengono mangiati tutti gli oggetti statici (punti gialli e melle),
-	// si passa al livello successivo
+	// if the static objects are eaten (yellow points and apples),
+	// pass at the following level
+	
 	public void updateLvl() {
 		
 		if(this.map.getPoints().size() == 0 && this.map.getBigPoints().size() == 0){
@@ -122,7 +145,7 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	//gestisco l'interazione con i punti
+	//manage the points's interaction
 	public void interactionPoints() {
 		
 		for(int i = 0; i < this.map.getPoints().size(); i++ ){
@@ -136,15 +159,15 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	//controllo le interazioni con le frutte
+	//control of the apples's interaction
 	public void interactionFruits() {
 		
 		for(int i = 0; i < this.map.getBigPoints().size(); i++ ){
 			
 			if(this.getTurno().intersects(this.map.getBigPoints().get(i))){
 				
-				this.start = System.currentTimeMillis();	// tempo di inizio per poter mangiare i nemici
-				this.getTurno().setKill(true);	// possibilita di mangiare i nemici	
+				this.start = System.currentTimeMillis(); // starting time to be able to eat enemies
+				this.getTurno().setKill(true);	// chance to eat enemies
 				this.map.getBigPoints().remove(i);
 				this.getTurno().setScore(this.getTurno().getScore() + 100);
 				
@@ -152,19 +175,20 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	//controllo interazione con nemici e in base allo stato di kill decido il risultato
+	//control of the enemys's interaction and in accord with the state of the kill 
+	//we decide the result
 	public void interactionEnemies() {
 		
 		for(int i = 0; i < this.map.getEnemies().size(); i++ ){
 			
 			if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 				
-				if(!this.getTurno().isKill()){	// può ammazzare nemici o no
+				if(!this.getTurno().isKill()){	// can kill the enemies or not 
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
 						
-						this.getPlayers().get(this.getIndex()+1).setTurno(true); //turno del giocatore successivo
-						this.getTurno().setTurno(false);	// muore giocatore corrente
+						this.getPlayers().get(this.getIndex()+1).setTurno(true); //turn of the next player 
+						this.getTurno().setTurno(false);	// die the current player
 						this.map = new Map(this, this.getPath());
 						
 					}else{
@@ -218,7 +242,7 @@ public class Level implements KeyListener {
 		
 		this.getTurno().render(g);
 		
-		// mostro a schermo punteggio giovatore attuale e fps
+		// show on screen current player's score and fps
 		
 		g.setColor(Color.WHITE);
 		g.drawString("Score: " + this.getTurno().getScore(), 0, 25);
@@ -238,7 +262,10 @@ public class Level implements KeyListener {
 		return start;
 		
 	}
-
+	
+	/**
+	 * Getters and Setters
+	 */
 	public List <Player> getPlayers() { return players; }
 
 	public void setPlayers(List <Player> players) { this.players = players; }
@@ -259,7 +286,7 @@ public class Level implements KeyListener {
 		
 	}
 
-	//gestisco la tastiera
+	//manage the keyboard
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -437,5 +464,6 @@ public class Level implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		
 	}
+	
 	
 }
