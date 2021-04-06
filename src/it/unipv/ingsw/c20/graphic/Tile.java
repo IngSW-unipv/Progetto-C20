@@ -4,15 +4,33 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+/**
+ * Class for the creation of the tiles that are going to form the game's wall
+ * 
+ * @author Enxhi Ismaili, Carlos Reynaga
+ *
+ */
+
 public class Tile extends Rectangle{
 	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Class creator of this tiles
+	 * @param x of this tile
+	 * @param y of this tile
+	 */
+	
 	public Tile(int x, int y){
 		
 		this.setBounds(x, y, 32, 32);
 		
 	}
+	
+	/**
+	 * Render of this tile
+	 * @param g graphics
+	 */
 	
 	public void Render(Graphics g){
 		
@@ -24,6 +42,10 @@ public class Tile extends Rectangle{
 		g2d.drawLine(x, y + 32 - 1, x + 32 - 1, y + 32 - 1);
 
 	}
+	
+	/**
+	 * Tick of the tile 
+	 */
 	
 	public void tick(){
 		

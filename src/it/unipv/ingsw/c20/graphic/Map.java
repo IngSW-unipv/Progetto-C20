@@ -163,9 +163,8 @@ public class Map {
 			return 16;
 		}else if(n<=32){
 			return 32;
-		}else {
-			return 32;
 		}
+		return 32;
 	}
 	
 	/*private void tick() {

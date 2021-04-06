@@ -138,6 +138,24 @@ public class Level implements KeyListener {
 	 */
 	public void updateLvl() {
 		
+		if(this.getTurno().getLvl() == 33 || this.getTurno().getScore() == 200000){
+			
+			//Controls in order to not make the game last too long
+			
+			if(this.getIndex() < this.getPlayers().size() -1){
+				
+				this.getPlayers().get(this.getIndex()+1).setTurno(true); //turn of the next player 
+				this.getTurno().setTurno(false);	// die the current player
+				this.map = new Map(this, this.getPath());
+				
+			}else{
+				
+				this.game.setState(State.End);
+				
+			}
+			
+		}
+		
 		if(this.map.getPoints().size() == 0 && this.map.getBigPoints().size() == 0){
 			//win
 			this.getTurno().setLvl(this.getTurno().getLvl() + 1);
