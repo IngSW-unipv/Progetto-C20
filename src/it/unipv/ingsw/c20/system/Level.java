@@ -17,13 +17,8 @@ import java.util.Random;
 public class Level implements KeyListener {
 	
 	private int width, height;
-	private List <Player> players;
-	private Map map;
-	
-	/**
-	 * @param players list of the active players
-	 * @param map map where the game is played 
-	 */
+	private List <Player> players; 			// List of the active players
+	private Map map;						//map where the game is played
 	
 	private Game game;
 	private boolean paused = false;
@@ -31,7 +26,8 @@ public class Level implements KeyListener {
 
 	/**
 	 * Constructor sets the players creating a list that will contain them,
-	 * adds the listener at the game, creates the players and create the map
+	 * adds the listener at the game, creates the players and creates the map
+	 * 
 	 * @param game 
 	 * @param n integer represents the number of the players
 	 */
@@ -43,7 +39,7 @@ public class Level implements KeyListener {
 		
 		this.getPlayers().clear();
 		
-		// create the players required by the menu
+		// creates the players required by the menu
 		createplayer(n);
 		
 		map = new Map(this, this.getPath());
@@ -59,7 +55,7 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	// take the player with the current round
+	// takes the player with the current round
 	
 	/**
 	 * Getter
@@ -102,7 +98,7 @@ public class Level implements KeyListener {
 	}
 	
 	/**
-	 * Tick continuously update the logical side of what is happening on the screen
+	 * Tick continuously updates the logical side of what it is happening on the screen
 	 */
 	public void tick(){
 		
@@ -137,8 +133,8 @@ public class Level implements KeyListener {
 	}
 	
 	/**
-	 * if the static objects are eaten (yellow points and apples),
-	 * pass at the following level
+	 * If the static objects are eaten (yellow points and apples),
+	 * it passes at the following level
 	 */
 	public void updateLvl() {
 		
@@ -151,7 +147,7 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	/** manage the points's interaction */
+	/** Manages the points's interaction */
 	public void interactionPoints() {
 		
 		for(int i = 0; i < this.map.getPoints().size(); i++ ){
@@ -165,7 +161,7 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	/** control of the apples's interaction */
+	/** Control of the apples's interaction */
 	public void interactionFruits() {
 		
 		for(int i = 0; i < this.map.getBigPoints().size(); i++ ){
@@ -181,8 +177,9 @@ public class Level implements KeyListener {
 		}
 	}
 	
-	/**control of the enemys's interaction and in accord with the state of the kill 
-	 * we decide the result
+	/**
+	 * Control of the enemys's interaction and in accord with the state of the kill 
+	 * it decides the result
 	 */
 	public void interactionEnemies() {
 		
@@ -219,7 +216,7 @@ public class Level implements KeyListener {
 	
 	
 	/**
-	 * Render continuously update the graphic side of what is happening on the screen.
+	 * Render continuously updates the graphic side of what it is happening on the screen.
 	 */
 	public void Render(Graphics g){
 		
@@ -322,8 +319,8 @@ public class Level implements KeyListener {
 	public Map getMap() { return map; }
 	
 	/**
-	 * Generate randomly a map
-	 * @return String that contain the location of a random map 
+	 * Randomly generates a map
+	 * @return String that contains the location of a random map 
 	 * present among the resources
 	 */
 	public String getPath(){
@@ -333,7 +330,7 @@ public class Level implements KeyListener {
 	}
 
 	/**
-	 * Manage the keyboard
+	 * Manages the keyboard
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {

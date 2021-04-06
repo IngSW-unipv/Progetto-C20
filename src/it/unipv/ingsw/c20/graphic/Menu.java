@@ -13,11 +13,11 @@ public class Menu extends MouseAdapter{
 	private final Game game;
 
 	/**
-	 * @author Filippo Tagliaferri
 	 * Class costructor
-	 * @param game to change the enum and start of the level
+	 * @author Filippo Tagliaferri
+	 * 
+	 * @param game changes the enum and the start of the level
 	 */
-
 	public Menu(Game game){
 		
 		this.game = game;
@@ -25,11 +25,10 @@ public class Menu extends MouseAdapter{
 	}
 
 	/**
-	 * this get the colour based on the n of the list
-	 * @param n of List
-	 * @return colour
+	 * Gets the color based on the "n" of the list
+	 * @param n number of List
+	 * @return color
 	 */
-
 	public String getColore(int n){
 		if(n == 0){
 			return "Orange";
@@ -46,9 +45,9 @@ public class Menu extends MouseAdapter{
 	}
 
 	/**
-	 * this get the key based on the n of the list
-	 * @param n of List
-	 * @return key
+	 * Gets the key based on the "n" of the List
+	 * @param n number of List
+	 * @return keys
 	 */
 	public String getTasti(int n){
 		if(n == 0){
@@ -66,16 +65,16 @@ public class Menu extends MouseAdapter{
 	}
 
 	/**
-	 * Control if the mouse is over the baloon
-	 * @param mx x mouse
-	 * @param my y mouse
-	 * @param x start of the rectangle
-	 * @param y start of the rectangle
-	 * @param width of the rectangle
-	 * @param height of the the rectangle
-	 * @return the boolean value to confirm the mouseover
+	 * Controls if the mouse is over the baloon
+	 * 
+	 * @param mx mouse's x
+	 * @param my mouse's y
+	 * @param x rectangle's beginning position
+	 * @param y rectangle's beginning position
+	 * @param width rectangle's width
+	 * @param height rectangle's height
+	 * @return the boolean value to confirm if the cursor is on the baloon
 	 */
-
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int height){
 		
 		if(mx >x && mx< x+width){
@@ -91,8 +90,8 @@ public class Menu extends MouseAdapter{
 	}
 
 	/**
-	 * This method is the logic parte of the Menu,
-	 * if you click on something in the if the method will do something
+	 * This method describes the logical part of the Menu,
+	 * if you click something on the menu, the if method will do something
 	 * @param e mouseEvent
 	 */
 
@@ -148,15 +147,15 @@ public class Menu extends MouseAdapter{
 	}
 
 	/**
-	 * tick method present in all the class
+	 * Tick method present in all the classes
 	 */
 	public void tick() {
 		
 	}
 
 	/**
-	 * Control the graphics part of the Menu,
-	 * The ending menu is dynamic in base of the number of player
+	 * Controls the graphic part of the Menu,
+	 * The ending menu is dynamic according to the number of players
 	 * @param g Graphics
 	 */
 	public void render(Graphics g) {

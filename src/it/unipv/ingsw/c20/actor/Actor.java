@@ -20,7 +20,7 @@ public abstract class Actor extends Rectangle {
 	 * 
 	 * @param x     starting position of the player that will be immediately updated
 	 * @param y     starting position of the player that will be immediately updated
-	 * @param level in this moment
+	 * @param level the level in this moment
 	 */
 	public Actor(int x, int y, Level level) {
 
@@ -30,7 +30,7 @@ public abstract class Actor extends Rectangle {
 	}
 	
 	public Level getLevel(){
-		return this.level;
+		return level;
 	}
 
 	public abstract boolean canMove(int x, int y);

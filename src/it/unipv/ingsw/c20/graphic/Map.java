@@ -20,13 +20,13 @@ public class Map {
 	private List<LilPoint> points; //lista dei punti piccoli nel gioco
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
 	private List <Player> enemies; // lita dei giocatori non attivi e bot
+	
 	/**
-	 * @author Filippo Tagliaferri
 	 * Class constructor
-	 *@param level to set all the List to play
-	 *@param path to get the path to follow for the image
+	 * @author Filippo Tagliaferri
+	 * @param level sets all the Lists to play
+	 * @param path gets the path to follow to find the image
 	 */
-
 	public Map(Level level, String path){
 
 		this.level = level;
@@ -41,11 +41,12 @@ public class Map {
 
 
 	/**
-	 * Creations of the map for the game,
-	 * the class will take the image from path and divide it in
-	 * square 32x32, next it will control the colour of the square
-	 * and put wall for black, points for white, enemy for red and player for blue.
-	 * @param path to get the image
+	 * Creation of the game's map,
+	 * the class takes the image from "path" and divides it in a
+	 * 32x32 square, then it will control the square's color: 
+	 * black = wall, white = point, red = enemy, blue = player.
+	 * 
+	 * @param path gets the image
 	 */
 	public void createMap(String path){
 
@@ -143,10 +144,11 @@ public class Map {
 	}
 
 	/**
-	 * This method will return the speed for the enemy based
-	 * on the current level of the active player.
-	 * Created because the speed need to be a divider of 32
-	 * @param n of level
+	 * This method will return the enemy's speed, according
+	 * to the current level of the active player.
+	 * Created because the speed needs to be a divider of 32
+	 * 
+	 * @param n number of levels
 	 * @return the speed for the enemy
 	 */
 	private int getSpeed(int n){

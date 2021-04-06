@@ -32,7 +32,7 @@ public class Player extends Actor {
 	 * 
 	 * @param x	starting position of the player that will be immediately updated
 	 * @param y	starting position of the player that will be immediately updated
-	 * @param level	in this moment
+	 * @param level	the level in this moment
 	 * @param b	player's turn
 	 * @param i number of the player
 	 */
@@ -57,7 +57,7 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * Class used to move the player right
+	 * Method used for moving the player to the right
 	 */
 	public void moveRight() {
 		this.direction[0] = true;
@@ -66,7 +66,7 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * Class used to move the player left
+	 * Method used for moving the player to the left
 	 */
 	public void moveLeft() {
 		this.direction[1] = true;
@@ -75,7 +75,7 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * Class used to move the player up
+	 * Method used for moving the player upwards
 	 */
 	public void moveUp() {
 		this.direction[2] = true;
@@ -84,15 +84,15 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * Class used to move the player down
+	 * Method used for moving the player downwards
 	 */
 	public void moveDown() {
 		this.direction[3] = true;
-		this.setTemp(3); // used to save directions
+		this.setTemp(3); // used to save the directions
 	}
 
 	/**
-	 * Class used to understand if the next rectangle (32x32) is a rectangle in
+	 * Method used to understand if the next rectangle (32x32) is a rectangle in
 	 * which you can move (true) or not (false)
 	 * 
 	 * @param nextX
@@ -126,7 +126,7 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * Tick continuously update the logical side of what is happening on the screen
+	 * Tick continuously updates the logical side of what it is happening on the screen
 	 * in order to manage the movement
 	 */
 	public void tick() {
@@ -204,7 +204,7 @@ public class Player extends Actor {
 	}
 
 	/**
-	 * graphic rendering of the player with differentiation in case of ghost or pacman
+	 * Graphic rendering of the player with differentiation in case of ghost or pacman
 	 */
 	public void render(Graphics g) {
 		if (!this.turno) {

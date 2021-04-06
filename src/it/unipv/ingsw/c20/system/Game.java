@@ -24,11 +24,11 @@ public class Game extends Canvas implements Runnable{
 	
 	private Thread thread;
 	
-	private Level level;  // Facade controller, it will manage game's logic
+	private Level level;  // Facade controller, it will manage game's logic.
 
-	private final Menu menu; // will manage the written part of the game
+	private final Menu menu; // it will manage the written part of the game.
 	
-	private State state; // describes the game's state
+	private State state; // it describes the game's state.
 	
 	
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
@@ -39,12 +39,12 @@ public class Game extends Canvas implements Runnable{
 		this.setMinimumSize(dimension);
 		this.setMaximumSize(dimension);
 		
-		//The game will starts every time from the menu, so menu will be the first state.
+		//The game will start every time from the menu, so the menu will be the first state.
 		this.state = State.Menu;
 
 		//Creates the menu.
 		this.menu = new Menu(this);
-		//Adds the listener so that menu can react to mouse's movement.
+		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
 	}
 	
@@ -78,14 +78,14 @@ public class Game extends Canvas implements Runnable{
 	
   /** Game's core, manages the fps system, creating the illusion of a moving picture. */
 	public void run(){
-		//This the game's core, the master function that allow the game to be updated continuously.
+		//This is the game's core, the master function that allows the game to be updated continuously.
 		
 		this.requestFocusInWindow(); 				//When a key is pressed, it will be listened from the proper listener.
 		long lastTime = System.nanoTime(); 			//it's the timer of the system (nanoseconds), used for delta's calculation.
 		long timer = System.currentTimeMillis(); 	//it's the time of the system (milliseconds), used for delta's calculation.
 		double amountOfTicks = 60.0; 				//it's the amount of tick per second.
 		double ns = 1e9/amountOfTicks; 				//indicates the amount of nanoseconds in every tick.
-		double delta = 0; 							//delta when he is increased by one it will indicates that a tick is passed.
+		double delta = 0; 							//when delta is increased by one it will indicate that a tick is passed.
 		int fps = 0; 								//fps frames per second.
 		
 		while(isRunning){
@@ -96,7 +96,7 @@ public class Game extends Canvas implements Runnable{
 			
 			
 			while(delta >=1){
-				//One tick has passed so i call tick method.
+				//One tick has passed so I call tick method.
 				this.tick();
 				
 				//Brings back delta to 0.
@@ -106,14 +106,14 @@ public class Game extends Canvas implements Runnable{
 			//Updates window renderizing it.
 			this.render();
 			
-			//I've updated the window so now i will increase fps by one.
+			//I've updated the window so now I will increase fps by one.
 			fps++;
 			
 			if(System.currentTimeMillis() - timer >1000){
 				//It writes fps one per second controlling timer.
 				timer += 1000; 						//Updates the time to be one second late.
 				
-				//Updates frames and bring back to 0 fps, this will happen once per second.
+				//Updates frames and brings back to 0 fps, this will happen once per second.
 				this.frames = fps;
 				
 				fps = 0;	
@@ -124,26 +124,26 @@ public class Game extends Canvas implements Runnable{
 	}
 
 	private void tick() {
-		// Tick continuously update the logical side of what is happening on the screen. 
+		// Tick continuously updates the logical side of what is happening on the screen. 
 		
 		if(state == State.Game){
 			//If i'm playing it will update the window using level's images.
 			level.tick();
 		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
-			//If i'm not playing i'm in the menu or in the tutorial, so i will update the window using menu's images.
+			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
 	}
 
 	
 	private void render() {
-		//Render continuously update the graphic side of what is happening on the screen. 
+		//Render continuously update the graphic side of what it is happening on the screen. 
 		
 		//BufferStrategy is used to organize window's elements.
 		BufferStrategy bs = this.getBufferStrategy();
 		
 		if(bs == null){
-			//If bs is null then it creates 3 buffer.
+			//If bs is null then it creates 3 buffers.
 			this.createBufferStrategy(3);
 			return;
 		}
@@ -168,10 +168,10 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		g.dispose();
-		//The drawn down buffer will became JFrame's buffer.
+		//The drawn buffer will become JFrame's buffer.
 		bs.show(); 
 		
-		//Close the loop do while with a security prevention, cause can happen to loose some frames in the buffer.
+		//Close the loop do-while with a security prevention, because it could lose some frames in the buffer.
 		}while(bs.contentsLost()); 
 	}
 	

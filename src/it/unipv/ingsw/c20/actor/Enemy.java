@@ -30,7 +30,7 @@ public class Enemy extends Player {
 	 * @param x	starting position of the player that will be immediately updated
 	 * @param y	starting position of the player that will be immediately updated
 	 * @param l starting speed
-	 * @param level	in this moment
+	 * @param level	the level in this moment
 	 */
 	public Enemy(int x, int y, int l, Level level) {
 
@@ -45,7 +45,7 @@ public class Enemy extends Player {
 	}
 
 	/**
-	 * Class used to understand if the next rectangle (32x32) is a rectangle in
+	 * Method used to understand if the next rectangle (32x32) is a rectangle in
 	 * which you can move (true) or not (false)
 	 * 
 	 * @param nextX
@@ -79,7 +79,7 @@ public class Enemy extends Player {
 	}
 
 	/**
-	 * Tick continuously update the logical side of what is happening on the screen
+	 * Tick continuously updates the logical side of what it is happening on the screen
 	 * in order to manage the movement
 	 */
 	public void tick() {
@@ -166,7 +166,7 @@ public class Enemy extends Player {
 	}
 
 	/**
-	 * graphic rendering of the ghost with the implementation of a timer
+	 * Graphic rendering of the ghost with the implementation of a timer
 	 */
 	public void render(Graphics g) {
 
