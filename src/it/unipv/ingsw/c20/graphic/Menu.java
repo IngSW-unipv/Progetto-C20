@@ -98,8 +98,6 @@ public class Menu extends MouseAdapter{
 
 	public void mousePressed(MouseEvent e){
 		
-		Music.musicActor("res/sound/mouse.wav", 0);
-		
 		int mx = e.getX();
 		int my = e.getY();
 		
@@ -107,6 +105,8 @@ public class Menu extends MouseAdapter{
 		int y = 64;
 		
 		if(game.getState() == State.End){
+			
+			Music.musicActor("res/sound/mouse.wav", 0);
 			
 			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(this.game.getLevel().getPlayers().size()*y), x/2, y)){
 				
@@ -125,6 +125,9 @@ public class Menu extends MouseAdapter{
 			}
 			
 		}else if(game.getState()  == State.Menu){
+			
+			Music.musicActor("res/sound/mouse.wav", 0);
+			
 			for(int i=0; i < 5; i++){
 				if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (i*y), 200, 64)){
 
@@ -141,6 +144,9 @@ public class Menu extends MouseAdapter{
 			}
 			
 		}else if(game.getState() == State.Tutorial){
+			
+			Music.musicActor("res/sound/mouse.wav", 0);
+			
 			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
 				//menu
 				this.game.setState(State.Menu);
