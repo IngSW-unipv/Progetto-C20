@@ -15,11 +15,10 @@ public class BigPoint extends Point{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Creator of this fruit points
+	 * Creator of the fruit point
 	 * @param x (+16-8) to center the point (32/2 + half the width)
 	 * @param y (+16-8) to center the point (32/2 + half the height)
 	 */
-	
 	public BigPoint(int x, int y){
 		super(x+16-8, y+16-8, 16, 16);
 		
@@ -27,10 +26,9 @@ public class BigPoint extends Point{
 	
 
 	/**
-	 * Render this fruit point 
+	 * Rendering the fruit point 
 	 * @param g graphics
 	 */
-	
 	public void render(Graphics g){
 		
 		g.drawImage(new ImageIcon("res/players/apple.png").getImage(), this.x-8, this.y-8, null);
@@ -40,7 +38,6 @@ public class BigPoint extends Point{
 	/**
 	 * Tick this fruit point 
 	 */
-	
 	public void tick() {
 		
 	}

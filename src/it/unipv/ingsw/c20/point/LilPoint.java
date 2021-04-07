@@ -8,7 +8,6 @@ import java.awt.*;
  * @author Enxhi Ismaili, Carlos Reynaga
  *
  */
-
 public class LilPoint extends Point{
 	
 	private static final long serialVersionUID = 1L;
@@ -28,7 +27,6 @@ public class LilPoint extends Point{
 	 * Render this point
 	 * @param g graphics
 	 */
-	
 	public void render(Graphics g){
 		
 		g.setColor(Color.YELLOW);
@@ -39,7 +37,6 @@ public class LilPoint extends Point{
 	/**
 	 * Tick of this point
 	 */
-	
 	public void tick() {
 		
 	}
