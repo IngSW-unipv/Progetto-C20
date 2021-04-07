@@ -97,6 +97,8 @@ public class Menu extends MouseAdapter{
 
 	public void mousePressed(MouseEvent e){
 		
+		this.game.music("res/sound/mouse.wav", 0);
+		
 		int mx = e.getX();
 		int my = e.getY();
 		

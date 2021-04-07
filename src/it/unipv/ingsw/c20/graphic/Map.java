@@ -167,13 +167,13 @@ public class Map {
 		return 32;
 	}
 	
-	/*private void tick() {
+	public void tick() {
 		
 	}
 	
-	private void render() {
+	public void render() {
 		
-	}*/
+	}
 
 	public Tile[][] getTiles() { return tiles; }
 
