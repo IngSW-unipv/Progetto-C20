@@ -1,20 +1,11 @@
 package it.unipv.ingsw.c20.system;
 
 import it.unipv.ingsw.c20.graphic.Menu;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
-
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
 
 
    /**
@@ -40,7 +31,6 @@ public class Game extends Canvas implements Runnable{
 	
 	private State state; // it describes the game's state.
 	
-	
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
 		
@@ -57,7 +47,8 @@ public class Game extends Canvas implements Runnable{
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
 		
-		this.music("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
+		Music.musicActor("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
+		
 	}
 	
 	private synchronized void start(){
@@ -187,6 +178,7 @@ public class Game extends Canvas implements Runnable{
 		}while(bs.contentsLost()); 
 	}
 	
+
 	
 	//Getter e Setter
 	
@@ -228,18 +220,6 @@ public class Game extends Canvas implements Runnable{
 		return 640;
 	}
 	
-	public static void music(String res, int loop ){
-            try {
-                File file = new File(res);
-                Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(file));
-                clip.loop(loop);
-                
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-		}
 	
 	/** 
 	 * Main: creates the game, forms the window, starts the game 

@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import it.unipv.ingsw.c20.system.Game;
+import it.unipv.ingsw.c20.system.Music;
 import it.unipv.ingsw.c20.system.State;
 
 public class Menu extends MouseAdapter{
@@ -97,7 +98,7 @@ public class Menu extends MouseAdapter{
 
 	public void mousePressed(MouseEvent e){
 		
-		this.game.music("res/sound/mouse.wav", 0);
+		Music.musicActor("res/sound/mouse.wav", 0);
 		
 		int mx = e.getX();
 		int my = e.getY();
@@ -127,7 +128,7 @@ public class Menu extends MouseAdapter{
 			for(int i=0; i < 5; i++){
 				if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (i*y), 200, 64)){
 
-					//create level con 1 player
+					//create level with 1 player
 					this.game.setLevel(i+1);
 					this.game.setState(State.Game);
 

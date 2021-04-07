@@ -81,6 +81,7 @@ public class Level implements KeyListener {
 	 * Getter
 	 * @return integer that is the index of the player pacman
 	 */
+	@SuppressWarnings("null")
 	public int getIndex(){
 		
 		for(int i = 0; i < getPlayers().size(); i++){
@@ -207,7 +208,7 @@ public class Level implements KeyListener {
 				
 				if(!this.getTurno().isKill()){	// can kill the enemies or not 
 					
-					this.game.music("res/sound/playerDeath.wav", 0);
+					Music.musicActor("res/sound/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
 						this.getPlayers().get(this.getIndex()+1).setTurno(true); //turn of the next player 
@@ -221,7 +222,7 @@ public class Level implements KeyListener {
 					}
 					
 				}else{
-					this.game.music("res/sound/enemyDeath.wav", 0);
+					Music.musicActor("res/sound/enemyDeath.wav", 0);
 					this.map.getEnemies().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 200);
 					
