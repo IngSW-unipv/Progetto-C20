@@ -30,7 +30,7 @@ public class LilPoint extends Point{
 	public void render(Graphics g){
 		
 		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, this.height, this.width);
+		g.fillOval(x, y, width, height);
 		
 	}
 
