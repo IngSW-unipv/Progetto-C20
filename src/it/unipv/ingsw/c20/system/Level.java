@@ -277,8 +277,9 @@ public class Level implements KeyListener {
 		g.drawString("Level: " + this.getTurno().getLvl(), 0, 40);
 		
 		if(this.paused){
-			
-			g.drawString("The game is paused", this.game.getWidth()/2, this.game.getHeight()/2);
+			g.setFont(new Font("Synchro LET", 3, 28));
+			g.setColor(Color.CYAN);
+			g.drawString("The game is paused", this.game.getWidth()/3, this.game.getHeight()/2);
 			
 		}
 		
