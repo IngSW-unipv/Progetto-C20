@@ -8,7 +8,7 @@ import javax.sound.sampled.Clip;
 /**
  * Class that creates the game's music
  *  
- * @author 
+ * @author Mattia Seravalli
  * 
  *
  */
