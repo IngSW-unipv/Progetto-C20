@@ -35,8 +35,6 @@ public class Tile extends Rectangle{
 	public void Render(Graphics g){
 		
 		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, 32, 32);
 		g.setColor(new Color(0,128,255));
 		g2d.drawLine(x, y, x, y + 32 - 1);
 		g2d.drawLine(x, y, x + 32 - 1, y);
