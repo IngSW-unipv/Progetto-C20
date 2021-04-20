@@ -4,12 +4,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;
 import it.unipv.ingsw.c20.system.State;
 
-public class Menu extends MouseAdapter{
+public class Menu implements MouseListener{
 	
 	private final Game game;
 
@@ -91,71 +92,6 @@ public class Menu extends MouseAdapter{
 	}
 
 	/**
-	 * This method describes the logical part of the Menu,
-	 * if you click something on the menu, the if method will do something
-	 * @param e mouseEvent
-	 */
-
-	public void mousePressed(MouseEvent e){
-		
-		int mx = e.getX();
-		int my = e.getY();
-		
-		int x = 200;
-		int y = 64;
-		
-		if(game.getState() == State.End){
-			
-			Music.musicActor("res/sound/mouse.wav", 0);
-			
-			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(this.game.getLevel().getPlayers().size()*y), x/2, y)){
-				
-				// ricreo con gli stessi player
-				int n = this.game.getLevel().getPlayers().size();
-				this.game.setLevel(n);
-				this.game.setState(State.Game);
-				
-			}
-			
-			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2) + x/2, ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(this.game.getLevel().getPlayers().size()*y), x/2, y)){
-
-				// menu
-				this.game.setState(State.Menu);
-				
-			}
-			
-		}else if(game.getState()  == State.Menu){
-			
-			Music.musicActor("res/sound/mouse.wav", 0);
-			
-			for(int i=0; i < 5; i++){
-				if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (i*y), 200, 64)){
-
-					//create level with 1 player
-					this.game.setLevel(i+1);
-					this.game.setState(State.Game);
-
-				}
-			}
-			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
-				
-				//how to play
-				this.game.setState(State.Tutorial);
-			}
-			
-		}else if(game.getState() == State.Tutorial){
-			
-			Music.musicActor("res/sound/mouse.wav", 0);
-			
-			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
-				//menu
-				this.game.setState(State.Menu);
-			}
-		}
-		
-	}
-
-	/**
 	 * Tick method present in all the classes
 	 */
 	public void tick() {
@@ -227,6 +163,96 @@ public class Menu extends MouseAdapter{
 			g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), x, y);
 			g.drawString("Menu", (game.getWIDTH() / 2) - w2, h2+(5*y)+((game.getHEIGHT() - (6* y))/2));
 		}
+		
+	}
+
+	/**
+	 * This method describes the logical part of the Menu,
+	 * if you click something on the menu, the if method will do something
+	 * @param e mouseEvent
+	 */
+
+	public void mousePressed(MouseEvent e){
+		
+		int mx = e.getX();
+		int my = e.getY();
+		
+		int x = 200;
+		int y = 64;
+		
+		if(game.getState() == State.End){
+			
+			Music.musicActor("res/sound/mouse.wav", 0);
+			
+			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(this.game.getLevel().getPlayers().size()*y), x/2, y)){
+				
+				// ricreo con gli stessi player
+				int n = this.game.getLevel().getPlayers().size();
+				this.game.setLevel(n);
+				this.game.setState(State.Game);
+				
+			}
+			
+			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2) + x/2, ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(this.game.getLevel().getPlayers().size()*y), x/2, y)){
+
+				// menu
+				this.game.setState(State.Menu);
+				
+			}
+			
+		}else if(game.getState()  == State.Menu){
+			
+			Music.musicActor("res/sound/mouse.wav", 0);
+			
+			for(int i=0; i < 5; i++){
+				if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (i*y), 200, 64)){
+
+					//create level with 1 player
+					this.game.setLevel(i+1);
+					this.game.setState(State.Game);
+
+				}
+			}
+			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
+				
+				//how to play
+				this.game.setState(State.Tutorial);
+			}
+			
+		}else if(game.getState() == State.Tutorial){
+			
+			Music.musicActor("res/sound/mouse.wav", 0);
+			
+			if(mouseOver(mx, my, (game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
+				//menu
+				this.game.setState(State.Menu);
+			}
+		}
+		
+	}
+
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
