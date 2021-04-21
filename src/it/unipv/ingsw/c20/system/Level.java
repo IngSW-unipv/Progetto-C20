@@ -321,8 +321,9 @@ public class Level implements KeyListener {
 	 * present among the resources
 	 */
 	public String getPath(){
-		Random ram = new Random();
-		return "res/map/map" + (ram.nextInt(3 - 1) + 1) +  ".png";
+		//Random ram = new Random();
+		//return "res/map/map" + (ram.nextInt(3 - 1) + 1) +  ".png";
+		return "res/map/map.png";
 		
 	}
 
