@@ -15,11 +15,13 @@ import it.unipv.ingsw.c20.point.LilPoint;
 import it.unipv.ingsw.c20.system.Level;
 
 public class Map {
-	Level level;
+	private Level level;
 	private Tile[][] tiles;
 	private List<LilPoint> points; //lista dei punti piccoli nel gioco
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
 	private List <Player> enemies; // lita dei giocatori non attivi e bot
+	private int width; //return 20
+	private int height;
 	
 	/**
 	 * Class constructor
@@ -27,6 +29,7 @@ public class Map {
 	 * @param level sets all the Lists to play
 	 * @param path gets the path to follow to find the image
 	 */
+	
 	public Map(Level level, String path){
 
 		this.level = level;
@@ -62,18 +65,18 @@ public class Map {
 			//ottengo l'immagine e la divido in caselle da ricreare
 
 			BufferedImage map = ImageIO.read(new File(path));
-			level.setWidth(map.getWidth());
-			level.setHeight(map.getHeight());
-			int[] pixels = new int[level.getWidth() * level.getHeight()];
-			this.setTiles(new Tile[level.getWidth()][level.getHeight()]);
-			map.getRGB(0, 0, level.getWidth(), level.getHeight(), pixels, 0, level. getWidth());
+			this.width = map.getWidth(); //return 20
+			this.height = map.getHeight(); // return 15
+			int[] pixels = new int[width * height];
+			this.setTiles(new Tile[width][height]);
+			map.getRGB(0, 0, width, height, pixels, 0, width);
 			int pos = 0;
 
-			for(int xx = 0; xx < level.getWidth() ; xx++){
+			for(int xx = 0; xx < width ; xx++){
 
-				for(int yy = 0; yy < level.getHeight() ; yy++){
+				for(int yy = 0; yy < height ; yy++){
 
-					int val = pixels[xx + (yy * level.getWidth())];
+					int val = pixels[xx + (yy * width)];
 
 					if(val == 0xFF0000FF){
 
@@ -151,20 +154,17 @@ public class Map {
 	 * @param n number of levels
 	 * @return the speed for the enemy
 	 */
-	private int getSpeed(int n){
-
-		if(n<=2){
-			return 2;
-		}else if(n<=4){
-			return 4;
-		}else if(n<=8){
-			return 8;
-		}else if(n<=16){
-			return 16;
-		}else if(n<=32){
-			return 32;
-		}
-		return 32;
+	private int getSpeed(int target){
+		int number = 32;
+		    for (int i = 0; i < number; i++) {
+		        if (number % (target + i) == 0) {
+		            return target + i;
+		        } else if (number % (target - i) == 0) {
+		            return target - i;
+		        }
+		    }
+		    return number;
+	    
 	}
 	
 	public void tick() {
@@ -190,4 +190,12 @@ public class Map {
 	public List <Player> getEnemies() { return enemies; }
 
 	public void setEnemies(List <Player> enemies) { this.enemies = enemies; }
+	
+	public int getWidth() { return width; }
+
+	public void setWidth(int width) { this.width = width; }
+
+	public int getHeight() { return height; }
+
+	public void setHeight(int height) { this.height = height; }
 }

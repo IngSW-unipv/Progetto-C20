@@ -6,9 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import it.unipv.ingsw.c20.constants.Colors;
+import it.unipv.ingsw.c20.constants.Commands;
+import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;
-import it.unipv.ingsw.c20.system.State;
 
 public class Menu implements MouseListener{
 	
@@ -24,46 +26,6 @@ public class Menu implements MouseListener{
 		
 		this.game = game;
 		
-	}
-
-	/**
-	 * Gets the color based on the "n" of the list
-	 * @param n number of List
-	 * @return color
-	 */
-	public String getColore(int n){
-		if(n == 0){
-			return "Orange";
-		}else if(n == 1){
-			return "Blue";
-		}else if(n == 2){
-			return "Red";
-		}else if(n == 3){
-			return "Green";
-		}else if(n == 4){
-			return "Yellow";
-		}
-		return "Error";
-	}
-
-	/**
-	 * Gets the key based on the "n" of the List
-	 * @param n number of List
-	 * @return keys
-	 */
-	public String getTasti(int n){
-		if(n == 0){
-			return "WASD";
-		}else if(n == 1){
-			return "TFGH";
-		}else if(n == 2){
-			return "IJKL";
-		}else if(n == 3){
-			return "Freccette";
-		}else if(n == 4){
-			return "8456";
-		}
-		return "Error";
 	}
 
 	/**
@@ -117,9 +79,9 @@ public class Menu implements MouseListener{
 			
 			for(int i = 0; i < this.game.getLevel().getPlayers().size(); i++ ){
 	
-				int w2 = g.getFontMetrics().stringWidth(this.getColore(i) + ":" + this.game.getLevel().getPlayers().get(i).getScore()) / 2;
+				int w2 = g.getFontMetrics().stringWidth(this.game.getLevel().getPlayers().get(i).getColor().getColorName() + ":" + this.game.getLevel().getPlayers().get(i).getScore()) / 2;
 				g.drawRect((game.getWIDTH()/2)-(x/2), ((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size() + 1) * y))/2) +(i*y), x, y);
-				g.drawString(this.getColore(i) + ": " + this.game.getLevel().getPlayers().get(i).getScore() , (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size()+1)* y))/2) );
+				g.drawString(this.game.getLevel().getPlayers().get(i).getColor().getColorName() + ": " + this.game.getLevel().getPlayers().get(i).getScore() , (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - ((this.game.getLevel().getPlayers().size()+1)* y))/2) );
 			
 			}
 			
@@ -155,8 +117,8 @@ public class Menu implements MouseListener{
 			int h2 = g.getFontMetrics().getHeight();
 			int w2;
 			for(int i = 0; i < 5; i++){
-				w2 = g.getFontMetrics().stringWidth(this.getColore(i) + ":" + this.getTasti(i)) / 2;
-				g.drawString(this.getColore(i) + ":" + this.getTasti(i), (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - (6* y))/2));
+				w2 = g.getFontMetrics().stringWidth(Colors.values()[i].getColorName() + ":" + Commands.values()[i].getString()) / 2;
+				g.drawString(Colors.values()[i].getColorName() + ":" + Commands.values()[i].getString(), (game.getWIDTH() / 2) - w2, h2+(i*y)+((game.getHEIGHT() - (6* y))/2));
 			}
 
 			w2 = g.getFontMetrics().stringWidth("Menu") / 2;
@@ -165,15 +127,41 @@ public class Menu implements MouseListener{
 		}
 		
 	}
+	@Override
+	public void mousePressed(MouseEvent e){
+		// TODO Auto-generated method stub
+	}
+
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	/**
 	 * This method describes the logical part of the Menu,
 	 * if you click something on the menu, the if method will do something
 	 * @param e mouseEvent
 	 */
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 
-	public void mousePressed(MouseEvent e){
-		
 		int mx = e.getX();
 		int my = e.getY();
 		
@@ -228,31 +216,6 @@ public class Menu implements MouseListener{
 				this.game.setState(State.Menu);
 			}
 		}
-		
-	}
-
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	

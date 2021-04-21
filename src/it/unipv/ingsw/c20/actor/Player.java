@@ -1,9 +1,12 @@
 package it.unipv.ingsw.c20.actor;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 
+import it.unipv.ingsw.c20.constants.Colors;
+import it.unipv.ingsw.c20.constants.Commands;
 import it.unipv.ingsw.c20.system.Level;
 
 /**
@@ -24,6 +27,8 @@ public class Player extends Actor {
 	private int score = 0, lvl = 1;
 	private boolean turno;
 	private int posizione;
+	private Colors color;
+	private int[] key;
 	private Image[] pacman;
 	private Image[] fantasmi;
 
@@ -36,17 +41,27 @@ public class Player extends Actor {
 	 * @param b	player's turn
 	 * @param i number of the player
 	 */
-	public Player(int x, int y, Level level, boolean b, int i) {
+	public Player(int x, int y, Level level, boolean b, int i, Colors c) {
 		super(x, y, level);
 		this.posizione = i;
 		this.setBounds(x, y, 32, 32);
-		direction = new boolean[4]; // right 0, left 1, up 2, down 3
+		this.direction = new boolean[4]; // right 0, left 1, up 2, down 3
 		this.reset();
 		this.turno = b;
+		this.color = c;
+		this.key = new int[4];
+		this.setKey();
 		this.setPacman();
 		this.setFantasmi();
 	}
 
+	public void setKey(){
+		key[0] = Commands.values()[this.posizione].getRight();
+		key[1] = Commands.values()[this.posizione].getLeft();
+		key[2] = Commands.values()[this.posizione].getUp();
+		key[3] = Commands.values()[this.posizione].getDown();
+	}
+	
 	/**
 	 * Resets the direction's vector
 	 */
@@ -54,6 +69,33 @@ public class Player extends Actor {
 
 		Arrays.fill(this.direction, false);
 
+	}
+	
+	public void move(int key){
+		
+		if(key == this.key[0]){
+			
+			this.moveRight();
+			
+		}
+		
+		if(key == this.key[1]){
+			
+			this.moveLeft();
+			
+		}
+		
+		if(key == this.key[2]){
+			
+			this.moveUp();
+			
+		}
+		
+		if(key == this.key[3]){
+			
+			this.moveDown();
+			
+		}
 	}
 
 	/**
@@ -335,6 +377,14 @@ public class Player extends Actor {
 
 		this.temp = temp;
 
+	}
+
+	public Colors getColor() {
+		return color;
+	}
+
+	public void setColor(Colors color) {
+		this.color = color;
 	}
 
 	/**

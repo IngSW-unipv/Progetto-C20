@@ -1,12 +1,15 @@
 package it.unipv.ingsw.c20.system;
 
 import it.unipv.ingsw.c20.actor.Player;
+import it.unipv.ingsw.c20.constants.Colors;
+import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.graphic.Map;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 /**
@@ -16,7 +19,6 @@ import java.util.Random;
  */
 public class Level implements KeyListener {
 	
-	private int width, height;
 	private List <Player> players; 			// List of the active players
 	private Map map;						//map where the game is played
 	
@@ -47,11 +49,10 @@ public class Level implements KeyListener {
 	
 	private void createplayer(int n) {
 		if(n >= 1){
-			
-			getPlayers().add(0, new Player(0, 0, this, true, 0));
+			getPlayers().add(0, new Player(0, 0, this, true, 0, Colors.values()[0]));
 		}
 		for(int i = 1; i<n; i++){
-			getPlayers().add(i, new Player(0, 0, this, false, i));
+			getPlayers().add(i, new Player(0, 0, this, false, i, Colors.values()[i]));
 		}
 	}
 	
@@ -240,9 +241,9 @@ public class Level implements KeyListener {
 	 */
 	public void Render(Graphics g){
 		
-		for(int x = 0 ; x < getWidth() ; x++){
+		for(int x = 0 ; x < this.game.getWIDTH()/32 ; x++){
 			
-			for(int y = 0 ; y < getHeight() ; y++){
+			for(int y = 0 ; y < this.game.getHEIGHT()/32 ; y++){
 				
 				if(this.map.getTiles()[x][y] != null) this.map.getTiles()[x][y].Render(g);
 				
@@ -309,31 +310,6 @@ public class Level implements KeyListener {
 	public void setPlayers(List <Player> players) { this.players = players; }
 	
 	/**
-	 * Getter
-	 * @return height 
-	 */
-	
-	public int getHeight() { return height; }
-	
-	/**
-	 * Setter
-	 * @param height
-	 */
-	public void setHeight(int height) { this.height = height; }
-	
-	/**
-	 * Getter
-	 * @return width
-	 */
-	public int getWidth() { return width; }
-	
-	/**
-	 * Setter
-	 * @param width
-	 */
-	public void setWidth(int width) { this.width = width; }
-	
-	/**
 	 * Map's getter
 	 * @return map
 	 */
@@ -355,153 +331,8 @@ public class Level implements KeyListener {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		// Player 1
-		if(this.getPlayers().size() >=1 ){
-			
-			if(e.getKeyCode() == KeyEvent.VK_W){
-				
-				this.getPlayers().get(0).moveUp();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_S){
-				
-				this.getPlayers().get(0).moveDown();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_A){
-				
-				this.getPlayers().get(0).moveLeft();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_D){
-				
-				this.getPlayers().get(0).moveRight();
-				
-			}
-			
-		}
-		
-		//Player 2
-		if(this.getPlayers().size() >= 2){
-			
-			if(e.getKeyCode() == KeyEvent.VK_T){
-				
-				this.getPlayers().get(1).moveUp();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_G){
-				
-				this.getPlayers().get(1).moveDown();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_F){
-				
-				this.getPlayers().get(1).moveLeft();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_H){
-				
-				this.getPlayers().get(1).moveRight();
-				
-			}
-			
-		}
-		
-		//Player 3
-		if(this.getPlayers().size() >= 3){
-			
-			if(e.getKeyCode() == KeyEvent.VK_I){
-				
-				this.getPlayers().get(2).moveUp();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_K){
-				
-				this.getPlayers().get(2).moveDown();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_J){
-				
-				this.getPlayers().get(2).moveLeft();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_L){
-				
-				this.getPlayers().get(2).moveRight();
-				
-			}
-			
-		}
-		
-		
-		//Player 4
-		if(this.getPlayers().size() >= 4){
-			
-			if(e.getKeyCode() == KeyEvent.VK_UP){
-				
-				this.getPlayers().get(3).moveUp();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_DOWN){
-				
-				this.getPlayers().get(3).moveDown();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_LEFT){
-				
-				this.getPlayers().get(3).moveLeft();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-				
-				this.getPlayers().get(3).moveRight();
-				
-			}
-			
-		}
-		
-		//Player 5
-		if(this.getPlayers().size() >= 5){
-			
-
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD8){
-				
-				this.getPlayers().get(4).moveUp();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD5){
-				
-				this.getPlayers().get(4).moveDown();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD4){
-				
-				this.getPlayers().get(4).moveLeft();
-				
-			}
-			
-			if(e.getKeyCode() == KeyEvent.VK_NUMPAD6){
-				
-				this.getPlayers().get(4).moveRight();
-				
-			}
-			
-			
+		for(Player p : this.getPlayers()){
+			p.move(e.getKeyCode());
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_P){

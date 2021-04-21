@@ -1,5 +1,7 @@
 package it.unipv.ingsw.c20.system;
 
+import it.unipv.ingsw.c20.constants.Colors;
+import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.graphic.Menu;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -31,24 +33,29 @@ public class Game extends Canvas implements Runnable{
 	
 	private State state; // it describes the game's state.
 	
+	private int WIDTH, HEIGHT;
+	
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
-		
-		Dimension dimension = new Dimension(this.getWIDTH(), this.getHEIGHT());
-		this.setPreferredSize(dimension);
-		this.setMinimumSize(dimension);
-		this.setMaximumSize(dimension);
 		
 		//The game will start every time from the menu, so the menu will be the first state.
 		this.state = State.Menu;
 
 		//Creates the menu.
 		this.menu = new Menu(this);
+		this.level = new Level(this, 1);
+		
+		this.WIDTH = this.level.getMap().getWidth();
+		this.HEIGHT = this.level.getMap().getHeight();
+		
+		Dimension dimension = new Dimension(this.getWIDTH(), this.getHEIGHT());
+		this.setPreferredSize(dimension);
+		this.setMinimumSize(dimension);
+		this.setMaximumSize(dimension);
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
 		
 		Music.musicActor("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
-		
 	}
 	
 	private synchronized void start(){
@@ -210,14 +217,14 @@ public class Game extends Canvas implements Runnable{
 	 * @return window's height. */
 	public int getHEIGHT() {
 		//Height --> Lunghezza (Y).
-		return 480;
+		return HEIGHT*32;
 	}
 	
 	/** Width's getter 
 	 * @return window's width. */
 	public int getWIDTH() {
 		//Width --> Larghezza (X).
-		return 640;
+		return WIDTH*32;
 	}
 	
 	
