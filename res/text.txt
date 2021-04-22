@@ -1,6 +1,9 @@
+Orange: 12350
+Orange: 4000
 Yellow: 1250
 Orange: 1100
 Red: 950
 Green: 950
 Blue: 900
 Orange: 800
+Blue: 700

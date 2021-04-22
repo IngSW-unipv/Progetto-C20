@@ -39,6 +39,7 @@ public class Player extends Actor {
 	 * @param level	the level in this moment
 	 * @param b	player's turn
 	 * @param i number of the player
+	 * @param c color of the player
 	 */
 	public Player(int x, int y, Level level, boolean b, int i, Colors c) {
 		super(x, y, level);
@@ -53,7 +54,10 @@ public class Player extends Actor {
 		this.setPacman();
 		this.setFantasmi();
 	}
-
+	
+	/**
+	 * Sets the game's commands
+	 */
 	public void setKey(){
 		key[0] = Commands.values()[this.posizione].getRight();
 		key[1] = Commands.values()[this.posizione].getLeft();
@@ -378,10 +382,20 @@ public class Player extends Actor {
 
 	}
 
+	/**
+	 * Color's getter
+	 * 
+	 * @return player's color
+	 */
 	public Colors getColor() {
 		return color;
 	}
 
+	/**
+	 * Color's setter
+	 * 
+	 * @param color is the color of the player.
+	 */
 	public void setColor(Colors color) {
 		this.color = color;
 	}
