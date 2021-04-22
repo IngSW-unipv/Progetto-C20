@@ -20,7 +20,7 @@ public class Map {
 	private List<LilPoint> points; //lista dei punti piccoli nel gioco
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
 	private List <Player> enemies; // lita dei giocatori non attivi e bot
-	private int width; //return 20
+	private int width; //return pixel
 	private int height;
 	
 	/**
@@ -54,7 +54,6 @@ public class Map {
 	public void createMap(String path){
 
 		Random r = new Random();
-		int max = 10; //max punti grossi
 		//pulisco le liste dalla precedente mappa
 		this.getBigPoints().clear();
 		this.getPoints().clear();
@@ -67,6 +66,7 @@ public class Map {
 			BufferedImage map = ImageIO.read(new File(path));
 			this.width = map.getWidth(); //return 20
 			this.height = map.getHeight(); // return 15
+			int max = (this.height * this.width)/4; //max punti grossi
 			int[] pixels = new int[width * height];
 			this.setTiles(new Tile[width][height]);
 			map.getRGB(0, 0, width, height, pixels, 0, width);

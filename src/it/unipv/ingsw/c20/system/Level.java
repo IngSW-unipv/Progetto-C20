@@ -4,14 +4,14 @@ import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.graphic.Map;
+import it.unipv.ingsw.c20.scores.ScoreReader;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+
 /**
  * 
  * @author Enxhi Ismaili, Carlos Reynaga
@@ -34,7 +34,6 @@ public class Level implements KeyListener {
 	 * @param n integer represents the number of the players
 	 */
 	public Level(Game game, int n){
-		
 		this.game = game;
 		setPlayers(new ArrayList<>());
 		this.game.addKeyListener(this);
@@ -212,12 +211,13 @@ public class Level implements KeyListener {
 					Music.musicActor("res/sound/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
+						this.game.getScores().addScore(this.getTurno().getColor().getColorName(), this.getTurno().getScore());
 						this.getPlayers().get(this.getIndex()+1).setTurno(true); //turn of the next player 
 						this.getTurno().setTurno(false);	// die the current player
 						this.map = new Map(this, this.getPath());
 						
 					}else{
-						
+						this.game.getScores().addScore(this.getTurno().getColor().getColorName(), this.getTurno().getScore());
 						this.game.setState(State.End);
 						
 					}

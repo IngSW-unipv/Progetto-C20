@@ -1,0 +1,6 @@
+Yellow: 1250
+Orange: 1100
+Red: 950
+Green: 950
+Blue: 900
+Orange: 800

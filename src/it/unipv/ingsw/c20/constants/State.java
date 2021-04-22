@@ -10,6 +10,7 @@ public enum State {
 	Game,
 	End,
 	Menu,
-	Tutorial
+	Tutorial,
+	Highscore;
 
 }

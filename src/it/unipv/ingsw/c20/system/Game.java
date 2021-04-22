@@ -1,8 +1,9 @@
 package it.unipv.ingsw.c20.system;
 
-import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.constants.State;
-import it.unipv.ingsw.c20.graphic.Menu;
+import it.unipv.ingsw.c20.menu.Menu;
+import it.unipv.ingsw.c20.scores.ScoreReader;
+
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
@@ -35,12 +36,16 @@ public class Game extends Canvas implements Runnable{
 	
 	private int WIDTH, HEIGHT;
 	
+	private ScoreReader scores;
+	
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
 		
 		//The game will start every time from the menu, so the menu will be the first state.
 		this.state = State.Menu;
 
+		this.setScores(new ScoreReader());
+		
 		//Creates the menu.
 		this.menu = new Menu(this);
 		this.level = new Level(this, 1);
@@ -172,7 +177,7 @@ public class Game extends Canvas implements Runnable{
 		if(state == State.Game){
 			
 			level.Render(g);
-		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
+		}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Highscore){
 	
 			menu.render(g);
 		}
@@ -228,6 +233,14 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	
+	public ScoreReader getScores() {
+		return scores;
+	}
+
+	public void setScores(ScoreReader scores) {
+		this.scores = scores;
+	}
+
 	/** 
 	 * Main: creates the game, forms the window, starts the game 
 	 *

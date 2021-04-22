@@ -1,7 +1,6 @@
 package it.unipv.ingsw.c20.actor;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 
