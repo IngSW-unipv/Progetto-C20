@@ -27,6 +27,15 @@ public class Player extends Actor {
 	private boolean turno;
 	private int posizione;
 	private Colors color;
+	private String nome;
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	private int[] key;
 	private Image[] pacman;
 	private Image[] fantasmi;
@@ -41,14 +50,19 @@ public class Player extends Actor {
 	 * @param i number of the player
 	 * @param c color of the player
 	 */
-	public Player(int x, int y, Level level, boolean b, int i, Colors c) {
+	public Player(int x, int y, Level level, boolean b, int i, String nome) {
 		super(x, y, level);
 		this.posizione = i;
 		this.setBounds(x, y, 32, 32);
 		this.direction = new boolean[4]; // right 0, left 1, up 2, down 3
 		this.reset();
 		this.turno = b;
-		this.color = c;
+		if(nome.equals("")){
+			this.nome = Colors.values()[i].getColorName();
+		}else{
+			this.nome = nome;
+		}
+		this.color = Colors.values()[i];
 		this.key = new int[4];
 		this.setKey();
 		this.setPacman();

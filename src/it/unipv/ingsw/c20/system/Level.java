@@ -1,11 +1,8 @@
 package it.unipv.ingsw.c20.system;
 
 import it.unipv.ingsw.c20.actor.Player;
-import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.graphic.Map;
-import it.unipv.ingsw.c20.scores.ScoreReader;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -25,6 +22,10 @@ public class Level implements KeyListener {
 	private Game game;
 	private boolean paused = false;
 	private long start = 0;
+	/**
+	 * 
+	 */
+	private List<String> nomi;
 
 	/**
 	 * Constructor sets the players creating a list that will contain them,
@@ -33,25 +34,24 @@ public class Level implements KeyListener {
 	 * @param game 
 	 * @param n integer represents the number of the players
 	 */
-	public Level(Game game, int n){
+	public Level(Game game, int n, List<String> nomi){
 		this.game = game;
 		setPlayers(new ArrayList<>());
 		this.game.addKeyListener(this);
-		
-		this.getPlayers().clear();
-		
+		this.nomi = nomi;
 		// creates the players required by the menu
-		createplayer(n);
+		createplayer(n, nomi);
 		
-		map = new Map(this, this.getPath());
+		map = new Map(this, this.game.getMapPath());
 	}
 	
-	private void createplayer(int n) {
+	private void createplayer(int n, List<String> nomi) {
+		this.getPlayers().clear();
 		if(n >= 1){
-			getPlayers().add(0, new Player(0, 0, this, true, 0, Colors.values()[0]));
-		}
-		for(int i = 1; i<n; i++){
-			getPlayers().add(i, new Player(0, 0, this, false, i, Colors.values()[i]));
+			getPlayers().add(0, new Player(0, 0, this, true, 0, nomi.get(0)));
+			for(int i = 1; i<n; i++){
+				getPlayers().add(i, new Player(0, 0, this, false, i, nomi.get(i)));
+			}
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class Level implements KeyListener {
 				
 				this.getPlayers().get(this.getIndex()+1).setTurno(true); //turn of the next player 
 				this.getTurno().setTurno(false);	// die the current player
-				this.map = new Map(this, this.getPath());
+				this.map = new Map(this, this.game.getMapPath());
 				
 			}else{
 				
@@ -161,7 +161,7 @@ public class Level implements KeyListener {
 			//win
 			this.getTurno().setLvl(this.getTurno().getLvl() + 1);
 			
-			this.map = new Map(this, this.getPath());
+			this.map = new Map(this, this.game.getMapPath());
 			
 		}
 	}
@@ -211,13 +211,13 @@ public class Level implements KeyListener {
 					Music.musicActor("res/sound/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
-						this.game.getScores().addScore(this.getTurno().getColor().getColorName(), this.getTurno().getScore());
+						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
 						this.getPlayers().get(this.getIndex()+1).setTurno(true); //turn of the next player 
 						this.getTurno().setTurno(false);	// die the current player
-						this.map = new Map(this, this.getPath());
+						this.map = new Map(this, this.game.getMapPath());
 						
 					}else{
-						this.game.getScores().addScore(this.getTurno().getColor().getColorName(), this.getTurno().getScore());
+						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
 						this.game.setState(State.End);
 						
 					}
@@ -314,17 +314,13 @@ public class Level implements KeyListener {
 	 * @return map
 	 */
 	public Map getMap() { return map; }
-	
-	/**
-	 * Randomly generates a map
-	 * @return String that contains the location of a random map 
-	 * present among the resources
-	 */
-	public String getPath(){
-		//Random ram = new Random();
-		//return "res/map/map" + (ram.nextInt(3 - 1) + 1) +  ".png";
-		return "res/map/map.png";
-		
+
+	public List<String> getNomi() {
+		return nomi;
+	}
+
+	public void setNomi(List<String> nomi) {
+		this.nomi = nomi;
 	}
 
 	/**

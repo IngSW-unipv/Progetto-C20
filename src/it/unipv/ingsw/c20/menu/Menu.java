@@ -11,6 +11,16 @@ public class Menu extends IsMenu{
 	private TutorialMenu tutorial;
 	private StartingMenu menu;
 	private HighscoreMenu high;
+	private NameMenu name;
+	private int NGiocatori;
+
+	public int getNGiocatori() {
+		return NGiocatori;
+	}
+
+	public void setNGiocatori(int nGiocatori) {
+		NGiocatori = nGiocatori;
+	}
 
 	/**
 	 * Class costructor
@@ -25,6 +35,7 @@ public class Menu extends IsMenu{
 		this.tutorial = new TutorialMenu(getGame());
 		this.menu = new StartingMenu(getGame());
 		this.high = new HighscoreMenu(getGame());
+		this.name = new NameMenu(getGame());
 	}
 
 	/**
@@ -49,6 +60,8 @@ public class Menu extends IsMenu{
 			this.tutorial.render(g);;
 		}else if(getGame().getState()  == State.Highscore){
 			this.high.render(g);;
+		}else if(getGame().getState()  == State.Naming){
+			this.name.render(g);
 		}
 		
 	}
@@ -113,6 +126,10 @@ public class Menu extends IsMenu{
 		}else if(getGame().getState() == State.Highscore){
 			
 			this.high.mouseReleased(e);
+			
+		}else if(getGame().getState()  == State.Naming){
+			
+			this.name.mouseReleased(e);
 			
 		}
 		

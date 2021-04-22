@@ -55,9 +55,8 @@ public class StartingMenu extends IsMenu{
 		for(int i=0; i < 5; i++){
 			if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (i*y), 200, 64)){
 
-				//create level with 1 player
-				this.getGame().setLevel(i+1);
-				this.getGame().setState(State.Game);
+				this.getGame().setState(State.Naming);
+				this.getGame().getMenu().setNGiocatori(i+1);
 
 			}
 		}

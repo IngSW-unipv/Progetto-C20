@@ -1,6 +1,5 @@
 package it.unipv.ingsw.c20.actor;
 
-import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.system.Level;
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class Enemy extends Player {
 	 */
 	public Enemy(int x, int y, int l, Level level) {
 
-		super(x, y, level, false, 4, Colors.YELLOW);
+		super(x, y, level, false, 4, "");
 		r = new Random();
 		this.setBounds(x, y, 32, 32);
 		dir = r.nextInt(4);

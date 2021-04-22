@@ -31,9 +31,9 @@ public class EndingMenu extends IsMenu{
 		
 		for(int i = 0; i < this.getGame().getLevel().getPlayers().size(); i++ ){
 
-			int w2 = g.getFontMetrics().stringWidth(this.getGame().getLevel().getPlayers().get(i).getColor().getColorName() + ":" + this.getGame().getLevel().getPlayers().get(i).getScore()) / 2;
+			int w2 = g.getFontMetrics().stringWidth(this.getGame().getLevel().getPlayers().get(i).getNome() + ":" + this.getGame().getLevel().getPlayers().get(i).getScore()) / 2;
 			g.drawRect((getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size() + 1) * y))/2) +(i*y), x, y);
-			g.drawString(this.getGame().getLevel().getPlayers().get(i).getColor().getColorName() + ": " + this.getGame().getLevel().getPlayers().get(i).getScore() , (getGame().getWIDTH() / 2) - w2, h2+(i*y)+((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size()+1)* y))/2) );
+			g.drawString(this.getGame().getLevel().getPlayers().get(i).getNome() + ": " + this.getGame().getLevel().getPlayers().get(i).getScore() , (getGame().getWIDTH() / 2) - w2, h2+(i*y)+((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size()+1)* y))/2) );
 		
 		}
 		
@@ -87,7 +87,7 @@ public class EndingMenu extends IsMenu{
 			
 			// ricreo con gli stessi player
 			int n = this.getGame().getLevel().getPlayers().size();
-			this.getGame().setLevel(n);
+			this.getGame().setLevel(n, this.getGame().getLevel().getNomi());
 			this.getGame().setState(State.Game);
 			
 		}

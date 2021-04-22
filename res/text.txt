@@ -1,9 +1,10 @@
+a: 16950
 Orange: 12350
+Blue: 4450
 Orange: 4000
+RYELLOW: 1600
+R: 1400
+b: 1400
 Yellow: 1250
-Orange: 1100
-Red: 950
-Green: 950
-Blue: 900
-Orange: 800
-Blue: 700
+e: 1250
+ssss: 1150

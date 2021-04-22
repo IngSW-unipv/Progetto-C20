@@ -4,10 +4,13 @@ import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.menu.Menu;
 import it.unipv.ingsw.c20.scores.ScoreReader;
 
-import javax.sound.sampled.Clip;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 
 
@@ -24,6 +27,10 @@ public class Game extends Canvas implements Runnable{
 	
 	private int frames=0;
 
+	public String getMapPath() {
+		return mapPath;
+	}
+
 	private  final String TITLE= "Pac-Man";
 	
 	private Thread thread;
@@ -38,6 +45,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private ScoreReader scores;
 	
+	private final String mapPath = "res/map/map.png";
+	
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
 		
@@ -48,11 +57,14 @@ public class Game extends Canvas implements Runnable{
 		
 		//Creates the menu.
 		this.menu = new Menu(this);
-		this.level = new Level(this, 1);
 		
-		this.WIDTH = this.level.getMap().getWidth();
-		this.HEIGHT = this.level.getMap().getHeight();
-		
+		try {
+			this.WIDTH = ImageIO.read(new File(this.mapPath)).getWidth();
+			this.HEIGHT  = ImageIO.read(new File(this.mapPath)).getHeight();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		Dimension dimension = new Dimension(this.getWIDTH(), this.getHEIGHT());
 		this.setPreferredSize(dimension);
 		this.setMinimumSize(dimension);
@@ -60,7 +72,7 @@ public class Game extends Canvas implements Runnable{
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
 		
-		Music.musicActor("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
+		//Music.musicActor("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	private synchronized void start(){
@@ -144,7 +156,7 @@ public class Game extends Canvas implements Runnable{
 		if(state == State.Game){
 			//If i'm playing it will update the window using level's images.
 			level.tick();
-		}else if(state == State.End || state == State.Menu || state == State.Tutorial){
+		}else {
 			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
@@ -177,7 +189,7 @@ public class Game extends Canvas implements Runnable{
 		if(state == State.Game){
 			
 			level.Render(g);
-		}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Highscore){
+		}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Naming || state == State.Highscore){
 	
 			menu.render(g);
 		}
@@ -214,8 +226,8 @@ public class Game extends Canvas implements Runnable{
 	
 	/** Level's setter 
 	 * @param n number of the level requested. */
-	public void setLevel(int n) {
-		this.level = new Level(this, n);
+	public void setLevel(int n, List<String> nomi) {
+		this.level = new Level(this, n, nomi);
 	}
 	
 	/** Height's getter 
@@ -239,6 +251,10 @@ public class Game extends Canvas implements Runnable{
 
 	public void setScores(ScoreReader scores) {
 		this.scores = scores;
+	}
+
+	public Menu getMenu() {
+		return menu;
 	}
 
 	/** 

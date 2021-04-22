@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 import it.unipv.ingsw.c20.constants.State;
-import it.unipv.ingsw.c20.scores.ScoreReader;
 import it.unipv.ingsw.c20.scores.Scores;
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;

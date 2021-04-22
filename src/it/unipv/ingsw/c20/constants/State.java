@@ -11,6 +11,7 @@ public enum State {
 	End,
 	Menu,
 	Tutorial,
+	Naming,
 	Highscore;
 
 }
