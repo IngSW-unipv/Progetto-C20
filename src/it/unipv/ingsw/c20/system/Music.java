@@ -11,7 +11,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-public class Music implements Runnable{
+public class Music{
 
 public boolean isMusic() {
 		return music;
@@ -22,9 +22,7 @@ public boolean isMusic() {
 	}
 
 private File soundFile;
-private Thread thread;
 private List<Clip> clip;
-private Clip singleClip;
 private boolean music;
 private int loop;
 
@@ -42,26 +40,19 @@ public Music(){
 public void play(String musicFileName, int loop){
 
     this.soundFile = new File(musicFileName);    
-	if (!music) {
-    } else {
+	if (music) {
 	    try {
-    		this.clip.add(AudioSystem.getClip());
+	    	this.clip.add(AudioSystem.getClip());
 			this.clip.get(this.clip.size()-1).open(AudioSystem.getAudioInputStream(this.soundFile));
 			this.clip.get(this.clip.size()-1).loop(loop);
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-    thread = new Thread(this);
-    thread.setName("SoundPlayer");
-    thread.start();
+	}
 }
 
-/**
-* Invoked when the thread kicks off
-*/
-public void run() {
+public void tick() {
 	for(Clip c : this.clip){
 		if (!music) {
 	        c.stop();
@@ -72,13 +63,4 @@ public void run() {
 	
 }
 
-public void volume(float volume){
-
-    //TODO NEED HELP HERE
-    /*
-    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-    gainControl.setValue(-50.0f); // Reduce volume IN DECIBELS
-    clip.start();
-        */
-    }
 }

@@ -167,7 +167,7 @@ public class Game extends Canvas implements Runnable{
 			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
-		 System.out.println(java.lang.Thread.activeCount());;
+		this.music.tick();
 	}
 
 	
