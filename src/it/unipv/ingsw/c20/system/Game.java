@@ -5,6 +5,7 @@ import it.unipv.ingsw.c20.menu.Menu;
 import it.unipv.ingsw.c20.scores.ScoreReader;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -47,6 +48,12 @@ public class Game extends Canvas implements Runnable{
 	
 	private final String mapPath = "res/map/map.png";
 	
+	private Music music;
+	
+	public Music getMusic() {
+		return music;
+	}
+
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
 		
@@ -71,8 +78,8 @@ public class Game extends Canvas implements Runnable{
 		this.setMaximumSize(dimension);
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
-		
-		//Music.musicActor("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
+		this.music = new Music();
+		this.music.play("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	private synchronized void start(){
@@ -160,6 +167,7 @@ public class Game extends Canvas implements Runnable{
 			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
+		 System.out.println(java.lang.Thread.activeCount());;
 	}
 
 	

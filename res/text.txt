@@ -1,10 +1,10 @@
 a: 16950
 Orange: 12350
+War: 5400
+a: 4550
 Blue: 4450
 Orange: 4000
-RYELLOW: 1600
-R: 1400
-b: 1400
-Yellow: 1250
-e: 1250
-ssss: 1150
+Orange: 3000
+a: 2000
+war: 1900
+aer: 1850

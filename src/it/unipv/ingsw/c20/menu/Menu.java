@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
+import it.unipv.ingsw.c20.system.Music;
 
 public class Menu extends IsMenu{
 	
@@ -63,6 +64,10 @@ public class Menu extends IsMenu{
 		}else if(getGame().getState()  == State.Naming){
 			this.name.render(g);
 		}
+		int x = 200;
+		int y = 64;
+		
+		g.drawRect(getGame().getWIDTH()-x-1, getGame().getHEIGHT() - y-1, x, y);		
 		
 	}
 	@Override
@@ -111,6 +116,13 @@ public class Menu extends IsMenu{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		int mx = e.getX();
+		int my = e.getY();
+		
+		int x = 200;
+		int y = 64;
+		
 		if(getGame().getState() == State.End){
 			
 			this.end.mouseReleased(e);
@@ -131,6 +143,13 @@ public class Menu extends IsMenu{
 			
 			this.name.mouseReleased(e);
 			
+		}
+		
+		if(mouseOver(mx, my, getGame().getWIDTH()-x, getGame().getHEIGHT() - y, x, y)){
+			//menu
+			this.getGame().getMusic().setMusic(!this.getGame().getMusic().isMusic());
+			//Music.setVolume((Music.getVolume()/ 100f) * ((float)((x - (getGame().getWIDTH() - mx))/2)));
+			//(Music.getVolume()/ 100f) * ((float)((x - (getGame().getWIDTH() - mx))/2))
 		}
 		
 	}

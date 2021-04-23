@@ -207,8 +207,7 @@ public class Level implements KeyListener {
 			if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 				
 				if(!this.getTurno().isKill()){	// can kill the enemies or not 
-					
-					Music.musicActor("res/sound/playerDeath.wav", 0);
+					this.game.getMusic().play("res/sound/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
 						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
@@ -223,7 +222,7 @@ public class Level implements KeyListener {
 					}
 					
 				}else{
-					Music.musicActor("res/sound/enemyDeath.wav", 0);
+					this.game.getMusic().play("res/sound/enemyDeath.wav", 0);
 					this.map.getEnemies().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 200);
 					
