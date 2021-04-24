@@ -5,31 +5,30 @@ import java.io.IOException;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Music implements Runnable{
-	
-	public static boolean isMusic() {
-		return music;
-	}
-
-	public static void setMusic(boolean music) {
-		Music.music = music;
-	}
-
 		
 	private Clip clip;
 	private static boolean music = true;
 	private int loop;
 	
+	/**
+	 * start the music and the thread that is going to handle it
+	 * @param musicFileName location of the music
+	 * @param loop loop of the song
+	 */
 	public Music(String musicFileName, int loop){
 		
 		this.loop = loop;
 	    try {
 	    	this.clip = AudioSystem.getClip();
 			this.clip.open(AudioSystem.getAudioInputStream(new File(musicFileName)));
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-20.0f); // Reduce volume by 10 decibels.
 			this.clip.loop(loop);
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
@@ -40,6 +39,10 @@ public class Music implements Runnable{
 		
 	}
 
+	/**
+	 * controls if the music is ended
+	 */
+	
 	public void run() {
 		while(true){
 			if (music) {
@@ -62,6 +65,24 @@ public class Music implements Runnable{
 				}
 			}	
 		}
+	}
+	
+	/**
+	 * music getter
+	 * @return the boolean that indicate if the audio is on or off
+	 */
+	
+	public static boolean isMusic() {
+		return music;
+	}
+
+	/**
+	 * music setter
+	 * @param music true or false
+	 */
+	
+	public static void setMusic(boolean music) {
+		Music.music = music;
 	}
 
 }

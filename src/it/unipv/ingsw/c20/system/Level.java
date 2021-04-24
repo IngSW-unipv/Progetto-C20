@@ -19,13 +19,9 @@ public class Level implements KeyListener {
 	
 	private List <Player> players; 			// List of the active players
 	private Map map;						//map where the game is played
-	
 	private Game game;
 	private boolean paused = false;
 	private long start = 0;
-	/**
-	 * 
-	 */
 	private List<String> nomi;
 
 	/**
@@ -284,17 +280,15 @@ public class Level implements KeyListener {
 		}
 		
 	}
-
-
-	public long getStart() {
-		
-		return start;
-		
-	}
 	
 	/**
 	 * Getters and Setters
 	 */
+	
+	/** return the start of this timer
+	 * @return the timer of this timer that indicate the vulnerability of the ghost
+	 */
+	public long getStart() { return start;}
 	
 	/**
 	 * Getter's Player
@@ -314,13 +308,19 @@ public class Level implements KeyListener {
 	 */
 	public Map getMap() { return map; }
 
-	public List<String> getNomi() {
-		return nomi;
-	}
+	/**
+	 * names getter
+	 * @return the playe's name
+	 */
+	
+	public List<String> getNomi() { return nomi; }
 
-	public void setNomi(List<String> nomi) {
-		this.nomi = nomi;
-	}
+	/**
+	 * names setter
+	 * @param player's names
+	 */
+	
+	public void setNomi(List<String> nomi) {this.nomi = nomi;}
 
 	/**
 	 * Manages the keyboard
@@ -347,11 +347,19 @@ public class Level implements KeyListener {
 		
 	}
 
+	/**
+	 * Manages the keyboard
+	 */
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		
 	}
 
+	/**
+	 * Manages the keyboard
+	 */
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		

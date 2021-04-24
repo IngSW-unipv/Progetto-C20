@@ -2,6 +2,8 @@ package it.unipv.ingsw.c20.menu;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+import it.unipv.ingsw.c20.constants.Colors;
+import it.unipv.ingsw.c20.constants.Commands;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;
@@ -66,7 +68,14 @@ public class Menu extends IsMenu{
 		}
 		int x = 200;
 		int y = 64;
+		String temp = "Audio :";
+		if(Music.isMusic()){
+			temp = temp + " yes";
+		}else{
+			temp = temp + " no";
+		}
 		
+		g.drawString(temp, getGame().getWIDTH() - x, getGame().getHEIGHT()- (y/2));
 		g.drawRect(getGame().getWIDTH()-x-1, getGame().getHEIGHT() - y-1, x, y);		
 		
 	}
@@ -148,8 +157,6 @@ public class Menu extends IsMenu{
 		if(mouseOver(mx, my, getGame().getWIDTH()-x, getGame().getHEIGHT() - y, x, y)){
 			//menu
 			Music.setMusic(!Music.isMusic());
-			//Music.setVolume((Music.getVolume()/ 100f) * ((float)((x - (getGame().getWIDTH() - mx))/2)));
-			//(Music.getVolume()/ 100f) * ((float)((x - (getGame().getWIDTH() - mx))/2))
 		}
 		
 	}

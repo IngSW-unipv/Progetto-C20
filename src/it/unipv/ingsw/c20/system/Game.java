@@ -26,15 +26,7 @@ public class Game extends Canvas implements Runnable{
 
 	private boolean isRunning = false;
 	
-	public boolean isRunning() {
-		return isRunning;
-	}
-
 	private int frames=0;
-
-	public String getMapPath() {
-		return mapPath;
-	}
 
 	private  final String TITLE= "Pac-Man";
 	
@@ -58,7 +50,7 @@ public class Game extends Canvas implements Runnable{
 		//The game will start every time from the menu, so the menu will be the first state.
 		this.state = State.Menu;
 
-		this.setScores(new ScoreReader());
+		this.scores = new ScoreReader();
 		
 		//Creates the menu.
 		this.menu = new Menu(this);
@@ -77,7 +69,6 @@ public class Game extends Canvas implements Runnable{
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
 		
-		new Music("res/sounds/background.wav", Clip.LOOP_CONTINUOUSLY);
 
 	}
 	
@@ -87,6 +78,7 @@ public class Game extends Canvas implements Runnable{
 		if(!isRunning){
 			
 			isRunning = true;
+			new Music("res/sounds/background.wav", Clip.LOOP_CONTINUOUSLY);
 			thread = new Thread(this);
 			thread.start();
 		}
@@ -166,7 +158,7 @@ public class Game extends Canvas implements Runnable{
 			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
-		System.out.println(java.lang.Thread.activeCount());
+
 	}
 
 	
@@ -187,14 +179,18 @@ public class Game extends Canvas implements Runnable{
 		
 		//Prints on the screen game's fps.
 		do {
+			
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
+			
 			if(state == State.Game){
 				
 				level.Render(g);
+				
 			}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Naming || state == State.Highscore){
 		
 				menu.render(g);
+				
 			}
 			g.setColor(Color.white);
 			int h2 = g.getFontMetrics().getHeight();
@@ -214,54 +210,40 @@ public class Game extends Canvas implements Runnable{
 	
 	/** Level's getter
 	 * @return game's level. */
-	public Level getLevel() {
-		return level;
-	}
+	public Level getLevel() { return level; }
 	
 	/** State's getter 
 	 * @return game's state. */
-	public State getState() {
-		return state;
-	}
+	public State getState() { return state; }
 	
 	/** State's setter 
 	 * @param state game's state requested to be modified. */
-	public void setState(State state) {
-		this.state = state;
-	}
+	public void setState(State state) { this.state = state; }
 	
 	/** Level's setter 
 	 * @param n number of the level requested. */
-	public void setLevel(int n, List<String> nomi) {
-		this.level = new Level(this, n, nomi);
-	}
+	public void setLevel(int n, List<String> nomi) { this.level = new Level(this, n, nomi); }
 	
 	/** Height's getter 
 	 * @return window's height. */
-	public int getHEIGHT() {
-		//Height --> Lunghezza (Y).
-		return HEIGHT*32;
-	}
+	public int getHEIGHT() { return HEIGHT*32; }
 	
 	/** Width's getter 
 	 * @return window's width. */
-	public int getWIDTH() {
-		//Width --> Larghezza (X).
-		return WIDTH*32;
-	}
+	public int getWIDTH() {  return WIDTH*32; }
 	
+	/** return the scores reader
+	 * @return the object that read the scores
+	 */
+	public ScoreReader getScores() { return scores; }
+
+	/** return menu 
+	 * @return the menuitem */
+	public Menu getMenu() { return menu; }
 	
-	public ScoreReader getScores() {
-		return scores;
-	}
-
-	public void setScores(ScoreReader scores) {
-		this.scores = scores;
-	}
-
-	public Menu getMenu() {
-		return menu;
-	}
+	/** return the path 
+	 * @return the path of the map */
+	public String getMapPath() { return mapPath; }
 
 	/** 
 	 * Main: creates the game, forms the window, starts the game 
