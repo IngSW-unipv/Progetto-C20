@@ -2,8 +2,6 @@ package it.unipv.ingsw.c20.menu;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import it.unipv.ingsw.c20.constants.Colors;
-import it.unipv.ingsw.c20.constants.Commands;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;
