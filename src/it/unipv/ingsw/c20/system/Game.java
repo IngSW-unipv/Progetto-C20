@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private ScoreReader scores;
 	
-	private final String mapPath = "res/map/map.png";
+	private final String mapPath = "res/maps/map.png";
 	
 	private Music music;
 	
@@ -79,7 +79,7 @@ public class Game extends Canvas implements Runnable{
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
 		this.music = new Music();
-		this.music.play("res/sound/background.wav", Clip.LOOP_CONTINUOUSLY);
+		this.music.play("res/sounds/background.wav", Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	private synchronized void start(){

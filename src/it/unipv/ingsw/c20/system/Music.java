@@ -2,8 +2,8 @@ package it.unipv.ingsw.c20.system;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -31,7 +31,8 @@ private int loop;
 */
 public Music(){
 	this.music = true;
-	this.clip = new ArrayList<Clip>();
+	//this.clip = new ArrayList<Clip>();
+	this.clip = new CopyOnWriteArrayList<Clip>();
 }
 
 /**
@@ -58,7 +59,12 @@ public void tick() {
 	        c.stop();
 	    } else {
 	        c.loop(loop);
+			if(!c.isActive()){
+				this.clip.remove(c);
+			}
 	    }
+
+		System.out.println(this.clip.size());
 	}
 	
 }

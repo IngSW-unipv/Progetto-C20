@@ -2,7 +2,8 @@ package it.unipv.ingsw.c20.system;
 
 import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.constants.State;
-import it.unipv.ingsw.c20.graphic.Map;
+import it.unipv.ingsw.c20.map.Map;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -207,7 +208,7 @@ public class Level implements KeyListener {
 			if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 				
 				if(!this.getTurno().isKill()){	// can kill the enemies or not 
-					this.game.getMusic().play("res/sound/playerDeath.wav", 0);
+					this.game.getMusic().play("res/sounds/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
 						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
@@ -222,7 +223,7 @@ public class Level implements KeyListener {
 					}
 					
 				}else{
-					this.game.getMusic().play("res/sound/enemyDeath.wav", 0);
+					this.game.getMusic().play("res/sounds/enemyDeath.wav", 0);
 					this.map.getEnemies().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 200);
 					

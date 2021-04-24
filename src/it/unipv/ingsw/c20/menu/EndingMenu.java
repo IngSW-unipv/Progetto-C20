@@ -80,7 +80,7 @@ public class EndingMenu extends IsMenu{
 		int x = 200;
 		int y = 64;
 		
-		this.getGame().getMusic().play("res/sound/mouse.wav", 0);
+		this.getGame().getMusic().play("res/sounds/mouse.wav", 0);
 		
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size() + 1) * y))/2) +(this.getGame().getLevel().getPlayers().size()*y), x/2, y)){
 			
