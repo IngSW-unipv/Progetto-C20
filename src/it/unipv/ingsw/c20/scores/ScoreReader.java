@@ -11,7 +11,7 @@ import java.util.Collections;
 public class ScoreReader {
 
 	private ArrayList<Scores> scores;
-	private static final String highscorefile = "res/text.txt";
+	private static final String highscorefile = "res/scores/text.txt";
 
 	public ScoreReader() {
 	    scores = new ArrayList<Scores>();

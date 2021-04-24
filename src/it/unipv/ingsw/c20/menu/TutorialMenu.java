@@ -9,7 +9,6 @@ import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.constants.Commands;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
-import it.unipv.ingsw.c20.system.Music;
 
 public class TutorialMenu extends IsMenu{
 	
@@ -51,7 +50,7 @@ public class TutorialMenu extends IsMenu{
 		int x = 200;
 		int y = 64;
 		
-		Music.musicActor("res/sound/mouse.wav", 0);
+		//this.getGame().getMusic().play("res/sounds/mouse.wav", 0);
 		
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
 			//menu

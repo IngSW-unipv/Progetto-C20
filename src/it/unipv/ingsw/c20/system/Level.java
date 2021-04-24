@@ -2,7 +2,8 @@ package it.unipv.ingsw.c20.system;
 
 import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.constants.State;
-import it.unipv.ingsw.c20.graphic.Map;
+import it.unipv.ingsw.c20.map.Map;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,13 +19,9 @@ public class Level implements KeyListener {
 	
 	private List <Player> players; 			// List of the active players
 	private Map map;						//map where the game is played
-	
 	private Game game;
 	private boolean paused = false;
 	private long start = 0;
-	/**
-	 * 
-	 */
 	private List<String> nomi;
 
 	/**
@@ -207,8 +204,7 @@ public class Level implements KeyListener {
 			if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 				
 				if(!this.getTurno().isKill()){	// can kill the enemies or not 
-					
-					Music.musicActor("res/sound/playerDeath.wav", 0);
+					new Music("res/sounds/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
 						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
@@ -223,7 +219,7 @@ public class Level implements KeyListener {
 					}
 					
 				}else{
-					Music.musicActor("res/sound/enemyDeath.wav", 0);
+					new Music("res/sounds/enemyDeath.wav", 0);
 					this.map.getEnemies().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 200);
 					
@@ -278,24 +274,21 @@ public class Level implements KeyListener {
 		g.drawString("Level: " + this.getTurno().getLvl(), 0, 40);
 		
 		if(this.paused){
-			g.setFont(new Font("Synchro LET", 3, 28));
-			g.setColor(Color.CYAN);
+			
 			g.drawString("The game is paused", this.game.getWidth()/3, this.game.getHeight()/2);
 			
 		}
-		
-	}
-
-
-	public long getStart() {
-		
-		return start;
 		
 	}
 	
 	/**
 	 * Getters and Setters
 	 */
+	
+	/** return the start of this timer
+	 * @return the timer of this timer that indicate the vulnerability of the ghost
+	 */
+	public long getStart() { return start;}
 	
 	/**
 	 * Getter's Player
@@ -315,13 +308,19 @@ public class Level implements KeyListener {
 	 */
 	public Map getMap() { return map; }
 
-	public List<String> getNomi() {
-		return nomi;
-	}
+	/**
+	 * names getter
+	 * @return the playe's name
+	 */
+	
+	public List<String> getNomi() { return nomi; }
 
-	public void setNomi(List<String> nomi) {
-		this.nomi = nomi;
-	}
+	/**
+	 * names setter
+	 * @param player's names
+	 */
+	
+	public void setNomi(List<String> nomi) {this.nomi = nomi;}
 
 	/**
 	 * Manages the keyboard
@@ -348,11 +347,19 @@ public class Level implements KeyListener {
 		
 	}
 
+	/**
+	 * Manages the keyboard
+	 */
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		
 	}
 
+	/**
+	 * Manages the keyboard
+	 */
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		

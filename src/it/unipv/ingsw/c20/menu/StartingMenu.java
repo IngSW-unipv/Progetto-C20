@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
-import it.unipv.ingsw.c20.system.Music;
 
 public class StartingMenu extends IsMenu{
 	
@@ -49,8 +48,7 @@ public class StartingMenu extends IsMenu{
 		int x = 200;
 		int y = 64;
 		
-		
-		Music.musicActor("res/sound/mouse.wav", 0);
+		//this.getGame().getMusic().play("res/sounds/mouse.wav", 0);
 		
 		for(int i=0; i < 5; i++){
 			if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (i*y), 200, 64)){

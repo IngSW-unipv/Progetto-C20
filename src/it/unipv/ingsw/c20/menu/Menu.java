@@ -2,8 +2,11 @@ package it.unipv.ingsw.c20.menu;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+import it.unipv.ingsw.c20.constants.Colors;
+import it.unipv.ingsw.c20.constants.Commands;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
+import it.unipv.ingsw.c20.system.Music;
 
 public class Menu extends IsMenu{
 	
@@ -63,6 +66,17 @@ public class Menu extends IsMenu{
 		}else if(getGame().getState()  == State.Naming){
 			this.name.render(g);
 		}
+		int x = 200;
+		int y = 64;
+		String temp = "Audio :";
+		if(Music.isMusic()){
+			temp = temp + " yes";
+		}else{
+			temp = temp + " no";
+		}
+		
+		g.drawString(temp, getGame().getWIDTH() - x, getGame().getHEIGHT()- (y/2));
+		g.drawRect(getGame().getWIDTH()-x-1, getGame().getHEIGHT() - y-1, x, y);		
 		
 	}
 	@Override
@@ -111,6 +125,13 @@ public class Menu extends IsMenu{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		int mx = e.getX();
+		int my = e.getY();
+		
+		int x = 200;
+		int y = 64;
+		
 		if(getGame().getState() == State.End){
 			
 			this.end.mouseReleased(e);
@@ -131,6 +152,11 @@ public class Menu extends IsMenu{
 			
 			this.name.mouseReleased(e);
 			
+		}
+		
+		if(mouseOver(mx, my, getGame().getWIDTH()-x, getGame().getHEIGHT() - y, x, y)){
+			//menu
+			Music.setMusic(!Music.isMusic());
 		}
 		
 	}

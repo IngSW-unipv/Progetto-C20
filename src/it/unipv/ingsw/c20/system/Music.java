@@ -1,34 +1,88 @@
 package it.unipv.ingsw.c20.system;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-/**
- * Class that creates the game's music
- *  
- * @author Mattia Seravalli
- * 
- *
- */
-public class Music {
+
+public class Music implements Runnable{
+		
+	private Clip clip;
+	private static boolean music = true;
+	private int loop;
+	
+	/**
+	 * start the music and the thread that is going to handle it
+	 * @param musicFileName location of the music
+	 * @param loop loop of the song
+	 */
+	public Music(String musicFileName, int loop){
+		
+		this.loop = loop;
+	    try {
+	    	this.clip = AudioSystem.getClip();
+			this.clip.open(AudioSystem.getAudioInputStream(new File(musicFileName)));
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-20.0f); // Reduce volume by 10 decibels.
+			this.clip.loop(loop);
+		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Thread thread = new Thread(this);
+		thread.start();
+		
+	}
 
 	/**
-	 * This method creates the music selected by the inserted path
-	 * @param res String that describes the path.
-	 * @param loop Integer that describes how many times the sound have to be reproduced.
+	 * controls if the music is ended
 	 */
-	public static void musicActor(String res, int loop){
-        try {
-            File file = new File(res);
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(file));
-            clip.loop(loop);
-          
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+	
+	public void run() {
+		while(true){
+			if (music) {
+				if(!this.clip.isRunning()){
+					if(this.loop == Clip.LOOP_CONTINUOUSLY){
+						this.clip.loop(this.loop);
+					}
+					if(this.clip.getFramePosition() == this.clip.getFrameLength()){
+						this.clip.close();
+						return;
+					}
+				}
+				
+			}else{
+				if(this.loop == Clip.LOOP_CONTINUOUSLY){
+					this.clip.stop();	
+				}else{
+					this.clip.close();
+					return;
+				}
+			}	
+		}
+	}
+	
+	/**
+	 * music getter
+	 * @return the boolean that indicate if the audio is on or off
+	 */
+	
+	public static boolean isMusic() {
+		return music;
+	}
+
+	/**
+	 * music setter
+	 * @param music true or false
+	 */
+	
+	public static void setMusic(boolean music) {
+		Music.music = music;
 	}
 
 }
