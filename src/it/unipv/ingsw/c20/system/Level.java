@@ -208,7 +208,7 @@ public class Level implements KeyListener {
 			if(this.getTurno().intersects(this.map.getEnemies().get(i))){
 				
 				if(!this.getTurno().isKill()){	// can kill the enemies or not 
-					this.game.getMusic().play("res/sounds/playerDeath.wav", 0);
+					new Music("res/sounds/playerDeath.wav", 0);
 					
 					if(this.getIndex() < this.getPlayers().size() -1){
 						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
@@ -223,7 +223,7 @@ public class Level implements KeyListener {
 					}
 					
 				}else{
-					this.game.getMusic().play("res/sounds/enemyDeath.wav", 0);
+					new Music("res/sounds/enemyDeath.wav", 0);
 					this.map.getEnemies().remove(i);
 					this.getTurno().setScore(this.getTurno().getScore() + 200);
 					
@@ -278,8 +278,7 @@ public class Level implements KeyListener {
 		g.drawString("Level: " + this.getTurno().getLvl(), 0, 40);
 		
 		if(this.paused){
-			g.setFont(new Font("Synchro LET", 3, 28));
-			g.setColor(Color.CYAN);
+			
 			g.drawString("The game is paused", this.game.getWidth()/3, this.game.getHeight()/2);
 			
 		}

@@ -2,8 +2,6 @@ package it.unipv.ingsw.c20.system;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -11,62 +9,59 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-public class Music{
-
-public boolean isMusic() {
+public class Music implements Runnable{
+	
+	public static boolean isMusic() {
 		return music;
 	}
 
-	public void setMusic(boolean music) {
-		this.music = music;
+	public static void setMusic(boolean music) {
+		Music.music = music;
 	}
 
-private File soundFile;
-private List<Clip> clip;
-private boolean music;
-private int loop;
-
-/**
-* Private because of the singleton
-*/
-public Music(){
-	this.music = true;
-	//this.clip = new ArrayList<Clip>();
-	this.clip = new CopyOnWriteArrayList<Clip>();
-}
-
-/**
-* Play a siren sound
-*/
-public void play(String musicFileName, int loop){
-
-    this.soundFile = new File(musicFileName);    
-	if (music) {
+		
+	private Clip clip;
+	private static boolean music = true;
+	private int loop;
+	
+	public Music(String musicFileName, int loop){
+		
+		this.loop = loop;
 	    try {
-	    	this.clip.add(AudioSystem.getClip());
-			this.clip.get(this.clip.size()-1).open(AudioSystem.getAudioInputStream(this.soundFile));
-			this.clip.get(this.clip.size()-1).loop(loop);
+	    	this.clip = AudioSystem.getClip();
+			this.clip.open(AudioSystem.getAudioInputStream(new File(musicFileName)));
+			this.clip.loop(loop);
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Thread thread = new Thread(this);
+		thread.start();
+		
 	}
-}
 
-public void tick() {
-	for(Clip c : this.clip){
-		if (!music) {
-	        c.stop();
-	    } else {
-	        c.loop(loop);
-			if(!c.isActive()){
-				this.clip.remove(c);
-			}
-	    }
-
-		System.out.println(this.clip.size());
+	public void run() {
+		while(true){
+			if (music) {
+				if(!this.clip.isRunning()){
+					if(this.loop == Clip.LOOP_CONTINUOUSLY){
+						this.clip.loop(this.loop);
+					}
+					if(this.clip.getFramePosition() == this.clip.getFrameLength()){
+						this.clip.close();
+						return;
+					}
+				}
+				
+			}else{
+				if(this.loop == Clip.LOOP_CONTINUOUSLY){
+					this.clip.stop();	
+				}else{
+					this.clip.close();
+					return;
+				}
+			}	
+		}
 	}
-	
-}
 
 }

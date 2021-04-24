@@ -26,6 +26,10 @@ public class Game extends Canvas implements Runnable{
 
 	private boolean isRunning = false;
 	
+	public boolean isRunning() {
+		return isRunning;
+	}
+
 	private int frames=0;
 
 	public String getMapPath() {
@@ -47,12 +51,6 @@ public class Game extends Canvas implements Runnable{
 	private ScoreReader scores;
 	
 	private final String mapPath = "res/maps/map.png";
-	
-	private Music music;
-	
-	public Music getMusic() {
-		return music;
-	}
 
 	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
 	public Game(){
@@ -78,8 +76,9 @@ public class Game extends Canvas implements Runnable{
 		this.setMaximumSize(dimension);
 		//Adds the listener so that the menu can react to the mouse's movement.
 		this.addMouseListener(menu); 
-		this.music = new Music();
-		this.music.play("res/sounds/background.wav", Clip.LOOP_CONTINUOUSLY);
+		
+		new Music("res/sounds/background.wav", Clip.LOOP_CONTINUOUSLY);
+
 	}
 	
 	private synchronized void start(){
@@ -167,7 +166,7 @@ public class Game extends Canvas implements Runnable{
 			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
-		this.music.tick();
+		System.out.println(java.lang.Thread.activeCount());
 	}
 
 	
@@ -188,25 +187,24 @@ public class Game extends Canvas implements Runnable{
 		
 		//Prints on the screen game's fps.
 		do {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.setColor(Color.white);
-		int h2 = g.getFontMetrics().getHeight();
-		g.drawString("FPS: " + this.frames, 0, h2);
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, this.getWidth(), this.getHeight());
+			if(state == State.Game){
+				
+				level.Render(g);
+			}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Naming || state == State.Highscore){
 		
-		if(state == State.Game){
+				menu.render(g);
+			}
+			g.setColor(Color.white);
+			int h2 = g.getFontMetrics().getHeight();
+			g.drawString("FPS: " + this.frames, 0, h2);
 			
-			level.Render(g);
-		}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Naming || state == State.Highscore){
-	
-			menu.render(g);
-		}
-		
-		g.dispose();
-		//The drawn buffer will become JFrame's buffer.
-		bs.show(); 
-		
-		//Close the loop do-while with a security prevention, because it could lose some frames in the buffer.
+			g.dispose();
+			//The drawn buffer will become JFrame's buffer.
+			bs.show(); 
+			
+			//Close the loop do-while with a security prevention, because it could lose some frames in the buffer.
 		}while(bs.contentsLost()); 
 	}
 	

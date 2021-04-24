@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
+import it.unipv.ingsw.c20.system.Music;
 
 public class Menu extends IsMenu{
 	
@@ -146,7 +147,7 @@ public class Menu extends IsMenu{
 		
 		if(mouseOver(mx, my, getGame().getWIDTH()-x, getGame().getHEIGHT() - y, x, y)){
 			//menu
-			this.getGame().getMusic().setMusic(!this.getGame().getMusic().isMusic());
+			Music.setMusic(!Music.isMusic());
 			//Music.setVolume((Music.getVolume()/ 100f) * ((float)((x - (getGame().getWIDTH() - mx))/2)));
 			//(Music.getVolume()/ 100f) * ((float)((x - (getGame().getWIDTH() - mx))/2))
 		}
