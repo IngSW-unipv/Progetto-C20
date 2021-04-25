@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
-
    /**
 	 * Game's core class, the main is here.
 	 * 
@@ -32,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private Thread thread;
 	
-	private Level level;  // Facade controller, it will manage game's logic.
+	private Level level;  // it will manage game's logic.
 
 	private final Menu menu; // it will manage the written part of the game.
 	
@@ -40,11 +38,11 @@ public class Game extends Canvas implements Runnable{
 	
 	private int WIDTH, HEIGHT;
 	
-	private ScoreReader scores;
+	private ScoreReader scores; 
 	
 	private final String mapPath = "res/maps/map.png";
 
-	/** The constructor sets the first game's state (menu), creates the menu and add menu's listener. */
+	/** The constructor sets the first game's state (menu), creates the menu, adds menu's listener and creates the score. */
 	public Game(){
 		
 		//The game will start every time from the menu, so the menu will be the first state.
@@ -55,25 +53,28 @@ public class Game extends Canvas implements Runnable{
 		//Creates the menu.
 		this.menu = new Menu(this);
 		
+		//The window will modifies his dimension in relation to the map's dimension.
 		try {
 			this.WIDTH = ImageIO.read(new File(this.mapPath)).getWidth();
 			this.HEIGHT  = ImageIO.read(new File(this.mapPath)).getHeight();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}	
+		
 		Dimension dimension = new Dimension(this.getWIDTH(), this.getHEIGHT());
 		this.setPreferredSize(dimension);
 		this.setMinimumSize(dimension);
 		this.setMaximumSize(dimension);
-		//Adds the listener so that the menu can react to the mouse's movement.
+		
+		//Adds the listener so that the menu can react to the mouse's movements.
 		this.addMouseListener(menu); 
 		
 
 	}
 	
 	private synchronized void start(){
-		//Starts the game
+		//Starts the game, play music, create the thread.
 		
 		if(!isRunning){
 			
@@ -85,7 +86,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private synchronized void stop(){
-		//Stops the game
+		//Stops the game, stops the thread.
 		
 		if(!isRunning){
 			return;
@@ -101,7 +102,9 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	
-  /** Game's core, manages the fps system, creating the illusion of a moving picture. */
+  /** Game's core, manages the fps system, creating the illusion of a moving picture, implemented from Runnable 
+   *  interface.
+   */ 
 	public void run(){
 		//This is the game's core, the master function that allows the game to be updated continuously.
 		

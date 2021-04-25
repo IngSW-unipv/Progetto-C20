@@ -7,35 +7,63 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * This class will read the text file that memorize players' score.
+ * 
+ * @author Mattia Seravalli, Filippo Tagliaferri.
+ *
+ */
 public class ScoreReader {
 
 	private ArrayList<Scores> scores;
 	private static final String highscorefile = "res/scores/text.txt";
 
+	/**
+	 * The class constructor, it will loads the score file and creates a new array of scores.
+	 */
 	public ScoreReader() {
 	    scores = new ArrayList<Scores>();
 	    loadScoreFile();
 	}
 	
+	
+	/**
+	 * This method will return the score's list of players
+	 * @return array list of scores.
+	 */
 	public ArrayList<Scores> getScores() {
 	    return scores;
 	}
 	
+	
+	/**
+	 * This method will add a new score.
+	 * @param name Name of the player.
+	 * @param score Score of the player.
+	 */
 	public void addScore(String name, int score) {
 		this.scores.add(new Scores(name, score));
+		
 		sortScore();
 		updateScoreFile();
 		loadScoreFile();
 	}
 	
+	
+	/**
+	 * This method will sort the text file, so that we have a list from the bigger to the smaller score.
+	 */
 	public void sortScore(){
 		Collections.sort(scores, new ScoresComparator());
-		while(this.scores.size() > 10){
+		while(this.scores.size() > 8){
 			this.scores.remove(this.scores.size()-1);
 		}
 	}
 	
+	
+	/**
+	 * This method will load the text file in witch scores are memorized.
+	 */
 	public void loadScoreFile() {
 		
 		BufferedReader reader;
@@ -49,21 +77,28 @@ public class ScoreReader {
 				this.scores.remove(this.scores.size()-1);
 			}
 			
-			while (line != null) {
+			//Read only 8 best players
+			for(int i = 0; i < 8; i ++) {
 				
-				String[] splitString = line.split(":");
-				name = splitString[0];
-				score = Integer.valueOf((splitString[1].split(" "))[1]);
-				this.scores.add(new Scores(name, score));
-				line = reader.readLine();
+				if(line != null) {
+					String[] splitString = line.split(":");
+					name = splitString[0];
+					score= Integer.valueOf((splitString[1].split(" "))[1]);
+					this.scores.add(new Scores(name, score));
+					line = reader.readLine();
+				}
 				
 			}
+			
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * This method will update the text files, in witch scores are memorized, with a new score.
+	 */
 	public void updateScoreFile() {
 		
 		try {

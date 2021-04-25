@@ -53,7 +53,7 @@ public enum Commands {
 	}
 
 	public String getString(){
-		return KeyEvent.getKeyText(new Integer(this.right)) + KeyEvent.getKeyText(new Integer(this.left)) + KeyEvent.getKeyText(new Integer(this.up)) + KeyEvent.getKeyText(new Integer(this.down));
+		return KeyEvent.getKeyText((int)this.right) + KeyEvent.getKeyText((int)this.left) + KeyEvent.getKeyText((int)this.up) + KeyEvent.getKeyText((int)this.down);
 	}
 
 
