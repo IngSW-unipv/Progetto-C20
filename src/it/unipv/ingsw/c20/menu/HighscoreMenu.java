@@ -9,38 +9,68 @@ import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.scores.Scores;
 import it.unipv.ingsw.c20.system.Game;
 
+/**
+ * Games's naming menu
+ * @author Filippo Tagliaferri
+ *
+ */
+
 public class HighscoreMenu extends IsMenu {
 	
+	/**
+	 * Class constructor
+	 * @param game
+	 */
 	
 	public HighscoreMenu(Game game) {
 		// TODO Auto-generated constructor stub
 		super(game);
 	}
 
+	/**
+	 * mouse clicked
+	 */
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse entered 	
+	 */
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 *  mouse exited
+	 */
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse pressed
+	 */
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Controls if the user want go back to the menu
+	 */
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -61,12 +91,20 @@ public class HighscoreMenu extends IsMenu {
 		}
 	}
 
+	/**
+	 * standard tick method
+	 */
+	
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Show the top 8 score saved in a txt file
+	 */
+	
 	@Override
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub

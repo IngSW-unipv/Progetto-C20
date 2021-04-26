@@ -10,11 +10,26 @@ import it.unipv.ingsw.c20.constants.Commands;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 
+/**
+ *  Menu tutorial
+ * @author Filippo Tagliaferri
+ *
+ */
+
 public class TutorialMenu extends IsMenu{
+	
+	/**
+	 * Class constructor
+	 * @param game
+	 */
 	
 	public TutorialMenu(Game game){
 		super(game);
 	}
+	
+	/**
+	 * mouse clicked
+	 */
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -22,24 +37,41 @@ public class TutorialMenu extends IsMenu{
 		
 	}
 
+	/**
+	 * mouse entered
+	 */
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
+	/**
+	 * mouse exited 
+	 */
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse pressed
+	 */
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * gets if the palyer click on menu
+	 */
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -58,12 +90,20 @@ public class TutorialMenu extends IsMenu{
 		}
 	}
 
+	/**
+	 * tick method
+	 */
+	
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Render the commands of the player getted in the Commands enum
+	 */
+	
 	@Override
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub

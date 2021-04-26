@@ -3,6 +3,7 @@ package it.unipv.ingsw.c20.system;
 import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.map.Map;
+import it.unipv.ingsw.c20.map.Tile;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -236,15 +237,8 @@ public class Level implements KeyListener {
 	 * Render continuously updates the graphic side of what it is happening on the screen.
 	 */
 	public void Render(Graphics g){
-		
-		for(int x = 0 ; x < this.game.getWIDTH()/32 ; x++){
-			
-			for(int y = 0 ; y < this.game.getHEIGHT()/32 ; y++){
-				
-				if(this.map.getTiles()[x][y] != null) this.map.getTiles()[x][y].Render(g);
-				
-			}
-			
+		for(Tile t : this.map.getTiles()){
+			t.Render(g);
 		}
 		
 		for(int i = 0 ; i < this.map.getPoints().size() ; i++){

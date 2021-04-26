@@ -8,17 +8,37 @@ import java.awt.event.MouseEvent;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 
+/**
+ * Games's ending menu
+ * @author Filippo Tagliaferri
+ *
+ */
+
 public class EndingMenu extends IsMenu{
+	
+	/**
+	 * Class constructor
+	 * @param game
+	 */
 	
 	public EndingMenu(Game game){
 		super(game);
 	}
 	
+	/**
+	 * standard tick method
+	 */
+	
 	public void tick(){
 		
 	}
 	
-	public void Render(Graphics g){
+	/**
+	 * Take all of the Player's score and show them in turn order
+	 * @param g Graphics
+	 */
+	
+	public void render(Graphics g){
 
 		int x = 200;
 		int y = 64;
@@ -27,17 +47,17 @@ public class EndingMenu extends IsMenu{
 		g.setFont(fnt);
 		g.setColor(Color.WHITE);
 		int h2 = g.getFontMetrics().getHeight();
-		
+		int w2;
 		for(int i = 0; i < this.getGame().getLevel().getPlayers().size(); i++ ){
 
-			int w2 = g.getFontMetrics().stringWidth(this.getGame().getLevel().getPlayers().get(i).getNome() + ":" + this.getGame().getLevel().getPlayers().get(i).getScore()) / 2;
+			w2 = g.getFontMetrics().stringWidth(this.getGame().getLevel().getPlayers().get(i).getNome() + ":" + this.getGame().getLevel().getPlayers().get(i).getScore()) / 2;
 			g.drawRect((getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size() + 1) * y))/2) +(i*y), x, y);
 			g.drawString(this.getGame().getLevel().getPlayers().get(i).getNome() + ": " + this.getGame().getLevel().getPlayers().get(i).getScore() , (getGame().getWIDTH() / 2) - w2, h2+(i*y)+((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size()+1)* y))/2) );
 		
 		}
 		
 		g.drawRect((getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size() + 1) * y))/2) +(this.getGame().getLevel().getPlayers().size()*y), x/2, y);
-		int w2 = g.getFontMetrics().stringWidth("Retry") / 2;
+		w2 = g.getFontMetrics().stringWidth("Retry") / 2;
 		g.drawString("Retry", (getGame().getWIDTH()/2) - (x/2) + (x/4) - w2, h2+((this.getGame().getLevel().getPlayers().size())*y)+((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size()+1)* y))/2) );
 		
 		g.drawRect((getGame().getWIDTH()/2)-(x/2) + x/2, ((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size() + 1) * y))/2) +(this.getGame().getLevel().getPlayers().size()*y), x/2, y);
@@ -46,30 +66,50 @@ public class EndingMenu extends IsMenu{
 	
 	}
 
+	/**
+	 * mouseClicked
+	 */
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse entered
+	 */
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse exited
+	 */
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mousepressed
+	 */
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Controls where the mouse is released and can lead to Menu or a retry
+	 */
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -97,12 +137,6 @@ public class EndingMenu extends IsMenu{
 			this.getGame().setState(State.Menu);
 			
 		}
-		
-	}
-
-	@Override
-	public void render(Graphics g) {
-		// TODO Auto-generated method stub
 		
 	}
 }

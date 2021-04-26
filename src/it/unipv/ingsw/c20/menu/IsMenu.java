@@ -5,18 +5,39 @@ import java.awt.event.MouseListener;
 
 import it.unipv.ingsw.c20.system.Game;
 
+/**
+ * interface that indicate a menu 
+ * @author Filippo Tagliaferri
+ *
+ */
+
 public abstract class IsMenu implements MouseListener{
 	
 	private Game game;
+	
+	/**
+	 * Class creator 
+	 * @param game This game to change and get parameter
+	 */
 	
 	public IsMenu(Game game){
 		this.game = game;
 	}
 	
+	/**
+	 * Game getter
+	 * @return this game
+	 */
+	
 	public Game getGame() {
 		return game;
 	}
 
+	/**
+	 * game's setter
+	 * @param game setter
+	 */
+	
 	public void setGame(Game game) {
 		this.game = game;
 	}
@@ -46,7 +67,16 @@ public abstract class IsMenu implements MouseListener{
 		
 	}
 	
+	/**
+	 * tick method
+	 */
+	
 	public abstract void tick();
+	
+	/**
+	 * render method
+	 * @param g
+	 */
 	
 	public abstract void render(Graphics g);
 }

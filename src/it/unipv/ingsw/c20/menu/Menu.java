@@ -6,6 +6,12 @@ import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;
 
+/**
+ *  manage all the menus
+ * @author Filippo Tagliaferri
+ *
+ */
+
 public class Menu extends IsMenu{
 	
 	private EndingMenu end;
@@ -15,18 +21,26 @@ public class Menu extends IsMenu{
 	private NameMenu name;
 	private int NGiocatori;
 
+	/**
+	 * Number of player getter
+	 * @return the number of player
+	 */
+	
 	public int getNGiocatori() {
 		return NGiocatori;
 	}
 
+	/**
+	 * set the number of player
+	 * @param nGiocatori number of player
+	 */
+	
 	public void setNGiocatori(int nGiocatori) {
 		NGiocatori = nGiocatori;
 	}
 
 	/**
 	 * Class costructor
-	 * @author Filippo Tagliaferri
-	 * 
 	 * @param game changes the enum and the start of the level
 	 */
 	public Menu(Game game){
@@ -54,7 +68,7 @@ public class Menu extends IsMenu{
 	public void render(Graphics g) {
 		
 		if(getGame().getState()  == State.End){
-			this.end.Render(g);
+			this.end.render(g);
 		}else if(getGame().getState()  == State.Menu){
 			this.menu.render(g);
 		}else if(getGame().getState()  == State.Tutorial){
@@ -77,40 +91,41 @@ public class Menu extends IsMenu{
 		g.drawRect(getGame().getWIDTH()-x-1, getGame().getHEIGHT() - y-1, x, y);		
 		
 	}
+	
+	/**
+	 * mouse pressed
+	 */
+	
 	@Override
 	public void mousePressed(MouseEvent e){
 		// TODO Auto-generated method stub
-		if(getGame().getState() == State.End){
-			this.end.mousePressed(e);
-		}
 	}
 
+	/**
+	 * mouse clicked
+	 */
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(getGame().getState() == State.End){
-			this.end.mouseClicked(e);
-		}
 	}
 
+	/**
+	 *  mouse entered
+	 */
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(getGame().getState() == State.End){
-			this.end.mouseEntered(e);
-		}
-		
 	}
 
+	/**
+	 * mouse exited
+	 */
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(getGame().getState() == State.End){
-					
-			this.end.mouseExited(e);
-					
-		}
 	}
 
 

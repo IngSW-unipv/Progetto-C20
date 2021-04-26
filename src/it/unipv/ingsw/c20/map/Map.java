@@ -1,5 +1,6 @@
 package it.unipv.ingsw.c20.map;
 import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,10 +14,12 @@ import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.point.BigPoint;
 import it.unipv.ingsw.c20.point.LilPoint;
 import it.unipv.ingsw.c20.system.Level;
-
+/**
+ * @author Filippo Tagliaferri
+ */
 public class Map {
 	private Level level;
-	private Tile[][] tiles;
+	private List<Tile> tiles;
 	private List<LilPoint> points; //lista dei punti piccoli nel gioco
 	private List <BigPoint> bigPoints; // lista dei punti(frutta) grossi
 	private List <Player> enemies; // lita dei giocatori non attivi e bot
@@ -25,7 +28,6 @@ public class Map {
 	
 	/**
 	 * Class constructor
-	 * @author Filippo Tagliaferri
 	 * @param level sets all the Lists to play
 	 * @param path gets the path to follow to find the image
 	 */
@@ -68,7 +70,7 @@ public class Map {
 			this.height = map.getHeight(); // return 15
 			int max = (this.height * this.width)/4; //max punti grossi
 			int[] pixels = new int[width * height];
-			this.setTiles(new Tile[width][height]);
+			this.setTiles(new ArrayList<>());
 			map.getRGB(0, 0, width, height, pixels, 0, width);
 			int pos = 0;
 
@@ -89,7 +91,7 @@ public class Map {
 					}else if(val == 0xFF000000){
 
 						//tile
-						this.getTiles()[xx][yy] = new Tile(xx*32, yy*32);
+						this.getTiles().add(new Tile(xx*32, yy*32));
 
 					}else{
 
@@ -175,9 +177,9 @@ public class Map {
 		
 	}
 
-	public Tile[][] getTiles() { return tiles; }
+	public List<Tile> getTiles() { return tiles; }
 
-	public void setTiles(Tile[][] tiles) { this.tiles = tiles; }
+	public void setTiles(List<Tile> tiles) { this.tiles = tiles; }
 
 	public List <BigPoint> getBigPoints() { return bigPoints; }
 

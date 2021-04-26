@@ -8,37 +8,68 @@ import java.awt.event.MouseEvent;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 
+/**
+ *  Starting menu that the user will see at first
+ * @author Filippo Tagliaferri
+ *
+ */
+
 public class StartingMenu extends IsMenu{
 	
+	/**
+	 * Class constructor
+	 * @param game
+	 */
 	
 	public StartingMenu(Game game){
 		 super(game);
 	}
 
+	/**
+	 * mouse clicked
+	 */
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 *  mouse entered
+	 */
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse exited
+	 */
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * mouse pressed
+	 */
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 *  gets where the mouse is pressed, in the for create the level
+	 *  or it can lead to highscore or tutorial
+	 */
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -53,8 +84,8 @@ public class StartingMenu extends IsMenu{
 		for(int i=0; i < 5; i++){
 			if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (i*y), 200, 64)){
 
-				this.getGame().setState(State.Naming);
 				this.getGame().getMenu().setNGiocatori(i+1);
+				this.getGame().setState(State.Naming);
 
 			}
 		}
@@ -72,12 +103,20 @@ public class StartingMenu extends IsMenu{
 		
 	}
 
+	/**
+	 * tick method
+	 */
+	
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * give the option to start a game, control highscore and tutorial
+	 */
+	
 	@Override
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub

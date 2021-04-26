@@ -1,5 +1,6 @@
 package it.unipv.ingsw.c20.actor;
 
+import it.unipv.ingsw.c20.map.Tile;
 import it.unipv.ingsw.c20.system.Level;
 import java.awt.*;
 import java.util.ArrayList;
@@ -55,23 +56,13 @@ public class Enemy extends Player {
 	public boolean canMove(int nextX, int nextY) {
 
 		Rectangle bounds = new Rectangle(nextX, nextY, this.width, this.height);
+		
+		for(Tile t : this.getLevel().getMap().getTiles()){
+			if (bounds.intersects(t)) {
 
-		for (int xx = 0; xx < this.getLevel().getMap().getTiles().length; xx++) {
-
-			for (int yy = 0; yy < this.getLevel().getMap().getTiles()[0].length; yy++) {
-
-				if (this.getLevel().getMap().getTiles()[xx][yy] != null) {
-
-					if (bounds.intersects(this.getLevel().getMap().getTiles()[xx][yy])) {
-
-						return false;
-
-					}
-
-				}
+				return false;
 
 			}
-
 		}
 
 		return true;

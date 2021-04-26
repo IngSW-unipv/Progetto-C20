@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.constants.Commands;
+import it.unipv.ingsw.c20.map.Tile;
 import it.unipv.ingsw.c20.system.Level;
 
 /**
@@ -162,22 +163,12 @@ public class Player extends Actor {
 
 		Rectangle bounds = new Rectangle(nextX, nextY, this.width, this.height); // Rectangle creation
 
-		for (int xx = 0; xx < this.getLevel().getMap().getTiles().length; xx++) {
+		for(Tile t : this.getLevel().getMap().getTiles()){
+			if (bounds.intersects(t)) {
 
-			for (int yy = 0; yy < this.getLevel().getMap().getTiles()[0].length; yy++) {
-
-				if (this.getLevel().getMap().getTiles()[xx][yy] != null) {
-
-					if (bounds.intersects(this.getLevel().getMap().getTiles()[xx][yy])) {
-
-						return false;
-
-					}
-
-				}
+				return false;
 
 			}
-
 		}
 
 		return true;
