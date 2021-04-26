@@ -151,6 +151,7 @@ public class Game extends Canvas implements Runnable{
 		stop();	//stops the game.	
 	}
 
+	
 	private void tick() {
 		// Tick continuously updates the logical side of what is happening on the screen. 
 		

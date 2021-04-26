@@ -17,8 +17,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Music implements Runnable{
 		
 	private Clip clip;
-	private static boolean music = true;
-	private int loop;
+	private static boolean music = true; 	//True if music is playing, false if music isn't playing
+	private int loop;						//How many times the music have to be played once finished.
+	private float volume = -20-0f;			//Volume of the music.
 	
 	/**
 	 * Music's constructor, it will start the music and the thread that is going to handle it
@@ -36,7 +37,7 @@ public class Music implements Runnable{
 			
 			//With gainControl we will control the music volume.
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-20.0f); 		//Reduces volume by 10 decibels.
+			gainControl.setValue(volume); 		//Reduces volume by 10 decibels.
 			
 			this.clip.loop(loop);
 			
