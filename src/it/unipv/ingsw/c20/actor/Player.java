@@ -264,7 +264,9 @@ public class Player extends Actor {
 				g.drawImage(fantasmi[0], this.x, this.y, null);
 				String time = Integer
 						.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
-				g.drawString(time, x + 16, y + 16);
+				int h2 = g.getFontMetrics().getHeight();
+				int w2 = g.getFontMetrics().stringWidth(time) / 2;
+				g.drawString(time, x-w2+16 , y + 16 + h2/2);
 			} else {
 				g.drawImage(fantasmi[1], this.x, this.y, null);
 			}

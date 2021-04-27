@@ -37,7 +37,7 @@ public class Music implements Runnable{
 			
 			//With gainControl we will control the music volume.
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(volume); 		//Reduces volume by 10 decibels.
+			gainControl.setValue(volume); 		//Reduces volume by 20 decibels.
 			
 			this.clip.loop(loop);
 			

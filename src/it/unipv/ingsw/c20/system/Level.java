@@ -264,12 +264,18 @@ public class Level implements KeyListener {
 		// show on screen current player's score and fps
 		
 		g.setColor(Color.WHITE);
-		g.drawString("Score: " + this.getTurno().getScore(), 0, 25);
-		g.drawString("Level: " + this.getTurno().getLvl(), 0, 40);
+		int h2 = g.getFontMetrics().getHeight();
+		
+		g.setColor(Color.WHITE);
+		int w2 = g.getFontMetrics().stringWidth("Score: " + this.getTurno().getScore());
+		g.drawString("Score: " + this.getTurno().getScore(), this.game.getWIDTH()/2 - w2/2 , h2);
+		w2 = g.getFontMetrics().stringWidth("Level: " + this.getTurno().getLvl());
+		g.drawString("Level: " + this.getTurno().getLvl(), this.game.getWIDTH() - w2, h2);
 		
 		if(this.paused){
 			
-			g.drawString("The game is paused", this.game.getWidth()/3, this.game.getHeight()/2);
+			w2 = g.getFontMetrics().stringWidth("The game is paused");
+			g.drawString("The game is paused", this.game.getWidth()/2-w2/2, this.game.getHeight()/2);
 			
 		}
 		
@@ -321,8 +327,10 @@ public class Level implements KeyListener {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		for(Player p : this.getPlayers()){
-			p.move(e.getKeyCode());
+		if(!this.paused){
+			for(Player p : this.getPlayers()){
+				p.move(e.getKeyCode());
+			}	
 		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_P){

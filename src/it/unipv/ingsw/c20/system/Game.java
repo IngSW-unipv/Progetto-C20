@@ -183,7 +183,8 @@ public class Game extends Canvas implements Runnable{
 		
 		//Prints on the screen game's fps.
 		do {
-			
+			Font fnt = new Font("arial", Font.BOLD,25);
+			g.setFont(fnt);
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			
