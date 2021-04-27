@@ -137,7 +137,7 @@ public class Level implements KeyListener {
 	 */
 	public void updateLvl() {
 		
-		if(this.getTurno().getLvl() == 33 || this.getTurno().getScore() == 200000){
+		if(this.getTurno().getLvl() == 33 || this.getTurno().getScore() >= 200000){
 			
 			//Controls in order to not make the game last too long
 			
