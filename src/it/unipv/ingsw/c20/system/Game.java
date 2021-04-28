@@ -1,7 +1,8 @@
 package it.unipv.ingsw.c20.system;
 
 import it.unipv.ingsw.c20.constants.State;
-import it.unipv.ingsw.c20.menu.Menu;
+import it.unipv.ingsw.c20.menu.IsMenu;
+import it.unipv.ingsw.c20.menu.StartingMenu;
 import it.unipv.ingsw.c20.scores.ScoreReader;
 
 import javax.imageio.ImageIO;
@@ -32,7 +33,9 @@ public class Game extends Canvas implements Runnable{
 	
 	private Level level;  // it will manage game's logic.
 
-	private final Menu menu; // it will manage the written part of the game.
+	private IsMenu menu; // it will manage the written part of the game.
+	
+	private int NGiocatori;
 	
 	private State state; // it describes the game's state.
 	
@@ -51,7 +54,7 @@ public class Game extends Canvas implements Runnable{
 		this.scores = new ScoreReader();
 		
 		//Creates the menu.
-		this.menu = new Menu(this);
+		this.setMenu(new StartingMenu(this));
 		
 		//The window will modifies his dimension in relation to the map's dimension.
 		try {
@@ -66,9 +69,6 @@ public class Game extends Canvas implements Runnable{
 		this.setPreferredSize(dimension);
 		this.setMinimumSize(dimension);
 		this.setMaximumSize(dimension);
-		
-		//Adds the listener so that the menu can react to the mouse's movements.
-		this.addMouseListener(menu); 
 		
 
 	}
@@ -158,11 +158,11 @@ public class Game extends Canvas implements Runnable{
 		if(state == State.Game){
 			//If i'm playing it will update the window using level's images.
 			level.tick();
+			
 		}else {
 			//If I'm not playing I'm in the menu or in the tutorial, so I will update the window using the menu's images.
 			menu.tick();
 		}
-
 	}
 
 	
@@ -192,7 +192,7 @@ public class Game extends Canvas implements Runnable{
 				
 				level.Render(g);
 				
-			}else if(state == State.End || state == State.Menu || state == State.Tutorial || state == State.Naming || state == State.Highscore){
+			}else if(state == State.Menu){
 		
 				menu.render(g);
 				
@@ -227,7 +227,11 @@ public class Game extends Canvas implements Runnable{
 	
 	/** Level's setter 
 	 * @param n number of the level requested. */
-	public void setLevel(int n, List<String> nomi) { this.level = new Level(this, n, nomi); }
+	public void setLevel(int n, List<String> nomi) {
+		this.removeKeyListener(this.menu);
+		this.removeMouseListener(this.menu);
+		this.level = new Level(this, n, nomi);
+		}
 	
 	/** Height's getter 
 	 * @return window's height. */
@@ -244,11 +248,28 @@ public class Game extends Canvas implements Runnable{
 
 	/** return menu 
 	 * @return the menuitem */
-	public Menu getMenu() { return menu; }
+	public IsMenu getMenu() { return menu; }
+	
+	public void setMenu(IsMenu menu){
+		this.removeKeyListener(this.menu);
+		this.removeMouseListener(this.menu);
+		this.menu = menu;
+		//Adds the listener so that the menu can react to the mouse's movements.
+		this.addMouseListener(this.menu);
+		this.addKeyListener(this.menu);
+	}
 	
 	/** return the path 
 	 * @return the path of the map */
 	public String getMapPath() { return mapPath; }
+
+	public int getNGiocatori() {
+		return NGiocatori;
+	}
+
+	public void setNGiocatori(int nGiocatori) {
+		NGiocatori = nGiocatori;
+	}
 
 	/** 
 	 * Main: creates the game, forms the window, starts the game 

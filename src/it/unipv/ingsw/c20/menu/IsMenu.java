@@ -1,6 +1,9 @@
 package it.unipv.ingsw.c20.menu;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import it.unipv.ingsw.c20.system.Game;
@@ -11,7 +14,7 @@ import it.unipv.ingsw.c20.system.Game;
  *
  */
 
-public abstract class IsMenu implements MouseListener{
+public abstract class IsMenu implements MouseListener, KeyListener{
 	
 	private Game game;
 	
@@ -79,4 +82,85 @@ public abstract class IsMenu implements MouseListener{
 	 */
 	
 	public abstract void render(Graphics g);
+	
+	/**
+	 * mouse clicked
+	 */
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * mouse entered
+	 */
+	
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * mouse exited
+	 */
+	
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 *  mouse pressed
+	 */
+	
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * mouse released
+	 */
+	
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * key pressed
+	 */
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * key released
+	 */
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 *  key typed
+	 */
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

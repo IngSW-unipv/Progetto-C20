@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.scores.Scores;
 import it.unipv.ingsw.c20.system.Game;
 
@@ -28,46 +27,6 @@ public class HighscoreMenu extends IsMenu {
 	}
 
 	/**
-	 * mouse clicked
-	 */
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse entered 	
-	 */
-	
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 *  mouse exited
-	 */
-	
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse pressed
-	 */
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
 	 * Controls if the user want go back to the menu
 	 */
 	
@@ -86,7 +45,7 @@ public class HighscoreMenu extends IsMenu {
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2) + x/2, ((getGame().getHEIGHT() - ((this.getGame().getScores().getScores().size() + 1) * y))/2) +(this.getGame().getScores().getScores().size()*y), x/2, y)){
 			
 			// menu
-			this.getGame().setState(State.Menu);
+			this.getGame().setMenu(new StartingMenu(this.getGame()));
 			
 		}
 	}
@@ -117,16 +76,16 @@ public class HighscoreMenu extends IsMenu {
 		g.setFont(fnt);
 		g.setColor(Color.WHITE);
 		int h2 = g.getFontMetrics().getHeight();
+		int w2;
 		int i = 0;
-		
 			for(Scores score : this.getGame().getScores().getScores()){
-				int w2 = g.getFontMetrics().stringWidth(score.toString()) / 2;
+				w2 = g.getFontMetrics().stringWidth(score.toString()) / 2;
 				g.drawRect((getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - ((this.getGame().getScores().getScores().size() + 1) * y))/2) +(i*y), x, y);
 				g.drawString(score.toString() , (getGame().getWIDTH() / 2) - w2, h2+(i*y)+((getGame().getHEIGHT() - ((this.getGame().getScores().getScores().size()+1)* y))/2) );
 				i++;
 			}
 		
-		int w2 = g.getFontMetrics().stringWidth("Menu") / 2;
+		w2 = g.getFontMetrics().stringWidth("Menu") / 2;
 		g.drawRect((getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - ((this.getGame().getScores().getScores().size() + 1) * y))/2) +(this.getGame().getScores().getScores().size()*y), x, y);
 		g.drawString("Menu" , (getGame().getWIDTH() / 2) - w2, h2+((this.getGame().getScores().getScores().size())*y)+((getGame().getHEIGHT() - ((this.getGame().getScores().getScores().size()+1)* y))/2) );
 		

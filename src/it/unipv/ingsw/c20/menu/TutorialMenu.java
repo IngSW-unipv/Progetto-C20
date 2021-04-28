@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 import it.unipv.ingsw.c20.constants.Colors;
 import it.unipv.ingsw.c20.constants.Commands;
-import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 
 /**
@@ -25,47 +24,6 @@ public class TutorialMenu extends IsMenu{
 	
 	public TutorialMenu(Game game){
 		super(game);
-	}
-	
-	/**
-	 * mouse clicked
-	 */
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse entered
-	 */
-	
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	/**
-	 * mouse exited 
-	 */
-	
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse pressed
-	 */
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -86,7 +44,7 @@ public class TutorialMenu extends IsMenu{
 		
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
 			//menu
-			this.getGame().setState(State.Menu);
+			this.getGame().setMenu(new StartingMenu(this.getGame()));
 		}
 	}
 

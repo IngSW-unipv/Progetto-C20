@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 
 /**
@@ -23,46 +22,6 @@ public class StartingMenu extends IsMenu{
 	
 	public StartingMenu(Game game){
 		 super(game);
-	}
-
-	/**
-	 * mouse clicked
-	 */
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	/**
-	 *  mouse entered
-	 */
-	
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse exited
-	 */
-	
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse pressed
-	 */
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -84,20 +43,20 @@ public class StartingMenu extends IsMenu{
 		for(int i=0; i < 5; i++){
 			if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (i*y), 200, 64)){
 
-				this.getGame().getMenu().setNGiocatori(i+1);
-				this.getGame().setState(State.Naming);
+				this.getGame().setNGiocatori(i+1);
+				this.getGame().setMenu(new NameMenu(this.getGame()));
 
 			}
 		}
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (5*y), 200, 64)){
 			
 			//how to play
-			this.getGame().setState(State.Tutorial);
+			this.getGame().setMenu(new TutorialMenu(this.getGame()));
 		}
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (6*y), 200, 64)){
 			
 			//how to play
-			this.getGame().setState(State.Highscore);
+			this.getGame().setMenu(new HighscoreMenu(this.getGame()));
 		}
 		
 		

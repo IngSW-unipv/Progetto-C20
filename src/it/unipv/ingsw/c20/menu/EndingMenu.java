@@ -67,46 +67,6 @@ public class EndingMenu extends IsMenu{
 	}
 
 	/**
-	 * mouseClicked
-	 */
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse entered
-	 */
-	
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse exited
-	 */
-	
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mousepressed
-	 */
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
 	 * Controls where the mouse is released and can lead to Menu or a retry
 	 */
 	
@@ -134,7 +94,7 @@ public class EndingMenu extends IsMenu{
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2) + x/2, ((getGame().getHEIGHT() - ((this.getGame().getLevel().getPlayers().size() + 1) * y))/2) +(this.getGame().getLevel().getPlayers().size()*y), x/2, y)){
 
 			// menu
-			this.getGame().setState(State.Menu);
+			this.getGame().setMenu(new StartingMenu(this.getGame()));
 			
 		}
 		
