@@ -25,6 +25,7 @@ public class Level implements KeyListener {
 	private boolean paused = false;
 	private long start = 0;
 	private List<String> nomi;
+	private long temp = 0;
 
 	/**
 	 * Constructor sets the players creating a list that will contain them,
@@ -339,11 +340,11 @@ public class Level implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_P){
 			
 			if(this.paused){
-				
+				this.start = System.currentTimeMillis() - temp;
 				this.paused = false;
 				
 			}else if(!this.paused){
-				
+				this.temp = System.currentTimeMillis() - this.start;
 				this.paused = true;
 				
 			}

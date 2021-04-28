@@ -29,14 +29,7 @@ public class Player extends Actor {
 	private int posizione;
 	private Colors color;
 	private String nome;
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	private String tempo = "";
 	private int[] key;
 	private Image[] pacman;
 	private Image[] fantasmi;
@@ -180,7 +173,12 @@ public class Player extends Actor {
 	 * in order to manage the movement
 	 */
 	public void tick() {
-
+		if (!this.turno) {
+			if (this.getLevel().getTurno().isKill()) {
+				this.tempo = Integer.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
+			}
+		}
+		
 		if (direction[0] && canMove(x + speed, y)) {
 			// Each time you press a key it sets the corresponding value to true to figure
 			// out where to go and if it can go right
@@ -262,11 +260,9 @@ public class Player extends Actor {
 
 				g.setColor(Color.WHITE);
 				g.drawImage(fantasmi[0], this.x, this.y, null);
-				String time = Integer
-						.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
 				int h2 = g.getFontMetrics().getHeight();
-				int w2 = g.getFontMetrics().stringWidth(time) / 2;
-				g.drawString(time, x-w2+16 , y + 16 + h2/2);
+				int w2 = g.getFontMetrics().stringWidth(tempo) / 2;
+				g.drawString(tempo, x-w2+16 , y + 16 + h2/2);
 			} else {
 				g.drawImage(fantasmi[1], this.x, this.y, null);
 			}
@@ -437,5 +433,23 @@ public class Player extends Actor {
 	public Image getFantasma(int n) {
 		return this.fantasmi[n];
 	}
+	
+	/**
+	 * get nome
+	 * @return nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * set nome
+	 * @param nome nome
+	 */
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 
 }
