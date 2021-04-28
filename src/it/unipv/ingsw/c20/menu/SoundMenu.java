@@ -6,8 +6,18 @@ import java.awt.event.MouseEvent;
 import it.unipv.ingsw.c20.system.Game;
 import it.unipv.ingsw.c20.system.Music;
 
+
+/**
+ * This class create the menu that disables sound effects in the game.
+ * @author Filippo Tagliaferri
+ *
+ */
 public class SoundMenu extends IsMenu{
 
+	/**
+	 * The class constructor
+	 * @param game this game.
+	 */
 	public SoundMenu(Game game) {
 		super(game);
 		// TODO Auto-generated constructor stub

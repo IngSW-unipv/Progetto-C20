@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ * This class handles tha intercation with game's object
  * @author Enxhi Ismaili, Carlos Reynaga
  *
  */

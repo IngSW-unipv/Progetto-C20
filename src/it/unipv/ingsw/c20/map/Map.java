@@ -15,6 +15,7 @@ import it.unipv.ingsw.c20.point.BigPoint;
 import it.unipv.ingsw.c20.point.LilPoint;
 import it.unipv.ingsw.c20.system.Level;
 /**
+ * This class takes an image and transform it in a playing map.
  * @author Filippo Tagliaferri
  */
 public class Map {
