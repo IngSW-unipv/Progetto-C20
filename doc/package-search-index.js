@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"it.unipv.ingsw.c20.actor"},{"l":"it.unipv.ingsw.c20.constants"},{"l":"it.unipv.ingsw.c20.map"},{"l":"it.unipv.ingsw.c20.menu"},{"l":"it.unipv.ingsw.c20.point"},{"l":"it.unipv.ingsw.c20.scores"},{"l":"it.unipv.ingsw.c20.system"}]

@@ -78,7 +78,7 @@ public abstract class IsMenu implements MouseListener, KeyListener{
 	
 	/**
 	 * render method
-	 * @param g
+	 * @param g graphics
 	 */
 	
 	public abstract void render(Graphics g);

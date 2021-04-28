@@ -18,7 +18,7 @@ public class EndingMenu extends IsMenu{
 	
 	/**
 	 * Class constructor
-	 * @param game
+	 * @param game this game
 	 */
 	
 	public EndingMenu(Game game){

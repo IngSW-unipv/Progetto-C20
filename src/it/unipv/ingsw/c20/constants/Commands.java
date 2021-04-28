@@ -61,7 +61,7 @@ public enum Commands {
 
 	/**
 	 * left key setter
-	 * @param right key to go left
+	 * @param left key to go left
 	 */
 	
 	public void setLeft(int left) {
@@ -79,7 +79,7 @@ public enum Commands {
 
 	/**
 	 * up key setter
-	 * @param right key to go up
+	 * @param up key to go up
 	 */
 	
 	public void setUp(int up) {
@@ -97,7 +97,7 @@ public enum Commands {
 	
 	/**
 	 * down key setter
-	 * @param right key to go down
+	 * @param down key to go down
 	 */
 	
 	public void setDown(int down) {

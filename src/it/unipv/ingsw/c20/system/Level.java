@@ -31,8 +31,9 @@ public class Level implements KeyListener {
 	 * Constructor sets the players creating a list that will contain them,
 	 * adds the listener at the game, creates the players and creates the map
 	 * 
-	 * @param game 
+	 * @param game this game
 	 * @param n integer represents the number of the players
+	 * @param nomi name of the players
 	 */
 	public Level(Game game, int n, List<String> nomi){
 		this.game = game;
@@ -239,6 +240,7 @@ public class Level implements KeyListener {
 	
 	/**
 	 * Render continuously updates the graphic side of what it is happening on the screen.
+	 * @param g Graphics
 	 */
 	public void Render(Graphics g){
 		for(Tile t : this.map.getTiles()){
@@ -302,7 +304,7 @@ public class Level implements KeyListener {
 	
 	/**
 	 * Setter
-	 * @param players
+	 * @param players this players
 	 */
 	public void setPlayers(List <Player> players) { this.players = players; }
 	
@@ -321,7 +323,7 @@ public class Level implements KeyListener {
 
 	/**
 	 * names setter
-	 * @param player's names
+	 * @param nomi player's names
 	 */
 	
 	public void setNomi(List<String> nomi) {this.nomi = nomi;}

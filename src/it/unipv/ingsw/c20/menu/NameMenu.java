@@ -24,7 +24,8 @@ public class NameMenu extends IsMenu{
 	
 	/**
 	 * Class constructor
-	 * @param game
+	 * @param game this game
+	 * @param n n player
 	 */
 	
 	public NameMenu(Game game, int n){

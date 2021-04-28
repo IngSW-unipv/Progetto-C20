@@ -19,7 +19,7 @@ public class TutorialMenu extends IsMenu{
 	
 	/**
 	 * Class constructor
-	 * @param game
+	 * @param game this game
 	 */
 	
 	public TutorialMenu(Game game){

@@ -224,7 +224,9 @@ public class Game extends Canvas implements Runnable{
 	public void setState(State state) { this.state = state; }
 	
 	/** Level's setter 
-	 * @param n number of the level requested. */
+	 * @param n number of the level requested.
+	 * @param nomi name of the players
+	 */
 	public void setLevel(int n, List<String> nomi) {
 		this.removeKeyListener(this.menu);
 		this.removeMouseListener(this.menu);

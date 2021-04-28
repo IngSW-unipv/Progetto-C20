@@ -20,7 +20,7 @@ public class StartingMenu extends IsMenu{
 	
 	/**
 	 * Class constructor
-	 * @param game
+	 * @param game this game
 	 */
 	
 	public StartingMenu(Game game){

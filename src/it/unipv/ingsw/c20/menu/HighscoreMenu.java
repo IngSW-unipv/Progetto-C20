@@ -18,7 +18,7 @@ public class HighscoreMenu extends IsMenu {
 	
 	/**
 	 * Class constructor
-	 * @param game
+	 * @param game this game
 	 */
 	
 	public HighscoreMenu(Game game) {

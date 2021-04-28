@@ -42,7 +42,7 @@ public class Player extends Actor {
 	 * @param level	the level in this moment
 	 * @param b	player's turn
 	 * @param i number of the player
-	 * @param c color of the player
+	 * @param nome this player's name
 	 */
 	public Player(int x, int y, Level level, boolean b, int i, String nome) {
 		super(x, y, level);
@@ -148,9 +148,9 @@ public class Player extends Actor {
 	 * Method used to understand if the next rectangle (32x32) is a rectangle in
 	 * which you can move (true) or not (false)
 	 * 
-	 * @param nextX
-	 * @param nextY
-	 * @return boolean
+	 * @param nextX next X 
+	 * @param nextY next Y
+	 * @return boolean 
 	 */
 	public boolean canMove(int nextX, int nextY) {
 
@@ -427,7 +427,7 @@ public class Player extends Actor {
 	/**
 	 * Fantasma's getter
 	 * 
-	 * @param n
+	 * @param n the n of the ghost
 	 * @return the n-th ghost.
 	 */
 	public Image getFantasma(int n) {

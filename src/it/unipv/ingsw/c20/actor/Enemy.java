@@ -50,8 +50,8 @@ public class Enemy extends Player {
 	 * Method used to understand if the next rectangle (32x32) is a rectangle in
 	 * which you can move (true) or not (false)
 	 * 
-	 * @param nextX
-	 * @param nextY
+	 * @param nextX next X
+	 * @param nextY next Y
 	 * @return boolean
 	 */
 	public boolean canMove(int nextX, int nextY) {
