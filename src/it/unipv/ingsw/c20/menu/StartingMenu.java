@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.system.Game;
 
 /**
@@ -16,6 +15,9 @@ import it.unipv.ingsw.c20.system.Game;
 
 public class StartingMenu extends IsMenu{
 	
+	private IsMenu Music;
+	
+	
 	/**
 	 * Class constructor
 	 * @param game
@@ -23,46 +25,7 @@ public class StartingMenu extends IsMenu{
 	
 	public StartingMenu(Game game){
 		 super(game);
-	}
-
-	/**
-	 * mouse clicked
-	 */
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	/**
-	 *  mouse entered
-	 */
-	
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse exited
-	 */
-	
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * mouse pressed
-	 */
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		 this.Music = new SoundMenu(this.getGame());
 	}
 
 	/**
@@ -78,28 +41,26 @@ public class StartingMenu extends IsMenu{
 		
 		int x = 200;
 		int y = 64;
-		
-		//this.getGame().getMusic().play("res/sounds/mouse.wav", 0);
-		
+				
 		for(int i=0; i < 5; i++){
 			if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (i*y), 200, 64)){
 
-				this.getGame().getMenu().setNGiocatori(i+1);
-				this.getGame().setState(State.Naming);
+				this.getGame().setMenu(new NameMenu(this.getGame(), i+1));
 
 			}
 		}
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (5*y), 200, 64)){
 			
 			//how to play
-			this.getGame().setState(State.Tutorial);
+			this.getGame().setMenu(new TutorialMenu(this.getGame()));
 		}
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (6*y), 200, 64)){
 			
 			//how to play
-			this.getGame().setState(State.Highscore);
+			this.getGame().setMenu(new HighscoreMenu(this.getGame()));
 		}
 		
+		this.Music.mouseReleased(e);
 		
 	}
 
@@ -110,7 +71,7 @@ public class StartingMenu extends IsMenu{
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
-		
+		this.Music.tick();
 	}
 
 	/**
@@ -141,6 +102,8 @@ public class StartingMenu extends IsMenu{
 		g.drawRect((getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (7* y))/2) + (6*y), x, y);
 		g.drawString("Highscore", (getGame().getWIDTH() / 2) - w2, h2+(6*y)+((getGame().getHEIGHT() - (7* y))/2));
 		
+		
+		this.Music.render(g);
 	}
 
 }

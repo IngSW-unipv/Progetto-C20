@@ -8,10 +8,6 @@ package it.unipv.ingsw.c20.constants;
 public enum State {
 	
 	Game,
-	End,
-	Menu,
-	Tutorial,
-	Naming,
-	Highscore;
+	Menu;
 
 }

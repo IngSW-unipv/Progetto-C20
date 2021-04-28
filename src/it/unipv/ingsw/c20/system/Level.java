@@ -4,6 +4,7 @@ import it.unipv.ingsw.c20.actor.Player;
 import it.unipv.ingsw.c20.constants.State;
 import it.unipv.ingsw.c20.map.Map;
 import it.unipv.ingsw.c20.map.Tile;
+import it.unipv.ingsw.c20.menu.EndingMenu;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,6 +25,7 @@ public class Level implements KeyListener {
 	private boolean paused = false;
 	private long start = 0;
 	private List<String> nomi;
+	private long temp = 0;
 
 	/**
 	 * Constructor sets the players creating a list that will contain them,
@@ -149,7 +151,8 @@ public class Level implements KeyListener {
 				
 			}else{
 				
-				this.game.setState(State.End);
+				this.game.setMenu(new EndingMenu(this.game));
+				this.game.setState(State.Menu);
 				
 			}
 			
@@ -215,7 +218,8 @@ public class Level implements KeyListener {
 						
 					}else{
 						this.game.getScores().addScore(this.getTurno().getNome(), this.getTurno().getScore());
-						this.game.setState(State.End);
+						this.game.setMenu(new EndingMenu(this.game));
+						this.game.setState(State.Menu);
 						
 					}
 					
@@ -336,11 +340,11 @@ public class Level implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_P){
 			
 			if(this.paused){
-				
+				this.start = System.currentTimeMillis() - temp;
 				this.paused = false;
 				
 			}else if(!this.paused){
-				
+				this.temp = System.currentTimeMillis() - this.start;
 				this.paused = true;
 				
 			}

@@ -24,6 +24,7 @@ public class Enemy extends Player {
 	private Random r;
 	private int tmp = 4;
 	private List<Integer> t;
+	private String tempo = "";
 
 	/**
 	 * Class constructor
@@ -75,6 +76,10 @@ public class Enemy extends Player {
 	 */
 	public void tick() {
 
+		if (this.getLevel().getTurno().isKill()) {
+			this.tempo = Integer.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
+		}
+		
 		t.clear();
 
 		if (canMove(x + speed, y)) {
@@ -165,11 +170,10 @@ public class Enemy extends Player {
 
 			g.setColor(Color.WHITE);
 			g.drawImage(this.getFantasma(0), this.x, this.y, null);
-			String time = Integer.toString(3 - ((int) ((System.currentTimeMillis() - this.getLevel().getStart()) / 1000)));
 			int h2 = g.getFontMetrics().getHeight();
-			int w2 = g.getFontMetrics().stringWidth(time) / 2;
+			int w2 = g.getFontMetrics().stringWidth(tempo) / 2;
 				
-			g.drawString(time, x-w2+16 , y + 16 + h2/2);
+			g.drawString(tempo, x-w2+16 , y + 16 + h2/2);
 
 		} else {
 
