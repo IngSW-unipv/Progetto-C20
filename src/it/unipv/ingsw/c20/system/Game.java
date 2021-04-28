@@ -250,6 +250,11 @@ public class Game extends Canvas implements Runnable{
 	 * @return the menuitem */
 	public IsMenu getMenu() { return menu; }
 	
+	/**
+	 * set the menu adjusting the key and the mouse listener
+	 * @param menu this new menu
+	 */
+	
 	public void setMenu(IsMenu menu){
 		this.removeKeyListener(this.menu);
 		this.removeMouseListener(this.menu);
@@ -263,10 +268,20 @@ public class Game extends Canvas implements Runnable{
 	 * @return the path of the map */
 	public String getMapPath() { return mapPath; }
 
+	/**
+	 * N player og the game
+	 * @return the player that are playing now
+	 */
+	
 	public int getNGiocatori() {
 		return NGiocatori;
 	}
 
+	/**
+	 * nomber of game player
+	 * @param nGiocatori this new game player
+	 */
+	
 	public void setNGiocatori(int nGiocatori) {
 		NGiocatori = nGiocatori;
 	}
