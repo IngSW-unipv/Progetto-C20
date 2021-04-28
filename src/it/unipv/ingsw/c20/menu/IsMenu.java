@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import it.unipv.ingsw.c20.system.Game;
 
 /**
- * abstract class that indicate a menu 
+ * Abstract class that indicate a menu
  * @author Filippo Tagliaferri
  *
  */
