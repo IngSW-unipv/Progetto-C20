@@ -116,7 +116,6 @@ public class NameMenu extends IsMenu implements KeyListener{
 			//create level with n player
 			this.getGame().setLevel(this.getGame().getMenu().getNGiocatori(), this.nomi);
 			this.nome = "";
-			this.nomi.clear();
 			this.getGame().setState(State.Game);
 		}
 		int w2 = g.getFontMetrics().stringWidth(nome + 1) / 2;
