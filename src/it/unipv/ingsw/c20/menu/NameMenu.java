@@ -20,16 +20,18 @@ public class NameMenu extends IsMenu{
 	
 	private String nome;
 	private List<String> nomi; //lista dei punti piccoli nel gioco
+	private int NGiocatori;
 	
 	/**
 	 * Class constructor
 	 * @param game
 	 */
 	
-	public NameMenu(Game game){
+	public NameMenu(Game game, int n){
 		super(game);
 		this.nome = "";
 		this.nomi = new ArrayList<>();
+		this.NGiocatori = n;
 	}
 
 	/**
@@ -56,12 +58,12 @@ public class NameMenu extends IsMenu{
 		g.setFont(fnt);
 		g.setColor(Color.WHITE);
 		int h2 = g.getFontMetrics().getHeight();
-		if( this.nomi.size() < this.getGame().getNGiocatori()){
+		if( this.nomi.size() < this.NGiocatori){
 			int w2 = g.getFontMetrics().stringWidth("Nome player " + this.nomi.size()+1 + " :") / 2;
 			g.drawString("Nome player " + (this.nomi.size()+1) + " :", (getGame().getWIDTH() / 2) - w2, h2+(0*y)+((getGame().getHEIGHT() - (0* y))/2));
 		}else{
 			//create level with n player
-			this.getGame().setLevel(this.getGame().getNGiocatori(), this.nomi);
+			this.getGame().setLevel(this.NGiocatori, this.nomi);
 			this.nome = "";
 			this.getGame().setState(State.Game);
 		}

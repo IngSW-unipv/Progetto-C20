@@ -35,8 +35,6 @@ public class Game extends Canvas implements Runnable{
 
 	private IsMenu menu; // it will manage the written part of the game.
 	
-	private int NGiocatori;
-	
 	private State state; // it describes the game's state.
 	
 	private int WIDTH, HEIGHT;
@@ -267,24 +265,6 @@ public class Game extends Canvas implements Runnable{
 	/** return the path 
 	 * @return the path of the map */
 	public String getMapPath() { return mapPath; }
-
-	/**
-	 * N player og the game
-	 * @return the player that are playing now
-	 */
-	
-	public int getNGiocatori() {
-		return NGiocatori;
-	}
-
-	/**
-	 * nomber of game player
-	 * @param nGiocatori this new game player
-	 */
-	
-	public void setNGiocatori(int nGiocatori) {
-		NGiocatori = nGiocatori;
-	}
 
 	/** 
 	 * Main: creates the game, forms the window, starts the game 

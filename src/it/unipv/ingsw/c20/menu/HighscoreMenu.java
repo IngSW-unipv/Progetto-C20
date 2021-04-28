@@ -39,9 +39,7 @@ public class HighscoreMenu extends IsMenu {
 		
 		int x = 200;
 		int y = 64;
-		
-		//this.getGame().getMusic().play("res/sounds/mouse.wav", 0);
-		
+				
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2) + x/2, ((getGame().getHEIGHT() - ((this.getGame().getScores().getScores().size() + 1) * y))/2) +(this.getGame().getScores().getScores().size()*y), x/2, y)){
 			
 			// menu

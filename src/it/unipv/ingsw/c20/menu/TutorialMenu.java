@@ -39,9 +39,7 @@ public class TutorialMenu extends IsMenu{
 		
 		int x = 200;
 		int y = 64;
-		
-		//this.getGame().getMusic().play("res/sounds/mouse.wav", 0);
-		
+			
 		if(mouseOver(mx, my, (getGame().getWIDTH()/2)-(x/2), ((getGame().getHEIGHT() - (6* y))/2) + (5*y), 200, 64)){
 			//menu
 			this.getGame().setMenu(new StartingMenu(this.getGame()));
