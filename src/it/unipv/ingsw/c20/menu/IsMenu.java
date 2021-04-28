@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import it.unipv.ingsw.c20.system.Game;
 
 /**
- * interface that indicate a menu 
+ * Abstract class that indicate a menu 
  * @author Filippo Tagliaferri
  *
  */
